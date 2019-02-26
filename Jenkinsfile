@@ -9,8 +9,12 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
+                virtualenv test_env
+                source test_env/bin/activate
                 pip2 install mock --user
                 pip2 install pika --user
+                deactivate
+                rm -rf test_env
                 """
             }
         }
