@@ -36,49 +36,6 @@ import version
 __version__ = version.__version__
 
 
-class pika(object):
-
-    """Class:  FileOpen2
-
-    Description:  Class stub holder for file open class.
-
-    Super-Class:  None
-
-    Sub-Classes:  None
-
-    Methods:
-        BlockingConnection -> Stub holder for BlockingConnection function.
-
-    """
-
-    def BlockingConnection(self):
-
-        """Function:  BlockingConnection
-
-        Description:  Stub holder for BlockingConnection function.
-
-        Arguments:
-            None
-
-        """
-
-        raise pika.exceptions.ConnectionClosed('ConnectionClosedMsg')
-
-
-def pika_raise():
-
-    """Function:  pika_raise
-
-    Description:  Method stub holder for NNNNNN.
-
-    Arguments:
-        arg1 -> Stub holder for params argument.
-
-    """
-
-    raise pika.exceptions.ConnectionClosed('ConnectionClosedMsg')
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -91,8 +48,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_success_connect -> Test with successful connection.
         test_fail_closed -> Test with failed connection - ConnectionClosed.
+        test_success_connect -> Test with successful connection.
 
     """
 
@@ -111,13 +68,11 @@ class UnitTest(unittest.TestCase):
         self.host = "ServerName"
         self.port = 5555
         self.connection = None
-        self.open2 = pika()
 
-    @unittest.skip("Not working")
     @mock.patch("rabbitmq_class.pika.BlockingConnection")
     @mock.patch("rabbitmq_class.pika.ConnectionParameters")
     @mock.patch("rabbitmq_class.pika.PlainCredentials")
-    def test_fail_closed(self, mock_pika1, mock_pika2, mock_pika3):
+    def test_fail_closed(self, mock_creds, mock_conn, mock_blk):
 
         """Function:  test_fail_closed
 
@@ -129,12 +84,14 @@ class UnitTest(unittest.TestCase):
         """
 
 
-        mock_pika1.return_value = "PlainCredentials"
-        mock_pika2.return_value = "ConnectionParameters"
-        mock_pika3.side_effect = [self.open2]
+        mock_creds.return_value = "PlainCredentials"
+        mock_conn.return_value = "ConnectionParameters"
+        mock_blk.side_effect = \
+            pika.exceptions.ConnectionClosed('ConnectionClosedMsg')
         rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
 
-        self.assertEqual(rq.connect(), (False, "ConnectionClosed"))
+        status, msg = rq.connect()
+        self.assertEqual((status, str(msg)), (False, "ConnectionClosedMsg"))
 
     @mock.patch("rabbitmq_class.pika")
     def test_success_connect(self, mock_pika):
