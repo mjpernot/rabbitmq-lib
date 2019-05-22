@@ -1,5 +1,5 @@
 #!/bin/bash
-# Unit test code coverage for rabbitmq_class.py module.
+# Unit test code coverage for SonarQube to cover all library modules in rabitmq-lib.
 # This will run the Python code coverage module against all unit test modules.
 # This will show the amount of code that was tested and which lines of code
 #	that was skipped during the test.
@@ -35,4 +35,5 @@ echo ""
 echo "Producing code coverage report"
 coverage combine
 coverage report -m
- 
+coverage xml -i
+
