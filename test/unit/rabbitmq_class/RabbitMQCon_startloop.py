@@ -36,6 +36,48 @@ import version
 __version__ = version.__version__
 
 
+class StartLoop2(object):
+
+    """Class:  StartLoop2
+
+    Description:  Class stub holder for pika class.
+
+    Super-Class:  None
+
+    Sub-Classes:  None
+
+    Methods:
+        start_consuming -> Stub holder for start_consuming function.
+
+    """
+
+    def start_consuming(self):
+
+        """Function:  start_consuming
+
+        Description:  Stub holder for start_consuming function.
+
+        Arguments:
+            None
+
+        """
+
+        raise KeyboardInterrupt
+
+    def stop_consuming(self):
+
+        """Function:  stop_consuming
+
+        Description:  Stub holder for stop_consuming function.
+
+        Arguments:
+            None
+
+        """
+
+        return True
+
+
 class StartLoop(object):
 
     """Class:  StartLoop
@@ -77,6 +119,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_raise_exception -> Test with raising exception.
         test_success_consume -> Test with successful consuming.
 
     """
@@ -97,80 +140,27 @@ class UnitTest(unittest.TestCase):
         self.port = 5555
         self.connection = None
 
-    @unittest.skip("Not done")
-    @mock.patch("rabbitmq_class.pika.BlockingConnection")
-    @mock.patch("rabbitmq_class.pika.ConnectionParameters")
-    @mock.patch("rabbitmq_class.pika.PlainCredentials")
-    def test_fail_error(self, mock_creds, mock_conn, mock_blk):
+    @mock.patch("rabbitmq_class.RabbitMQCon.close")
+    @mock.patch("rabbitmq_class.pika")
+    def test_raise_exception(self, mock_pika, mock_close):
 
-        """Function:  test_fail_error
+        """Function:  test_raise_exception
 
-        Description:  Test with failed general error - GeneralError.
+        Description:  Test with raising exception.
 
         Arguments:
             None
 
         """
 
+        mock_pika.PlainCredentials.return_value = "PlainCredentials"
+        mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        mock_pika.BlockingConnection.return_value = "GoodConnection"
+        mock_close.return_value = True
+        rq = rabbitmq_class.RabbitMQCon(self.name, "pwd", self.host, self.port)
+        rq.channel = StartLoop2()
 
-        mock_creds.return_value = "PlainCredentials"
-        mock_conn.return_value = "ConnectionParameters"
-        mock_blk.side_effect = \
-            pika.exceptions.AMQPConnectionError('GeneralError')
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
-
-        status, msg = rq.connect()
-        self.assertEqual((status, str(msg)), (False, "GeneralError"))
-
-    @unittest.skip("Not done")
-    @mock.patch("rabbitmq_class.pika.BlockingConnection")
-    @mock.patch("rabbitmq_class.pika.ConnectionParameters")
-    @mock.patch("rabbitmq_class.pika.PlainCredentials")
-    def test_fail_auth(self, mock_creds, mock_conn, mock_blk):
-
-        """Function:  test_fail_auth
-
-        Description:  Test with failed authenication - AuthenticationError.
-
-        Arguments:
-            None
-
-        """
-
-
-        mock_creds.return_value = "PlainCredentials"
-        mock_conn.return_value = "ConnectionParameters"
-        mock_blk.side_effect = \
-            pika.exceptions.ProbableAuthenticationError('AuthenticationError')
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
-
-        status, msg = rq.connect()
-        self.assertEqual((status, str(msg)), (False, "AuthenticationError"))
-
-    @unittest.skip("Not done")
-    @mock.patch("rabbitmq_class.pika.BlockingConnection")
-    @mock.patch("rabbitmq_class.pika.ConnectionParameters")
-    @mock.patch("rabbitmq_class.pika.PlainCredentials")
-    def test_fail_closed(self, mock_creds, mock_conn, mock_blk):
-
-        """Function:  test_fail_closed
-
-        Description:  Test with failed connection - ConnectionClosed.
-
-        Arguments:
-            None
-
-        """
-
-
-        mock_creds.return_value = "PlainCredentials"
-        mock_conn.return_value = "ConnectionParameters"
-        mock_blk.side_effect = \
-            pika.exceptions.ConnectionClosed('ConnectionClosedMsg')
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
-
-        status, msg = rq.connect()
-        self.assertEqual((status, str(msg)), (False, "ConnectionClosedMsg"))
+        self.assertFalse(rq.start_loop())
 
     @mock.patch("rabbitmq_class.RabbitMQCon.close")
     @mock.patch("rabbitmq_class.pika")
