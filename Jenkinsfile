@@ -13,6 +13,9 @@ pipeline {
                 source test_env/bin/activate
                 pip2 install mock --user
                 pip2 install pika --user
+                ./test/unit/rabbitmq_class/RabbitMQ_init.py
+                ./test/unit/rabbitmq_class/RabbitMQ_connect.py
+                ./test/unit/rabbitmq_class/RabbitMQ_close.py
                 deactivate
                 rm -rf test_env
                 """
