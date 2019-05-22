@@ -78,7 +78,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_open_channel -> Test open_channel method.
+        test_bind_queue -> Test bind_queue method.
 
     """
 
@@ -103,11 +103,11 @@ class UnitTest(unittest.TestCase):
         self.auto_delete = True
 
     @mock.patch("rabbitmq_class.pika")
-    def test_open_channel(self, mock_pika):
+    def test_bind_queue(self, mock_pika):
 
-        """Function:  test_open_channel
+        """Function:  test_bind_queue
 
-        Description:  Test open_channel method.
+        Description:  Test bind_queue method.
 
         Arguments:
             None
