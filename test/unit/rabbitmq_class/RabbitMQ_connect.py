@@ -48,6 +48,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_auth -> Test with failed authenication - AuthenticationError.
         test_fail_closed -> Test with failed connection - ConnectionClosed.
         test_success_connect -> Test with successful connection.
 
@@ -68,6 +69,54 @@ class UnitTest(unittest.TestCase):
         self.host = "ServerName"
         self.port = 5555
         self.connection = None
+
+    @mock.patch("rabbitmq_class.pika.BlockingConnection")
+    @mock.patch("rabbitmq_class.pika.ConnectionParameters")
+    @mock.patch("rabbitmq_class.pika.PlainCredentials")
+    def test_fail_error(self, mock_creds, mock_conn, mock_blk):
+
+        """Function:  test_fail_error
+
+        Description:  Test with failed general error - GeneralError.
+
+        Arguments:
+            None
+
+        """
+
+
+        mock_creds.return_value = "PlainCredentials"
+        mock_conn.return_value = "ConnectionParameters"
+        mock_blk.side_effect = \
+            pika.exceptions.AMQPConnectionError('GeneralError')
+        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+
+        status, msg = rq.connect()
+        self.assertEqual((status, str(msg)), (False, "GeneralError"))
+
+    @mock.patch("rabbitmq_class.pika.BlockingConnection")
+    @mock.patch("rabbitmq_class.pika.ConnectionParameters")
+    @mock.patch("rabbitmq_class.pika.PlainCredentials")
+    def test_fail_auth(self, mock_creds, mock_conn, mock_blk):
+
+        """Function:  test_fail_auth
+
+        Description:  Test with failed authenication - AuthenticationError.
+
+        Arguments:
+            None
+
+        """
+
+
+        mock_creds.return_value = "PlainCredentials"
+        mock_conn.return_value = "ConnectionParameters"
+        mock_blk.side_effect = \
+            pika.exceptions.ProbableAuthenticationError('AuthenticationError')
+        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+
+        status, msg = rq.connect()
+        self.assertEqual((status, str(msg)), (False, "AuthenticationError"))
 
     @mock.patch("rabbitmq_class.pika.BlockingConnection")
     @mock.patch("rabbitmq_class.pika.ConnectionParameters")
