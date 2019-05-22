@@ -57,9 +57,9 @@ class CreateQueue(object):
         Description:  Stub holder for queue_declare function.
 
         Arguments:
-            queue -> Arg tub holder.
-            durable -> Arg tub holder.
-            auto_delete -> Arg tub holder.
+            queue -> Arg stub holder.
+            durable -> Arg stub holder.
+            auto_delete -> Arg stub holder.
 
         """
 
