@@ -118,7 +118,6 @@ class UnitTest(unittest.TestCase):
         status, msg = rq.connect()
         self.assertEqual((status, str(msg)), (False, "AuthenticationError"))
 
-    #@unittest.skip("Error")
     @mock.patch("rabbitmq_class.pika.BlockingConnection")
     @mock.patch("rabbitmq_class.pika.ConnectionParameters")
     @mock.patch("rabbitmq_class.pika.PlainCredentials")
@@ -141,7 +140,8 @@ class UnitTest(unittest.TestCase):
         rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
 
         status, msg = rq.connect()
-        self.assertEqual((status, str(msg)), (False, str((123, "ConnectionClosedMsg"))))
+        self.assertEqual((status, str(msg)),
+                         (False, str((123, "ConnectionClosedMsg"))))
 
     @mock.patch("rabbitmq_class.pika")
     def test_success_connect(self, mock_pika):
