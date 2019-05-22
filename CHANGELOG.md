@@ -5,6 +5,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [1.0.2] - 2019-05-22
+- Refactored unit testing programs to use mock.
 - Documentation updates.
 
 
