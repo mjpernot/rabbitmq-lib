@@ -26,6 +26,10 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_pub
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_setqueue.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_setupexchange.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_unbindqueue.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQCon_init.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQCon_consume.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQCon_ack.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQCon_startloop.py
 
 echo ""
 echo "Producing code coverage report"

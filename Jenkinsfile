@@ -31,6 +31,10 @@ pipeline {
                 ./test/unit/rabbitmq_class/RabbitMQPub_setqueue.py
                 ./test/unit/rabbitmq_class/RabbitMQPub_setupexchange.py
                 ./test/unit/rabbitmq_class/RabbitMQPub_unbindqueue.py
+                ./test/unit/rabbitmq_class/RabbitMQCon_init.py
+                ./test/unit/rabbitmq_class/RabbitMQCon_consume.py
+                ./test/unit/rabbitmq_class/RabbitMQCon_ack.py
+                ./test/unit/rabbitmq_class/RabbitMQCon_startloop.py
                 deactivate
                 rm -rf test_env
                 """
