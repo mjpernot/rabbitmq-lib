@@ -42,6 +42,7 @@ pipeline {
         }
         stage('SonarQube analysis') {
             steps {
+                sh './test/unit/sonarqube_code_coverage.sh'
                 script {
                     scannerHome = tool 'sonar-scanner';
                 }
