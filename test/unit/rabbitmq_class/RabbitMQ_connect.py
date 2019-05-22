@@ -137,11 +137,11 @@ class UnitTest(unittest.TestCase):
         mock_creds.return_value = "PlainCredentials"
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
-            pika.exceptions.ConnectionClosed('ConnectionClosedMsg')
+            pika.exceptions.ConnectionClosed(123, 'ConnectionClosedMsg')
         rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
 
         status, msg = rq.connect()
-        self.assertEqual((status, str(msg)), (False, "ConnectionClosedMsg"))
+        self.assertEqual((status, str(msg)), (False, str((123, "ConnectionClosedMsg"))))
 
     @mock.patch("rabbitmq_class.pika")
     def test_success_connect(self, mock_pika):
