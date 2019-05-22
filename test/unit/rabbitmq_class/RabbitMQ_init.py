@@ -80,13 +80,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
 
         self.assertEqual((rq.name, rq.host, rq.port, rq.connection),
-                          (self.name, self.host, self.port, None))
+                         (self.name, self.host, self.port, None))
 
     @mock.patch("rabbitmq_class.pika")
     def test_default(self, mock_pika):
@@ -105,7 +104,7 @@ class UnitTest(unittest.TestCase):
         rq = rabbitmq_class.RabbitMQ(self.name, "pwd")
 
         self.assertEqual((rq.name, rq.host, rq.port, rq.connection),
-                          (self.name, "localhost", 5672, None))
+                         (self.name, "localhost", 5672, None))
 
 
 if __name__ == "__main__":
