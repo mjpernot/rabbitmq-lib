@@ -2,7 +2,7 @@
 # Classification (U)
 
 # Description:
-  This project consists of a number of Python files that are common function libraries and classes for connecting to and operating in a RabbitMQ system.  These programs are not standalone programs, but are installed in another project to support those programs.
+  This project consists of a number of Python files that are common function libraries and classes for connecting to and operating in a RabbitMQ system.
 
 
 ###  This README file is broken down into the following sections:
@@ -30,26 +30,29 @@
 
 
 # Installation:
+  There are two types of installs: pip and git.  Pip will only install the program modules and classes, whereas git will install all modules and classes including testing programs along with README.md and CHANGELOG.md files.  The Pip installation will be modifying another program's project to install these supporting librarues via pip.
 
-To install the class to support a program - use the pip installation procedures.
-  * Add to requirements-rabbitmq-lib.txt:
-      git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/rabbitmq-lib.git#egg=rabbitmq-lib
+### Pip Installation:
+  * Replace **{Other_Python_Project}** with the baseline path of another python program.
+
+Create requirements-rabbitmq-lib.txt in another program's project.
 
 ```
-vim requirements-rabbitmq-lib.txt
+echo "git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/rabbitmq-lib.git#egg=rabbitmq-lib" >> {Other_Python_Project}/requirements-rabbitmq-lib.txt
 ```
 
-Place the requirements-rabbitmq-lib.txt file in the program's project.
-  * Add to program's README.md installation section:
-      pip install -r requirements-rabbitmq-lib.txt --target rabbit_lib --trusted-host pypi.appdev.proj.coe.ic.gov
+Place the following command into the another program's README.md file under the "Install supporting classes and libraries" section.
+   pip install -r /requirements-rabbitmq-lib.txt --target rabbit_lib --trusted-host pypi.appdev.proj.coe.ic.gov
+
 ```
-vim {PROGRAMS_PROJECT}/README.md
+vim {Other_Python_Project}/README.md
 ```
 
-Add the system module libraries of requirements.txt to the program's requirements.txt.
-  *  If the system modules are already in the {PROGRAMS_PROJECT}/requirements.txt file, then skip step.
+Add the RabbitMQ library requirements.txt to the another program's requirements.txt file and remove any duplicates.
+
 ```
 cat requirements.txt >> {PROGRAMS_PROJECT}/requirements.txt
+vim {Other_Python_Project}/requirements.txt
 ```
 
 # Program Descriptions:
