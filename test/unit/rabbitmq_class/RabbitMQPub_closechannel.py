@@ -3,7 +3,7 @@
 
 """Program:  RabbitMQPub_closechannel.py
 
-    Description:  Unit test of RabbitMQPub_closechannel in rabbitmq_class.py.
+    Description:  Unit test of RabbitMQPub.close_channel in rabbitmq_class.py.
 
     Usage:
         test/unit/rabbitmq_class/RabbitMQPub_closechannel.py
