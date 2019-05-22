@@ -56,8 +56,6 @@ class RabbitMQ(object):
             (input) passwd ->  User password.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default port is 5672.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -77,8 +75,7 @@ class RabbitMQ(object):
         Description:  Connects the instance to a RabbitMQ node.
 
         Arguments:
-            (output) connect_status -> True|False - Successfully connected to
-                RabbitMQ node.
+            (output) connect_status -> True|False - Successfully connected.
             (output) err_msg -> Error message if unsuccessful connection.
 
         """
@@ -165,15 +162,12 @@ class RabbitMQPub(RabbitMQ):
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default = 5672.
             (input) exchange_name -> Name of exchange.
-            (input) exchange_type -> Exchange types: direct, fanout, headers,
-                and topic.
+            (input) exchange_type -> Types: direct, fanout, headers, and topic.
             (input) queue_name -> Name of the queue to create.
             (input) routing_key -> Name of queue to rout to.
             (input) x_durable -> True|False - Exchange survives reboots.
             (input) q_durable -> True|False - Queue survives reboots.
             (input) auto_delete -> True|False - Auto-delete after consuming.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -307,8 +301,7 @@ class RabbitMQPub(RabbitMQ):
             initialization of an exchange and queue.
 
         Arguments:
-            (output) connect_status -> True|False - Successfully connected to
-                RabbitMQ.
+            (output) connect_status -> True|False - Successfully connected.
             (output) err_msg -> Error message if unsuccessful.
 
         """
@@ -458,8 +451,6 @@ class RabbitMQCon(RabbitMQPub):
             (input) q_durable -> True|False - Queue survives reboots.
             (input) auto_delete -> True|False - Auto-delete after consuming.
             (input) no_ack -> True|False - Automatic acknowledgement.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -479,8 +470,6 @@ class RabbitMQCon(RabbitMQPub):
 
         Arguments:
             (input) func_call -> Name of the callback function.
-            (input)  **kwargs:
-                None
             (output) Return consumer tag that is returned from basic_consume.
 
         """
@@ -496,8 +485,7 @@ class RabbitMQCon(RabbitMQPub):
             a RabbitMQ queue.
 
         Arguments:
-            (input)  **kwargs:
-                None
+            None
 
         """
 
@@ -517,8 +505,6 @@ class RabbitMQCon(RabbitMQPub):
 
         Arguments:
             (input) tag -> Message tag number being acknowledged.
-            (input)  **kwargs:
-                None
 
         """
 

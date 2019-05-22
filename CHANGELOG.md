@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [1.0.2] - 2019-05-22
+- Refactored unit testing programs to use mock.
+- Documentation updates.
+
+
 ## [1.0.1] - 2018-11-02
 - Documentation updates.
 
