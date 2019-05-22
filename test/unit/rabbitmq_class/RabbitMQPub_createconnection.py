@@ -77,6 +77,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_channel_is_closed -> Test with channel is closed.
+        test_channel_is_open -> Test with channel is open.
         test_fail_connect -> Test with failure to connect.
 
     """
@@ -100,6 +102,57 @@ class UnitTest(unittest.TestCase):
         self.queue_name = "Queue_Name"
         self.routing_key = "Route_Key"
         self.auto_delete = True
+
+    @mock.patch("rabbitmq_class.RabbitMQPub.open_channel")
+    @mock.patch("rabbitmq_class.RabbitMQPub.connect")
+    @mock.patch("rabbitmq_class.pika")
+    def test_channel_is_closed(self, mock_pika, mock_connect, mock_channel):
+
+        """Function:  test_channel_is_closed
+
+        Description:  Test with channel is closed.
+
+        Arguments:
+            None
+
+        """
+
+        mock_pika.PlainCredentials.return_value = "PlainCredentials"
+        mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        mock_connect.return_value = (True, None)
+        mock_channel.return_value = True
+        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd")
+        rq.channel = CreateConnection()
+        rq.channel.is_open = False
+
+        self.assertEqual(rq.create_connection(),
+                         (False, "Error:  Unable to open channel."))
+
+    @mock.patch("rabbitmq_class.RabbitMQPub.setup_queue")
+    @mock.patch("rabbitmq_class.RabbitMQPub.open_channel")
+    @mock.patch("rabbitmq_class.RabbitMQPub.connect")
+    @mock.patch("rabbitmq_class.pika")
+    def test_channel_is_open(self, mock_pika, mock_connect, mock_channel,
+                             mock_setup):
+
+        """Function:  test_channel_is_open
+
+        Description:  Test with channel is open.
+
+        Arguments:
+            None
+
+        """
+
+        mock_pika.PlainCredentials.return_value = "PlainCredentials"
+        mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        mock_connect.return_value = (True, None)
+        mock_channel.return_value = True
+        mock_setup.return_value = True
+        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd")
+        rq.channel = CreateConnection()
+
+        self.assertEqual(rq.create_connection(), (True, None))
 
     @mock.patch("rabbitmq_class.RabbitMQPub.connect")
     @mock.patch("rabbitmq_class.pika")
