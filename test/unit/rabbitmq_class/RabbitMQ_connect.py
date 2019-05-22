@@ -84,7 +84,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-
         mock_creds.return_value = "PlainCredentials"
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
@@ -107,7 +106,6 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-
 
         mock_creds.return_value = "PlainCredentials"
         mock_conn.return_value = "ConnectionParameters"
@@ -132,7 +130,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-
         mock_creds.return_value = "PlainCredentials"
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
@@ -154,7 +151,6 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
