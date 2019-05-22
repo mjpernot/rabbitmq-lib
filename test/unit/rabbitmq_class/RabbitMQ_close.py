@@ -37,9 +37,9 @@ __version__ = version.__version__
 
 class PikaClose(object):
 
-    """Class:  FileOpen
+    """Class:  PikaClose
 
-    Description:  Class stub holder for file open class.
+    Description:  Class stub holder for pika class.
 
     Super-Class:  None
 
