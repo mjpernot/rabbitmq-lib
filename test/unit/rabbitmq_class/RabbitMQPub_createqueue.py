@@ -46,7 +46,7 @@ class CreateQueue(object):
     Sub-Classes:  None
 
     Methods:
-        close -> Stub holder for channel function.
+        queue_declare -> Stub holder for queue_declare function.
 
     """
 
