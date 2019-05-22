@@ -52,9 +52,9 @@ class CreateQueue(object):
 
     def queue_declare(self, queue, durable, auto_delete):
 
-        """Function:  channel
+        """Function:  queue_declare
 
-        Description:  Stub holder for channel function.
+        Description:  Stub holder for queue_declare function.
 
         Arguments:
             queue -> Arg tub holder.
