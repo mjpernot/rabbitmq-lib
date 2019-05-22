@@ -84,7 +84,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         rq = rabbitmq_class.RabbitMQPub(self.name, "pwd", self.host, self.port,
@@ -96,9 +95,9 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((rq.name, rq.host, rq.port, rq.exchange,
                           rq.exchange_type, rq.queue_name, rq.routing_key,
                           rq.x_durable, rq.q_durable, rq.auto_delete),
-                          (self.name, self.host, 5555, self.exchange_name,
-                           "direct", self.queue_name, self.routing_key,
-                           True, True, self.auto_delete))
+                         (self.name, self.host, 5555, self.exchange_name,
+                          "direct", self.queue_name, self.routing_key,
+                          True, True, self.auto_delete))
 
     @mock.patch("rabbitmq_class.pika")
     def test_default(self, mock_pika):
@@ -119,8 +118,8 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((rq.name, rq.host, rq.port, rq.exchange,
                           rq.exchange_type, rq.queue_name, rq.routing_key,
                           rq.x_durable, rq.q_durable, rq.auto_delete),
-                          (self.name, "localhost", 5672, "", "direct", "", "",
-                           True, True, False))
+                         (self.name, "localhost", 5672, "", "direct", "", "",
+                          True, True, False))
 
 
 if __name__ == "__main__":
