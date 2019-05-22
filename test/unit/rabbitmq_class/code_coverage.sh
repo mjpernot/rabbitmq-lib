@@ -14,7 +14,6 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQ_close.
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_init.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_bindqueue.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_checkconfirm.py
-coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqpub_cleanup.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_clearqueue.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_closechannel.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/RabbitMQPub_createconnection.py

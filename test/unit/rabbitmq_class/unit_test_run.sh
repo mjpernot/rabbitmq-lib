@@ -10,7 +10,6 @@ test/unit/rabbitmq_class/RabbitMQ_close.py
 test/unit/rabbitmq_class/RabbitMQPub_init.py
 test/unit/rabbitmq_class/RabbitMQPub_bindqueue.py
 test/unit/rabbitmq_class/RabbitMQPub_checkconfirm.py
-test/unit/rabbitmq_class/rabbitmqpub_cleanup.py
 test/unit/rabbitmq_class/RabbitMQPub_clearqueue.py
 test/unit/rabbitmq_class/RabbitMQPub_closechannel.py
 test/unit/rabbitmq_class/RabbitMQPub_createconnection.py
