@@ -175,7 +175,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
