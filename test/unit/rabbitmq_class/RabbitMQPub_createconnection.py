@@ -10,7 +10,6 @@
         test/unit/rabbitmq_class/RabbitMQPub_createconnection.py
 
     Arguments:
-        None
 
 """
 
@@ -42,10 +41,6 @@ class CreateConnection(object):
 
     Description:  Class stub holder for pika class.
 
-    Super-Class:  None
-
-    Sub-Classes:  None
-
     Methods:
         exchange_declare -> Stub holder for exchange_declare function.
 
@@ -58,7 +53,6 @@ class CreateConnection(object):
         Description:  Stub holder for __init__ function.
 
         Arguments:
-            None
 
         """
 
@@ -70,10 +64,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:  None
 
     Methods:
         setUp -> Initialize testing environment.
@@ -90,7 +80,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -113,7 +102,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with channel is closed.
 
         Arguments:
-            None
 
         """
 
@@ -140,7 +128,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with channel is open.
 
         Arguments:
-            None
 
         """
 
@@ -163,7 +150,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with failure to connect.
 
         Arguments:
-            None
 
         """
 
