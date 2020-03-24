@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [1.1.0] - 2020-03-24
+
+
 ## [1.0.2] - 2019-05-22
 - Refactored unit testing programs to use mock.
 - Documentation updates.
@@ -70,7 +73,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Alpha version release.
 
 ### Changed
-- RabbitMQPub.__init__ - Removed non-used attributes in the class.
+- RabbitMQPub.\_\_init\_\_ - Removed non-used attributes in the class.
 
 
 ## [0.0.5] - 2017-11-08
@@ -90,7 +93,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [0.0.4] - 2017-11-07
 ### Fixed
-- RabbitMQPub.__init__ - Corrected misnamed argument to superclass call.
+- RabbitMQPub.\_\_init\_\_ - Corrected misnamed argument to superclass call.
 - RabbitMQ.connect - Set the handler to the self.connection attribute.
 - RabbitMQPub.open_channel - Set the handler to the self.channel attribute.
 - RabbitMQPub.close_channel - Removed returning channel to calling function.
@@ -101,7 +104,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [0.0.3] - 2017-11-06
 ### Fixed
-- RabbitMQ.__init__ - Corrected misnamed attributes.
+- RabbitMQ.\_\_init\_\_ - Corrected misnamed attributes.
 
 
 ## [0.0.2] - 2017-11-03
@@ -122,7 +125,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [0.0.1] - 2017-11-02
 ### Added
 - RabbitMQ class.
-- RabbitMQ.__init__ method.
+- RabbitMQ.\_\_init\_\_ method.
 - RabbitMQ.connect method.
 - RabbitMQ.close method.
 - RabbitMQPub class.
