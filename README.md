@@ -91,6 +91,7 @@ exit
 
 ##### Unit:  rabbitmq_class.py
 ```
+test/unit/rabbitmq_class/create_rmqcon.py
 test/unit/rabbitmq_class/create_rmqpub.py
 test/unit/rabbitmq_class/RabbitMQ_init.py
 test/unit/rabbitmq_class/RabbitMQ_connect.py
