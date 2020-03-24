@@ -9,7 +9,6 @@
         test/unit/rabbitmq_class/RabbitMQ_close.py
 
     Arguments:
-        None
 
 """
 
@@ -41,10 +40,6 @@ class PikaClose(object):
 
     Description:  Class stub holder for pika class.
 
-    Super-Class:  None
-
-    Sub-Classes:  None
-
     Methods:
         close -> Stub holder for close function.
 
@@ -57,7 +52,6 @@ class PikaClose(object):
         Description:  Stub holder for close function.
 
         Arguments:
-            None
 
         """
 
@@ -69,10 +63,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:  None
 
     Methods:
         setUp -> Initialize testing environment.
@@ -87,7 +77,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -104,7 +93,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with default arguments.
 
         Arguments:
-            None
 
         """
 
