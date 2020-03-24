@@ -24,6 +24,40 @@ import version
 __version__ = version.__version__
 
 
+def pub_2_rmq(cfg, data, **kwargs):
+
+    """Function:  pub_2_rmq
+
+    Description:  All in one function to publish to a RabbitMQ queue.
+
+    Arguments:
+        (input) cfg -> Configuration settings module for the program.
+        (input) data -> Data document.
+        (output) status -> True|False - Success of publishing to RabbitMQ.
+        (output) err_msg -> Error message, if any.
+
+    """
+
+    rmq = create_rmqpub(cfg, cfg.queue, cfg.r_key)
+    connect_status, err_msg = rmq.create_connection()
+
+    if connect_status and rmq.channel.is_open:
+        if rmq.publish_msg(data):
+            status = True
+            err_msg = None
+
+        else:
+            status = False
+            err_msg = "Failure in publishing to RabbitMQ"
+
+    else:
+        status = False
+
+    rmq.drop_connection()
+
+    return status, err_msg
+
+
 def create_rmqcon(cfg, q_name, r_key, **kwargs):
 
     """Function:  create_rmqcon

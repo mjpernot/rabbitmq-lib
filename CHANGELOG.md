@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [1.1.0] - 2020-03-24
 ### Added
+- pub_2_rmq:  All in one function to publish to a RabbitMQ queue.
 - create_rmqcon:  Function that creates a RabbitMQ Consumer instance.
 - create_rmqpub:  Function that creates a RabbitMQ Publisher instance.
 
