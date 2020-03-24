@@ -24,6 +24,28 @@ import version
 __version__ = version.__version__
 
 
+def create_rmqcon(cfg, q_name, r_key, **kwargs):
+
+    """Function:  create_rmqcon
+
+    Description:  Create and return a RabbitMQ Consimer instance.
+
+    Arguments:
+        (input) cfg -> Configuration settings module for the program.
+        (input) q_name -> Queue name in RabbitMQ.
+        (input) r_key -> Routing key in RabbitMQ.
+        (output) RabbitMQ Consumer instance.
+
+    """
+
+    return RabbitMQCon(
+        cfg.user, cfg.pswd, cfg.host, cfg.port,
+        exchange_name=cfg.exchange_name, exchange_type=cfg.exchange_type,
+        queue_name=q_name, routing_key=r_key, x_durable=cfg.x_durable,
+        q_durable=cfg.q_durable, auto_delete=cfg.auto_delete,
+        no_ack=cfg.no_ack)
+
+
 def create_rmqpub(cfg, q_name, r_key, **kwargs):
 
     """Function:  create_rmqpub
