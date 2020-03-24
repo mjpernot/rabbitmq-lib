@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
             pika.exceptions.AMQPConnectionError('GeneralError')
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
         status, msg = rq.connect()
         self.assertEqual((status, str(msg)), (False, "GeneralError"))
@@ -103,7 +103,7 @@ class UnitTest(unittest.TestCase):
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
             pika.exceptions.ProbableAuthenticationError('AuthenticationError')
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
         status, msg = rq.connect()
         self.assertEqual((status, str(msg)), (False, "AuthenticationError"))
@@ -125,7 +125,7 @@ class UnitTest(unittest.TestCase):
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
             pika.exceptions.ConnectionClosed(123, 'ConnectionClosedMsg')
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
         status, msg = rq.connect()
         self.assertEqual((status, str(msg)),
@@ -145,7 +145,7 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
         self.assertEqual(rq.connect(), (True, None))
 
