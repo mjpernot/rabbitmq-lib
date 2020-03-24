@@ -9,7 +9,6 @@
         test/unit/rabbitmq_class/RabbitMQPub_dropqueue.py
 
     Arguments:
-        None
 
 """
 
@@ -41,10 +40,6 @@ class DropQueue(object):
 
     Description:  Class stub holder for pika class.
 
-    Super-Class:  None
-
-    Sub-Classes:  None
-
     Methods:
         basic_publish -> Stub holder for basic_publish function.
 
@@ -72,10 +67,6 @@ class UnitTest(unittest.TestCase):
 
     Description:  Class which is a representation of a unit testing.
 
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:  None
-
     Methods:
         setUp -> Initialize testing environment.
         test_drop_queue -> Test drop_queue method.
@@ -89,7 +80,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -111,7 +101,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test drop_queue method.
 
         Arguments:
-            None
 
         """
 
