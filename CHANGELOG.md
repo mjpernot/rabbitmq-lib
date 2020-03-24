@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [1.1.0] - 2020-03-24
+### Added
+- create_rmqpub:  Function that creates a RabbitMQ Publisher instance.
 
 
 ## [1.0.2] - 2019-05-22
