@@ -21,7 +21,6 @@ import pika
 # Local
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -32,11 +31,6 @@ class RabbitMQ(object):
     Description:  Class which is a representation of a RabbitMQ message
         system.  A RabbitMQ object is used as proxy to implement the
         connecting to and closing connection to a RabbitMQ node.
-
-    Super-Class:  object
-
-    Sub-Classes:
-        RabbitMQPub
 
     Methods:
         __init__ -> Class instance initilization.
@@ -104,7 +98,6 @@ class RabbitMQ(object):
         Description:  Close the connection to the RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -120,11 +113,6 @@ class RabbitMQPub(RabbitMQ):
         queue and dropping and clearing these properties.  A RabbitMQPub object
         is used as proxy to implement the publishing a message to a RabbitMQ
         queue.
-
-    Super-Class:  RabbitMQ
-
-    Sub-Classes:
-        RabbitMQCon
 
     Methods:
         __init__ -> Class instance initilization.
@@ -195,7 +183,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Open a channel to a RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -208,7 +195,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Close the channel to the RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -221,7 +207,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Setup a queue on a RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -236,7 +221,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Create an exchange on a RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -251,7 +235,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Bind a queue to an exchange.
 
         Arguments:
-            None
 
         """
 
@@ -284,7 +267,6 @@ class RabbitMQPub(RabbitMQ):
             the exchange.
 
         Arguments:
-            None
 
         """
 
@@ -327,7 +309,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Drop the channel and connection to RabbitMQ.
 
         Arguments:
-            None
 
         """
 
@@ -341,7 +322,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Turn on the check confirmation for the channel.
 
         Arguments:
-            None
 
         """
 
@@ -369,7 +349,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Remove messages from queue.
 
         Arguments:
-            None
 
         """
 
@@ -382,7 +361,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Unbind a queue from an exchange.
 
         Arguments:
-            None
 
         """
 
@@ -414,11 +392,6 @@ class RabbitMQCon(RabbitMQPub):
         loop to look for new messages in a message queue.  A RabbitMQCon object
         is used as proxy to implement the consuming a message from a RabbitMQ
         queue.
-
-    Super-Class:  RabbitMQPub
-
-    Sub-Classes:
-        None
 
     Methods:
         __init__ -> Class instance initilization.
@@ -485,7 +458,6 @@ class RabbitMQCon(RabbitMQPub):
             a RabbitMQ queue.
 
         Arguments:
-            None
 
         """
 
