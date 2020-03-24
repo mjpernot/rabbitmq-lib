@@ -110,7 +110,7 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd")
+        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
         rq.channel = PublishMsg()
 
         self.assertTrue(rq.publish_msg(self.body))
