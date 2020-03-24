@@ -13,6 +13,7 @@ pipeline {
                 source test_env/bin/activate
                 pip2 install mock==2.0.0 --user
                 pip2 install pika==0.11.0 --user
+                ./test/unit/rabbitmq_class/create_rmqpub.py
                 ./test/unit/rabbitmq_class/RabbitMQ_init.py
                 ./test/unit/rabbitmq_class/RabbitMQ_connect.py
                 ./test/unit/rabbitmq_class/RabbitMQ_close.py

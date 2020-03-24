@@ -21,12 +21,8 @@
 # Prerequisites:
 
   * List of Linux packages that need to be installed on the server.
-    - python-libs
-    - python-devel
     - git
     - python-pip
-
-  * Local class/library dependencies within the program structure.
 
 
 # Installation:
@@ -61,9 +57,7 @@ vim {Other_Python_Project}/requirements.txt
 ##### Classes:
   RabbitMQ => Class which is a representation of a RabbitMQ message system.  A RabbitMQ object is used as proxy to implement the connecting to and closing connection to a RabbitMQ node.
 
-
   RabbitMQPub => Class which is a representation of a RabbitMQ Publisher.  A RabbitMQPub object is used as proxy to implement the publishing a message to a RabbitMQ queue.
-
 
   RabbitMQCon => Class which is a representation of a RabbitMQ Consumer.  A RabbitMQPub object is used as proxy to implement consuming a message from a RabbitMQ queue.
 
@@ -97,6 +91,7 @@ exit
 
 ##### Unit:  rabbitmq_class.py
 ```
+test/unit/rabbitmq_class/create_rmqpub.py
 test/unit/rabbitmq_class/RabbitMQ_init.py
 test/unit/rabbitmq_class/RabbitMQ_connect.py
 test/unit/rabbitmq_class/RabbitMQ_close.py
