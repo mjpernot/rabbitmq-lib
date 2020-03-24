@@ -109,7 +109,7 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_connect.return_value = (True, None)
         mock_channel.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd")
+        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
         rq.channel = CreateConnection()
         rq.channel.is_open = False
 
@@ -136,7 +136,7 @@ class UnitTest(unittest.TestCase):
         mock_connect.return_value = (True, None)
         mock_channel.return_value = True
         mock_setup.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd")
+        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
         rq.channel = CreateConnection()
 
         self.assertEqual(rq.create_connection(), (True, None))
@@ -156,7 +156,7 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_connect.return_value = (False, "Failed to connect")
-        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd")
+        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
 
         self.assertEqual(rq.create_connection(), (False, "Failed to connect"))
 
