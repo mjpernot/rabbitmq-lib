@@ -105,7 +105,7 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rq = rabbitmq_class.RabbitMQCon(self.name, "pwd")
+        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
         rq.channel = Ack()
 
         self.assertFalse(rq.ack("tag"))
