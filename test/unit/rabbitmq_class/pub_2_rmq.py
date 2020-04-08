@@ -113,7 +113,7 @@ class UnitTest(unittest.TestCase):
 
                 """
 
-                return
+                pass
 
             def publish_msg(self, msg):
 
