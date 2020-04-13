@@ -139,7 +139,8 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
         mock_close.return_value = True
-        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host,
+                                        self.port)
         rq.channel = StartLoop2()
 
         self.assertFalse(rq.start_loop())
@@ -160,7 +161,8 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
         mock_close.return_value = True
-        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host,
+                                        self.port)
         rq.channel = StartLoop()
 
         self.assertFalse(rq.start_loop())
