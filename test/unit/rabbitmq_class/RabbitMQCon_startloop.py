@@ -25,7 +25,6 @@ else:
 
 # Third-party
 import mock
-import pika
 
 # Local
 sys.path.append(os.getcwd())
