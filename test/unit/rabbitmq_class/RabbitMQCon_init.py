@@ -80,12 +80,11 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host, self.port,
-                                        exchange_name=self.exchange_name,
-                                        queue_name=self.queue_name,
-                                        routing_key=self.routing_key,
-                                        auto_delete=self.auto_delete,
-                                        no_ack=self.no_ack)
+        rq = rabbitmq_class.RabbitMQCon(
+            self.name, "xxxxx", self.host, self.port,
+            exchange_name=self.exchange_name, queue_name=self.queue_name,
+            routing_key=self.routing_key, auto_delete=self.auto_delete,
+            no_ack=self.no_ack)
 
         self.assertEqual((rq.name, rq.host, rq.port, rq.exchange,
                           rq.exchange_type, rq.queue_name, rq.routing_key,
