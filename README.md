@@ -5,6 +5,8 @@
 
 [![Coverage](https://sonarqube.code.dicelab.net/api/project_badges/measure?project=JAC-IDM%3Arabbitmq-lib&metric=coverage)](https://sonarqube.code.dicelab.net/dashboard?id=JAC-IDM%3Arabbitmq-lib)
 
+[![Build Status](https://jenkins.code.dicelab.net/buildStatus/icon?job=Highpoint%2FPython%2Frabbitmq-lib)](https://jenkins.code.dicelab.net/job/Highpoint/job/Python/job/rabbitmq-lib/)
+
 # Description:
   This project consists of a number of Python files that are common function libraries and classes for connecting to and operating in a RabbitMQ system.
 
