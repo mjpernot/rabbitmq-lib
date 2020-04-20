@@ -1,11 +1,6 @@
 # Python project that contains common libraries and classes for RabbitMQ.
 # Classification (U)
 
-[![Quality Gate Status](https://sonarqube.code.dicelab.net/api/project_badges/measure?project=JAC-IDM%3Arabbitmq-lib&metric=alert_status)](https://sonarqube.code.dicelab.net/dashboard?id=JAC-IDM%3Arabbitmq-lib)
-
-[![Coverage](https://sonarqube.code.dicelab.net/api/project_badges/measure?project=JAC-IDM%3Arabbitmq-lib&metric=coverage)](https://sonarqube.code.dicelab.net/dashboard?id=JAC-IDM%3Arabbitmq-lib)
-
-[![Build Status](https://jenkins.code.dicelab.net/buildStatus/icon?job=Highpoint%2FPython%2Frabbitmq-lib)](https://jenkins.code.dicelab.net/job/Highpoint/job/Python/job/rabbitmq-lib/)
 
 # Description:
   This project consists of a number of Python files that are common function libraries and classes for connecting to and operating in a RabbitMQ system.
@@ -19,10 +14,12 @@
  * Testing
    - Unit
 
+
 # Features:
  * Connect to and send commands to a RabbitMQ system.
  * Publish messages to RabbitMQ system.
  * Consume messages from RabbitMQ system.
+
 
 # Prerequisites:
 
