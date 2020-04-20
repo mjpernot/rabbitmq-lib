@@ -9,7 +9,6 @@
         test/unit/rabbitmq_class/RabbitMQ_init.py
 
     Arguments:
-        None
 
 """
 
@@ -41,10 +40,6 @@ class UnitTest(unittest.TestCase):
 
     Description:  Class which is a representation of a unit testing.
 
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:  None
-
     Methods:
         setUp -> Initialize testing environment.
         test_with_data -> Test other attributes with data.
@@ -59,7 +54,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -76,13 +70,12 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with all arguments.
 
         Arguments:
-            None
 
         """
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
         self.assertEqual((rq.name, rq.host, rq.port, rq.connection),
                          (self.name, self.host, self.port, None))
@@ -95,13 +88,12 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with default arguments.
 
         Arguments:
-            None
 
         """
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd")
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx")
 
         self.assertEqual((rq.name, rq.host, rq.port, rq.connection),
                          (self.name, "localhost", 5672, None))

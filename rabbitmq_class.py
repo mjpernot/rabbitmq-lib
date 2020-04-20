@@ -21,8 +21,84 @@ import pika
 # Local
 import version
 
-# Version
 __version__ = version.__version__
+
+
+def pub_2_rmq(cfg, data, **kwargs):
+
+    """Function:  pub_2_rmq
+
+    Description:  All in one function to publish to a RabbitMQ queue.
+
+    Arguments:
+        (input) cfg -> Configuration settings module for the program.
+        (input) data -> Data document.
+        (output) status -> True|False - Success of publishing to RabbitMQ.
+        (output) err_msg -> Error message, if any.
+
+    """
+
+    rmq = create_rmqpub(cfg, cfg.queue, cfg.r_key)
+    connect_status, err_msg = rmq.create_connection()
+
+    if connect_status and rmq.channel.is_open:
+        if rmq.publish_msg(data):
+            status = True
+            err_msg = None
+
+        else:
+            status = False
+            err_msg = "Failure in publishing to RabbitMQ"
+
+    else:
+        status = False
+
+    rmq.drop_connection()
+
+    return status, err_msg
+
+
+def create_rmqcon(cfg, q_name, r_key, **kwargs):
+
+    """Function:  create_rmqcon
+
+    Description:  Create and return a RabbitMQ Consimer instance.
+
+    Arguments:
+        (input) cfg -> Configuration settings module for the program.
+        (input) q_name -> Queue name in RabbitMQ.
+        (input) r_key -> Routing key in RabbitMQ.
+        (output) RabbitMQ Consumer instance.
+
+    """
+
+    return RabbitMQCon(
+        cfg.user, cfg.pswd, cfg.host, cfg.port,
+        exchange_name=cfg.exchange_name, exchange_type=cfg.exchange_type,
+        queue_name=q_name, routing_key=r_key, x_durable=cfg.x_durable,
+        q_durable=cfg.q_durable, auto_delete=cfg.auto_delete,
+        no_ack=cfg.no_ack)
+
+
+def create_rmqpub(cfg, q_name, r_key, **kwargs):
+
+    """Function:  create_rmqpub
+
+    Description:  Create and return a RabbitMQ Publisher instance.
+
+    Arguments:
+        (input) cfg -> Configuration settings module for the program.
+        (input) q_name -> Queue name in RabbitMQ.
+        (input) r_key -> Routing key in RabbitMQ.
+        (output) RabbitMQ Publisher instance.
+
+    """
+
+    return RabbitMQPub(
+        cfg.user, cfg.pswd, cfg.host, cfg.port,
+        exchange_name=cfg.exchange_name, exchange_type=cfg.exchange_type,
+        queue_name=q_name, routing_key=r_key, x_durable=cfg.x_durable,
+        q_durable=cfg.q_durable, auto_delete=cfg.auto_delete)
 
 
 class RabbitMQ(object):
@@ -32,11 +108,6 @@ class RabbitMQ(object):
     Description:  Class which is a representation of a RabbitMQ message
         system.  A RabbitMQ object is used as proxy to implement the
         connecting to and closing connection to a RabbitMQ node.
-
-    Super-Class:  object
-
-    Sub-Classes:
-        RabbitMQPub
 
     Methods:
         __init__ -> Class instance initilization.
@@ -104,7 +175,6 @@ class RabbitMQ(object):
         Description:  Close the connection to the RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -120,11 +190,6 @@ class RabbitMQPub(RabbitMQ):
         queue and dropping and clearing these properties.  A RabbitMQPub object
         is used as proxy to implement the publishing a message to a RabbitMQ
         queue.
-
-    Super-Class:  RabbitMQ
-
-    Sub-Classes:
-        RabbitMQCon
 
     Methods:
         __init__ -> Class instance initilization.
@@ -195,7 +260,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Open a channel to a RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -208,7 +272,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Close the channel to the RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -221,7 +284,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Setup a queue on a RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -236,7 +298,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Create an exchange on a RabbitMQ node.
 
         Arguments:
-            None
 
         """
 
@@ -251,7 +312,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Bind a queue to an exchange.
 
         Arguments:
-            None
 
         """
 
@@ -284,7 +344,6 @@ class RabbitMQPub(RabbitMQ):
             the exchange.
 
         Arguments:
-            None
 
         """
 
@@ -327,7 +386,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Drop the channel and connection to RabbitMQ.
 
         Arguments:
-            None
 
         """
 
@@ -341,7 +399,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Turn on the check confirmation for the channel.
 
         Arguments:
-            None
 
         """
 
@@ -369,7 +426,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Remove messages from queue.
 
         Arguments:
-            None
 
         """
 
@@ -382,7 +438,6 @@ class RabbitMQPub(RabbitMQ):
         Description:  Unbind a queue from an exchange.
 
         Arguments:
-            None
 
         """
 
@@ -414,11 +469,6 @@ class RabbitMQCon(RabbitMQPub):
         loop to look for new messages in a message queue.  A RabbitMQCon object
         is used as proxy to implement the consuming a message from a RabbitMQ
         queue.
-
-    Super-Class:  RabbitMQPub
-
-    Sub-Classes:
-        None
 
     Methods:
         __init__ -> Class instance initilization.
@@ -485,7 +535,6 @@ class RabbitMQCon(RabbitMQPub):
             a RabbitMQ queue.
 
         Arguments:
-            None
 
         """
 

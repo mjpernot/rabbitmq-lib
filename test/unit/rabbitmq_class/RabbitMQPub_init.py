@@ -9,7 +9,6 @@
         test/unit/rabbitmq_class/RabbitMQPub_init.py
 
     Arguments:
-        None
 
 """
 
@@ -41,10 +40,6 @@ class UnitTest(unittest.TestCase):
 
     Description:  Class which is a representation of a unit testing.
 
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:  None
-
     Methods:
         setUp -> Initialize testing environment.
         test_with_data -> Test other attributes with data.
@@ -59,7 +54,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -80,17 +74,15 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with all arguments.
 
         Arguments:
-            None
 
         """
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd", self.host, self.port,
-                                        exchange_name=self.exchange_name,
-                                        queue_name=self.queue_name,
-                                        routing_key=self.routing_key,
-                                        auto_delete=self.auto_delete)
+        rq = rabbitmq_class.RabbitMQPub(
+            self.name, "xxxxx", self.host, self.port,
+            exchange_name=self.exchange_name, queue_name=self.queue_name,
+            routing_key=self.routing_key, auto_delete=self.auto_delete)
 
         self.assertEqual((rq.name, rq.host, rq.port, rq.exchange,
                           rq.exchange_type, rq.queue_name, rq.routing_key,
@@ -107,13 +99,12 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with default arguments.
 
         Arguments:
-            None
 
         """
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd")
+        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
 
         self.assertEqual((rq.name, rq.host, rq.port, rq.exchange,
                           rq.exchange_type, rq.queue_name, rq.routing_key,

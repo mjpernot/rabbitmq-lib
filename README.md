@@ -1,6 +1,7 @@
 # Python project that contains common libraries and classes for RabbitMQ.
 # Classification (U)
 
+
 # Description:
   This project consists of a number of Python files that are common function libraries and classes for connecting to and operating in a RabbitMQ system.
 
@@ -13,20 +14,18 @@
  * Testing
    - Unit
 
+
 # Features:
  * Connect to and send commands to a RabbitMQ system.
  * Publish messages to RabbitMQ system.
  * Consume messages from RabbitMQ system.
 
+
 # Prerequisites:
 
   * List of Linux packages that need to be installed on the server.
-    - python-libs
-    - python-devel
     - git
     - python-pip
-
-  * Local class/library dependencies within the program structure.
 
 
 # Installation:
@@ -61,9 +60,7 @@ vim {Other_Python_Project}/requirements.txt
 ##### Classes:
   RabbitMQ => Class which is a representation of a RabbitMQ message system.  A RabbitMQ object is used as proxy to implement the connecting to and closing connection to a RabbitMQ node.
 
-
   RabbitMQPub => Class which is a representation of a RabbitMQ Publisher.  A RabbitMQPub object is used as proxy to implement the publishing a message to a RabbitMQ queue.
-
 
   RabbitMQCon => Class which is a representation of a RabbitMQ Consumer.  A RabbitMQPub object is used as proxy to implement consuming a message from a RabbitMQ queue.
 
@@ -95,39 +92,15 @@ pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic
 exit
 ```
 
-##### Unit:  rabbitmq_class.py
+### Testing:
 ```
-test/unit/rabbitmq_class/RabbitMQ_init.py
-test/unit/rabbitmq_class/RabbitMQ_connect.py
-test/unit/rabbitmq_class/RabbitMQ_close.py
-test/unit/rabbitmq_class/RabbitMQPub_init.py
-test/unit/rabbitmq_class/RabbitMQPub_bindqueue.py
-test/unit/rabbitmq_class/RabbitMQPub_checkconfirm.py
-test/unit/rabbitmq_class/RabbitMQPub_clearqueue.py
-test/unit/rabbitmq_class/RabbitMQPub_closechannel.py
-test/unit/rabbitmq_class/RabbitMQPub_createconnection.py
-test/unit/rabbitmq_class/RabbitMQPub_createqueue.py
-test/unit/rabbitmq_class/RabbitMQPub_dropconnection.py
-test/unit/rabbitmq_class/RabbitMQPub_dropexchange.py
-test/unit/rabbitmq_class/RabbitMQPub_dropqueue.py
-test/unit/rabbitmq_class/RabbitMQPub_openchannel.py
-test/unit/rabbitmq_class/RabbitMQPub_publishmsg.py
-test/unit/rabbitmq_class/RabbitMQPub_setqueue.py
-test/unit/rabbitmq_class/RabbitMQPub_setupexchange.py
-test/unit/rabbitmq_class/RabbitMQPub_unbindqueue.py
-test/unit/rabbitmq_class/RabbitMQCon_init.py
-test/unit/rabbitmq_class/RabbitMQCon_consume.py
-test/unit/rabbitmq_class/RabbitMQCon_ack.py
-test/unit/rabbitmq_class/RabbitMQCon_startloop.py
-```
-
-##### Unit:  All units
-```
+cd {Python_Project}/rabbitmq-lib
 test/unit/rabbitmq_class/unit_test_run.sh
 ```
 
-### Unit test code coverage
+### Code Coverage:
 ```
+cd {Python_Project}/rabbitmq-lib
 test/unit/rabbitmq_class/code_coverage.sh
 ```
 
