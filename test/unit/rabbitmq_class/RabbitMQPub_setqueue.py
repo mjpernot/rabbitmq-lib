@@ -9,7 +9,6 @@
         test/unit/rabbitmq_class/RabbitMQPub_setqueue.py
 
     Arguments:
-        None
 
 """
 
@@ -41,10 +40,6 @@ class UnitTest(unittest.TestCase):
 
     Description:  Class which is a representation of a unit testing.
 
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:  None
-
     Methods:
         setUp -> Initialize testing environment.
         test_setup_queue -> Test setup_queue method.
@@ -58,7 +53,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -84,7 +78,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test setup_queue method.
 
         Arguments:
-            None
 
         """
 
@@ -94,7 +87,7 @@ class UnitTest(unittest.TestCase):
         mock_create.return_value = True
         mock_bind.return_value = True
         mock_check.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd")
+        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
 
         self.assertFalse(rq.setup_queue())
 

@@ -9,7 +9,6 @@
         test/unit/rabbitmq_class/RabbitMQ_connect.py
 
     Arguments:
-        None
 
 """
 
@@ -42,10 +41,6 @@ class UnitTest(unittest.TestCase):
 
     Description:  Class which is a representation of a unit testing.
 
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:  None
-
     Methods:
         setUp -> Initialize testing environment.
         test_fail_auth -> Test with failed authenication - AuthenticationError.
@@ -61,7 +56,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -80,7 +74,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with failed general error - GeneralError.
 
         Arguments:
-            None
 
         """
 
@@ -88,7 +81,7 @@ class UnitTest(unittest.TestCase):
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
             pika.exceptions.AMQPConnectionError('GeneralError')
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
         status, msg = rq.connect()
         self.assertEqual((status, str(msg)), (False, "GeneralError"))
@@ -103,7 +96,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with failed authenication - AuthenticationError.
 
         Arguments:
-            None
 
         """
 
@@ -111,7 +103,7 @@ class UnitTest(unittest.TestCase):
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
             pika.exceptions.ProbableAuthenticationError('AuthenticationError')
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
         status, msg = rq.connect()
         self.assertEqual((status, str(msg)), (False, "AuthenticationError"))
@@ -126,7 +118,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with failed connection - ConnectionClosed.
 
         Arguments:
-            None
 
         """
 
@@ -134,7 +125,7 @@ class UnitTest(unittest.TestCase):
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
             pika.exceptions.ConnectionClosed(123, 'ConnectionClosedMsg')
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
         status, msg = rq.connect()
         self.assertEqual((status, str(msg)),
@@ -148,14 +139,13 @@ class UnitTest(unittest.TestCase):
         Description:  Test with successful connection.
 
         Arguments:
-            None
 
         """
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
-        rq = rabbitmq_class.RabbitMQ(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
         self.assertEqual(rq.connect(), (True, None))
 

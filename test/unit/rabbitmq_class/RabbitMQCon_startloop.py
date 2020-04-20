@@ -9,7 +9,6 @@
         test/unit/rabbitmq_class/RabbitMQCon_startloop.py
 
     Arguments:
-        None
 
 """
 
@@ -26,7 +25,6 @@ else:
 
 # Third-party
 import mock
-import pika
 
 # Local
 sys.path.append(os.getcwd())
@@ -42,10 +40,6 @@ class StartLoop2(object):
 
     Description:  Class stub holder for pika class.
 
-    Super-Class:  None
-
-    Sub-Classes:  None
-
     Methods:
         start_consuming -> Stub holder for start_consuming function.
 
@@ -58,7 +52,6 @@ class StartLoop2(object):
         Description:  Stub holder for start_consuming function.
 
         Arguments:
-            None
 
         """
 
@@ -71,7 +64,6 @@ class StartLoop2(object):
         Description:  Stub holder for stop_consuming function.
 
         Arguments:
-            None
 
         """
 
@@ -83,10 +75,6 @@ class StartLoop(object):
     """Class:  StartLoop
 
     Description:  Class stub holder for pika class.
-
-    Super-Class:  None
-
-    Sub-Classes:  None
 
     Methods:
         start_consuming -> Stub holder for start_consuming function.
@@ -100,7 +88,6 @@ class StartLoop(object):
         Description:  Stub holder for start_consuming function.
 
         Arguments:
-            None
 
         """
 
@@ -112,10 +99,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:  None
 
     Methods:
         setUp -> Initialize testing environment.
@@ -131,7 +114,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -149,7 +131,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with raising exception.
 
         Arguments:
-            None
 
         """
 
@@ -157,7 +138,8 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
         mock_close.return_value = True
-        rq = rabbitmq_class.RabbitMQCon(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host,
+                                        self.port)
         rq.channel = StartLoop2()
 
         self.assertFalse(rq.start_loop())
@@ -171,7 +153,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with successful consuming.
 
         Arguments:
-            None
 
         """
 
@@ -179,7 +160,8 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
         mock_close.return_value = True
-        rq = rabbitmq_class.RabbitMQCon(self.name, "pwd", self.host, self.port)
+        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host,
+                                        self.port)
         rq.channel = StartLoop()
 
         self.assertFalse(rq.start_loop())

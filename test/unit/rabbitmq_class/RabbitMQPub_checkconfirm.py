@@ -9,7 +9,6 @@
         test/unit/rabbitmq_class/RabbitMQPub_checkconfirm.py
 
     Arguments:
-        None
 
 """
 
@@ -41,10 +40,6 @@ class CheckConfirm(object):
 
     Description:  Class stub holder for pika class.
 
-    Super-Class:  None
-
-    Sub-Classes:  None
-
     Methods:
         confirm_delivery -> Stub holder for confirm_delivery function.
 
@@ -57,7 +52,6 @@ class CheckConfirm(object):
         Description:  Stub holder for confirm_delivery function.
 
         Arguments:
-            None
 
         """
 
@@ -69,10 +63,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:  None
 
     Methods:
         setUp -> Initialize testing environment.
@@ -87,7 +77,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -108,13 +97,12 @@ class UnitTest(unittest.TestCase):
         Description:  Test close_channel method.
 
         Arguments:
-            None
 
         """
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQPub(self.name, "pwd")
+        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
         rq.channel = CheckConfirm()
 
         self.assertFalse(rq.check_confirm())
