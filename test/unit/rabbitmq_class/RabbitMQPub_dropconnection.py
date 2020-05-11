@@ -83,9 +83,9 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_close.return_value = True
         mock_channel.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
 
-        self.assertFalse(rq.drop_connection())
+        self.assertFalse(rmq.drop_connection())
 
 
 if __name__ == "__main__":
