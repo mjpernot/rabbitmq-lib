@@ -66,25 +66,25 @@ pipeline {
                                 "pattern": "./*.py",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/rabbitmq-lib/"
+                                "target": "pypi-proj-local/highpoint/rabbitmq-lib/"
                             },
                             {
                                 "pattern": "./*.txt",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/rabbitmq-lib/"
+                                "target": "pypi-proj-local/highpoint/rabbitmq-lib/"
                             },
                             {
                                 "pattern": "./*.md",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/rabbitmq-lib/"
+                                "target": "pypi-proj-local/highpoint/rabbitmq-lib/"
                             },
                             {
                                 "pattern": "*.TEMPLATE",
                                 "recursive": true,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/rabbitmq-lib/config/"
+                                "target": "pypi-proj-local/highpoint/rabbitmq-lib/config/"
                             }
                         ]
                     }"""
