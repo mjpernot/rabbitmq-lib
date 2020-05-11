@@ -41,9 +41,22 @@ class ClearQueue(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         queue_purge -> Stub holder for queue_purge function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.queue = None
 
     def queue_purge(self, queue):
 
@@ -55,6 +68,8 @@ class ClearQueue(object):
             queue -> Arg stub holder.
 
         """
+
+        self.queue = queue
 
         return True
 
@@ -105,10 +120,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rq.channel = ClearQueue()
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq.channel = ClearQueue()
 
-        self.assertFalse(rq.clear_queue())
+        self.assertFalse(rmq.clear_queue())
 
 
 if __name__ == "__main__":
