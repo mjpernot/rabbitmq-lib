@@ -105,10 +105,10 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rq.channel = BindQueue()
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq.channel = BindQueue()
 
-        self.assertFalse(rq.bind_queue())
+        self.assertFalse(rmq.bind_queue())
 
 
 if __name__ == "__main__":
