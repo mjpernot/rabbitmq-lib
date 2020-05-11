@@ -2,7 +2,7 @@
 
 """Program:  rabbitmq_class.py
 
-    Description:  Class definitions and methods for RabbitMQ message queue.
+    Description:  Class definitions and methods for RabbitMQ system.
 
     Classes:
         RabbitMQ
@@ -62,7 +62,7 @@ def create_rmqcon(cfg, q_name, r_key, **kwargs):
 
     """Function:  create_rmqcon
 
-    Description:  Create and return a RabbitMQ Consimer instance.
+    Description:  Create a RabbitMQ Consumer instance.
 
     Arguments:
         (input) cfg -> Configuration settings module for the program.
@@ -84,7 +84,7 @@ def create_rmqpub(cfg, q_name, r_key, **kwargs):
 
     """Function:  create_rmqpub
 
-    Description:  Create and return a RabbitMQ Publisher instance.
+    Description:  Create a RabbitMQ Publisher instance.
 
     Arguments:
         (input) cfg -> Configuration settings module for the program.
@@ -134,7 +134,6 @@ class RabbitMQ(object):
         self.host = host
         self.port = port
         self.connection = None
-
         self.creds = pika.PlainCredentials(self.name, passwd)
         self.params = pika.ConnectionParameters(host=self.host, port=self.port,
                                                 credentials=self.creds)
@@ -326,8 +325,8 @@ class RabbitMQPub(RabbitMQ):
 
         Arguments:
             (input) body -> Message body being published to RabbitMQ.
-            (input) mandatory True|False -> Message is saved to queue.
-            (output) True | False -> Message confirmation delivery status.
+            (input) mandatory -> True|False - Message is saved to queue.
+            (output) True|False -> Message confirmation delivery status.
 
         """
 
@@ -411,8 +410,8 @@ class RabbitMQPub(RabbitMQ):
         Description:  Drop the queue from the exchange.
 
         Arguments:
-            (input) if_unused True|False -> Only drop if unused.
-            (input) if_empty True|False -> Only drop if empty.
+            (input) if_unused -> True|False - Only drop if unused.
+            (input) if_empty -> True|False - Only drop if empty.
 
         """
 
@@ -452,7 +451,7 @@ class RabbitMQPub(RabbitMQ):
         Description:  Drop an exchange from the RabbitMQ node.
 
         Arguments:
-            (input) if_unused True|False -> Only drop if unused.
+            (input) if_unused -> True|False - Only drop if unused.
 
         """
 

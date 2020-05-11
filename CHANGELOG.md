@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [1.1.1] - 2020-05-11
+### Changed
+- Documentation updates.
+
+
 ## [1.1.0] - 2020-03-24
 ### Added
 - pub_2_rmq:  All in one function to publish to a RabbitMQ queue.
@@ -12,11 +17,13 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [1.0.2] - 2019-05-22
+### Changed
 - Refactored unit testing programs to use mock.
 - Documentation updates.
 
 
 ## [1.0.1] - 2018-11-02
+### Changed
 - Documentation updates.
 
 
