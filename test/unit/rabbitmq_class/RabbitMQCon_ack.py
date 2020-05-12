@@ -41,9 +41,22 @@ class Ack(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         queue_unbind -> Stub holder for queue_unbind function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for __init__ function.
+
+        Arguments:
+
+        """
+
+        self.delivery_tag = None
 
     def basic_ack(self, delivery_tag):
 
@@ -55,6 +68,8 @@ class Ack(object):
             delivery_tag -> Arg stub holder.
 
         """
+
+        self.delivery_tag = delivery_tag
 
         return True
 
