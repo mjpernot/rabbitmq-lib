@@ -41,9 +41,24 @@ class UnbindQueue(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         queue_unbind -> Stub holder for queue_unbind function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for __init__ function.
+
+        Arguments:
+
+        """
+
+        self.queue = None
+        self.exchange = None
+        self.routing_key = None
 
     def queue_unbind(self, queue, exchange, routing_key):
 
@@ -57,6 +72,10 @@ class UnbindQueue(object):
             routing_key -> Arg stub holder.
 
         """
+
+        self.queue = queue
+        self.exchange = exchange
+        self.routing_key = routing_key
 
         return True
 
@@ -107,10 +126,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rq.channel = UnbindQueue()
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq.channel = UnbindQueue()
 
-        self.assertFalse(rq.unbind_queue())
+        self.assertFalse(rmq.unbind_queue())
 
 
 if __name__ == "__main__":
