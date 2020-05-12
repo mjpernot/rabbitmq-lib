@@ -41,9 +41,24 @@ class Consume(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         queue_unbind -> Stub holder for queue_unbind function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for __init__ function.
+
+        Arguments:
+
+        """
+
+        self.func_call = None
+        self.queue_name = None
+        self.no_ack = None
 
     def basic_consume(self, func_call, queue_name, no_ack):
 
@@ -57,6 +72,10 @@ class Consume(object):
             no_ack -> Arg stub holder.
 
         """
+
+        self.func_call = func_call
+        self.queue_name = queue_name
+        self.no_ack = no_ack
 
         return True
 
@@ -107,10 +126,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
-        rq.channel = Consume()
+        rmq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
+        rmq.channel = Consume()
 
-        self.assertTrue(rq.consume("func_call"))
+        self.assertTrue(rmq.consume("func_call"))
 
 
 if __name__ == "__main__":
