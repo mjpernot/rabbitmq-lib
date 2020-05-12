@@ -81,9 +81,9 @@ class UnitTest(unittest.TestCase):
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
             pika.exceptions.AMQPConnectionError('GeneralError')
-        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
+        rmq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
-        status, msg = rq.connect()
+        status, msg = rmq.connect()
         self.assertEqual((status, str(msg)), (False, "GeneralError"))
 
     @mock.patch("rabbitmq_class.pika.BlockingConnection")
@@ -103,9 +103,9 @@ class UnitTest(unittest.TestCase):
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
             pika.exceptions.ProbableAuthenticationError('AuthenticationError')
-        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
+        rmq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
-        status, msg = rq.connect()
+        status, msg = rmq.connect()
         self.assertEqual((status, str(msg)), (False, "AuthenticationError"))
 
     @mock.patch("rabbitmq_class.pika.BlockingConnection")
@@ -125,9 +125,9 @@ class UnitTest(unittest.TestCase):
         mock_conn.return_value = "ConnectionParameters"
         mock_blk.side_effect = \
             pika.exceptions.ConnectionClosed(123, 'ConnectionClosedMsg')
-        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
+        rmq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
-        status, msg = rq.connect()
+        status, msg = rmq.connect()
         self.assertEqual((status, str(msg)),
                          (False, str((123, "ConnectionClosedMsg"))))
 
@@ -145,9 +145,9 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
-        rq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
+        rmq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
 
-        self.assertEqual(rq.connect(), (True, None))
+        self.assertEqual(rmq.connect(), (True, None))
 
 
 if __name__ == "__main__":

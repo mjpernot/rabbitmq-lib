@@ -87,9 +87,9 @@ class UnitTest(unittest.TestCase):
         mock_create.return_value = True
         mock_bind.return_value = True
         mock_check.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
 
-        self.assertFalse(rq.setup_queue())
+        self.assertFalse(rmq.setup_queue())
 
 
 if __name__ == "__main__":

@@ -41,9 +41,26 @@ class PublishMsg(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         basic_publish -> Stub holder for basic_publish function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for __init__ function.
+
+        Arguments:
+
+        """
+
+        self.exchange = None
+        self.routing_key = None
+        self.body = None
+        self.mandatory = None
+        self.properties = None
 
     def basic_publish(self, exchange, routing_key, body, mandatory,
                       properties):
@@ -60,6 +77,12 @@ class PublishMsg(object):
             properties -> Arg stub holder.
 
         """
+
+        self.exchange = exchange
+        self.routing_key = routing_key
+        self.body = body
+        self.mandatory = mandatory
+        self.properties = properties
 
         return True
 
@@ -110,10 +133,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rq.channel = PublishMsg()
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq.channel = PublishMsg()
 
-        self.assertTrue(rq.publish_msg(self.body))
+        self.assertTrue(rmq.publish_msg(self.body))
 
 
 if __name__ == "__main__":

@@ -41,9 +41,24 @@ class SetupExchange(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         exchange_declare -> Stub holder for exchange_declare function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for __init__ function.
+
+        Arguments:
+
+        """
+
+        self.exchange = None
+        self.exchange_type = None
+        self.durable = None
 
     def exchange_declare(self, exchange, exchange_type, durable):
 
@@ -57,6 +72,10 @@ class SetupExchange(object):
             durable -> Arg stub holder.
 
         """
+
+        self.exchange = exchange
+        self.exchange_type = exchange_type
+        self.durable = durable
 
         return True
 
@@ -105,10 +124,10 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rq.channel = SetupExchange()
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq.channel = SetupExchange()
 
-        self.assertFalse(rq.setup_exchange())
+        self.assertFalse(rmq.setup_exchange())
 
 
 if __name__ == "__main__":

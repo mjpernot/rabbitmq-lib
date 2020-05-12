@@ -90,6 +90,7 @@ class UnitTest(unittest.TestCase):
                 self.conn_status = True
                 self.err_msg = ""
                 self.pub_status = True
+                self.msg = None
 
             def create_connection(self):
 
@@ -125,6 +126,8 @@ class UnitTest(unittest.TestCase):
                     (input) msg -> Message body.
 
                 """
+
+                self.msg = msg
 
                 return self.pub_status
 

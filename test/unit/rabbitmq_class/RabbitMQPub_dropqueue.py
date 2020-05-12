@@ -41,9 +41,24 @@ class DropQueue(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         basic_publish -> Stub holder for basic_publish function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for __init__ function.
+
+        Arguments:
+
+        """
+
+        self.queue = None
+        self.if_unused = None
+        self.if_empty = None
 
     def queue_delete(self, queue, if_unused, if_empty):
 
@@ -57,6 +72,10 @@ class DropQueue(object):
             if_empty -> Arg stub holder.
 
         """
+
+        self.queue = queue
+        self.if_unused = if_unused
+        self.if_empty = if_empty
 
         return True
 
@@ -107,10 +126,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rq.channel = DropQueue()
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq.channel = DropQueue()
 
-        self.assertFalse(rq.drop_queue())
+        self.assertFalse(rmq.drop_queue())
 
 
 if __name__ == "__main__":
