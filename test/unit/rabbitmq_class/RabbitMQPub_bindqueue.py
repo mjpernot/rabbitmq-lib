@@ -41,9 +41,24 @@ class BindQueue(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         exchange_declare -> Stub holder for exchange_declare function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for __init__ function.
+
+        Arguments:
+
+        """
+
+        self.queue = None
+        self.exchange = None
+        self.routing_key = None
 
     def queue_bind(self, queue, exchange, routing_key):
 
@@ -57,6 +72,10 @@ class BindQueue(object):
             routing_key -> Arg stub holder.
 
         """
+
+        self.queue = queue
+        self.exchange = exchange
+        self.routing_key = routing_key
 
         return True
 
