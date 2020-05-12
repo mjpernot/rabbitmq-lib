@@ -41,9 +41,23 @@ class DropExchange(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         queue_unbind -> Stub holder for queue_unbind function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for __init__ function.
+
+        Arguments:
+
+        """
+
+        self.exchange = None
+        self.if_unused = None
 
     def exchange_delete(self, exchange, if_unused):
 
@@ -56,6 +70,9 @@ class DropExchange(object):
             if_unused -> Arg stub holder.
 
         """
+
+        self.exchange = exchange
+        self.if_unused = if_unused
 
         return True
 
@@ -106,10 +123,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rq.channel = DropExchange()
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq.channel = DropExchange()
 
-        self.assertFalse(rq.drop_exchange())
+        self.assertFalse(rmq.drop_exchange())
 
 
 if __name__ == "__main__":
