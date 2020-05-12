@@ -41,9 +41,22 @@ class Ack(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         queue_unbind -> Stub holder for queue_unbind function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for __init__ function.
+
+        Arguments:
+
+        """
+
+        self.delivery_tag = None
 
     def basic_ack(self, delivery_tag):
 
@@ -55,6 +68,8 @@ class Ack(object):
             delivery_tag -> Arg stub holder.
 
         """
+
+        self.delivery_tag = delivery_tag
 
         return True
 
@@ -105,10 +120,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
-        rq.channel = Ack()
+        rmq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
+        rmq.channel = Ack()
 
-        self.assertFalse(rq.ack("tag"))
+        self.assertFalse(rmq.ack("tag"))
 
 
 if __name__ == "__main__":

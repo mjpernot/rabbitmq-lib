@@ -41,7 +41,8 @@ class StartLoop2(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        start_consuming -> Stub holder for start_consuming function.
+        start_consuming -> start_consuming method.
+        stop_consuming -> stop_consuming method.
 
     """
 
@@ -138,11 +139,11 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
         mock_close.return_value = True
-        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host,
-                                        self.port)
-        rq.channel = StartLoop2()
+        rmq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host,
+                                         self.port)
+        rmq.channel = StartLoop2()
 
-        self.assertFalse(rq.start_loop())
+        self.assertFalse(rmq.start_loop())
 
     @mock.patch("rabbitmq_class.RabbitMQCon.close")
     @mock.patch("rabbitmq_class.pika")
@@ -160,11 +161,11 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BlockingConnection.return_value = "GoodConnection"
         mock_close.return_value = True
-        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host,
-                                        self.port)
-        rq.channel = StartLoop()
+        rmq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx", self.host,
+                                         self.port)
+        rmq.channel = StartLoop()
 
-        self.assertFalse(rq.start_loop())
+        self.assertFalse(rmq.start_loop())
 
 
 if __name__ == "__main__":

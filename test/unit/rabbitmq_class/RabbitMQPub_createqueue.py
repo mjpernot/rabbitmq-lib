@@ -41,9 +41,24 @@ class CreateQueue(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         queue_declare -> Stub holder for queue_declare function.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.queue = None
+        self.durable = None
+        self.auto_delete = None
 
     def queue_declare(self, queue, durable, auto_delete):
 
@@ -57,6 +72,10 @@ class CreateQueue(object):
             auto_delete -> Arg stub holder.
 
         """
+
+        self.queue = queue
+        self.durable = durable
+        self.auto_delete = auto_delete
 
         return True
 
@@ -105,10 +124,10 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rq.channel = CreateQueue()
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq.channel = CreateQueue()
 
-        self.assertFalse(rq.create_queue())
+        self.assertFalse(rmq.create_queue())
 
 
 if __name__ == "__main__":

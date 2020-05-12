@@ -80,16 +80,16 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQCon(
+        rmq = rabbitmq_class.RabbitMQCon(
             self.name, "xxxxx", self.host, self.port,
             exchange_name=self.exchange_name, queue_name=self.queue_name,
             routing_key=self.routing_key, auto_delete=self.auto_delete,
             no_ack=self.no_ack)
 
-        self.assertEqual((rq.name, rq.host, rq.port, rq.exchange,
-                          rq.exchange_type, rq.queue_name, rq.routing_key,
-                          rq.x_durable, rq.q_durable, rq.auto_delete,
-                          rq.no_ack),
+        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.exchange,
+                          rmq.exchange_type, rmq.queue_name, rmq.routing_key,
+                          rmq.x_durable, rmq.q_durable, rmq.auto_delete,
+                          rmq.no_ack),
                          (self.name, self.host, 5555, self.exchange_name,
                           "direct", self.queue_name, self.routing_key,
                           True, True, self.auto_delete, self.no_ack))
@@ -107,12 +107,12 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
+        rmq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
 
-        self.assertEqual((rq.name, rq.host, rq.port, rq.exchange,
-                          rq.exchange_type, rq.queue_name, rq.routing_key,
-                          rq.x_durable, rq.q_durable, rq.auto_delete,
-                          rq.no_ack),
+        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.exchange,
+                          rmq.exchange_type, rmq.queue_name, rmq.routing_key,
+                          rmq.x_durable, rmq.q_durable, rmq.auto_delete,
+                          rmq.no_ack),
                          (self.name, "localhost", 5672, "", "direct", "", "",
                           True, True, False, False))
 
