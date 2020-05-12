@@ -42,6 +42,7 @@ class CreateConnection(object):
     Description:  Class stub holder for pika class.
 
     Methods:
+        __init__ -> Class initialization.
         exchange_declare -> Stub holder for exchange_declare function.
 
     """
