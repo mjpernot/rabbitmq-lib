@@ -69,8 +69,6 @@ vim {Other_Python_Project}/requirements.txt
 
 # Unit Testing:
 
-### Description: Testing consists of unit testing for the functions in the rabbitmq_class class.
-
 ### Installation:
 
 Install the project using git.
