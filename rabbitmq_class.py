@@ -503,10 +503,11 @@ class RabbitMQCon(RabbitMQPub):
 
         """
 
-        super(RabbitMQCon, self).__init__(user, passwd, host, port,
-                                          exchange_name, exchange_type,
-                                          queue_name, routing_key, x_durable,
-                                          q_durable, auto_delete, **kwargs)
+        super(RabbitMQCon, self).__init__(
+            user, passwd, host, port, exchange_name=exchange_name,
+            exchange_type=exchange_type, queue_name=queue_name,
+            routing_key=routing_key, x_durable=x_durable, q_durable=q_durable,
+            auto_delete=auto_delete, **kwargs)
 
         self.no_ack = no_ack
 
