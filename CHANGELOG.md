@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [1.1.2] - 2020-06-10
+### Changed
+- RabbitMQCon.consume:  Added queue argument to allow a specify queue to be monitored.
 
 
 ## [1.1.1] - 2020-05-11

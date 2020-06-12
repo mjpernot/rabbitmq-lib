@@ -519,12 +519,15 @@ class RabbitMQCon(RabbitMQPub):
 
         Arguments:
             (input) func_call -> Name of the callback function.
+            (input) **kwargs:
+                queue -> Name of queue.
             (output) Return consumer tag that is returned from basic_consume.
 
         """
 
-        return self.channel.basic_consume(func_call, self.queue_name,
-                                          self.no_ack)
+        queue = kwargs.get("queue", self.queue_name)
+
+        return self.channel.basic_consume(func_call, queue, self.no_ack)
 
     def start_loop(self, **kwargs):
 
