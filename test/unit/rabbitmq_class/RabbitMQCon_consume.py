@@ -88,6 +88,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_queue_arg -> Test with queue argument.
         test_consume -> Test consume method.
 
     """
@@ -111,6 +112,25 @@ class UnitTest(unittest.TestCase):
         self.routing_key = "Route_Key"
         self.auto_delete = True
         self.body = "Message_Body"
+
+    @mock.patch("rabbitmq_class.pika")
+    def test_queue_arg(self, mock_pika):
+
+        """Function:  test_queue_arg
+
+        Description:  Test with queue argument.
+
+        Arguments:
+
+        """
+
+        mock_pika.PlainCredentials.return_value = "PlainCredentials"
+        mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        mock_pika.BasicProperties.return_value = True
+        rmq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
+        rmq.channel = Consume()
+
+        self.assertTrue(rmq.consume("func_call", queue="queue_name"))
 
     @mock.patch("rabbitmq_class.pika")
     def test_consume(self, mock_pika):
