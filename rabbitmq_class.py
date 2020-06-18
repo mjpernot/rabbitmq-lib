@@ -503,10 +503,11 @@ class RabbitMQCon(RabbitMQPub):
 
         """
 
-        super(RabbitMQCon, self).__init__(user, passwd, host, port,
-                                          exchange_name, exchange_type,
-                                          queue_name, routing_key, x_durable,
-                                          q_durable, auto_delete, **kwargs)
+        super(RabbitMQCon, self).__init__(
+            user, passwd, host, port, exchange_name=exchange_name,
+            exchange_type=exchange_type, queue_name=queue_name,
+            routing_key=routing_key, x_durable=x_durable, q_durable=q_durable,
+            auto_delete=auto_delete, **kwargs)
 
         self.no_ack = no_ack
 
@@ -519,12 +520,15 @@ class RabbitMQCon(RabbitMQPub):
 
         Arguments:
             (input) func_call -> Name of the callback function.
+            (input) **kwargs:
+                queue -> Name of queue.
             (output) Return consumer tag that is returned from basic_consume.
 
         """
 
-        return self.channel.basic_consume(func_call, self.queue_name,
-                                          self.no_ack)
+        queue = kwargs.get("queue", self.queue_name)
+
+        return self.channel.basic_consume(func_call, queue, self.no_ack)
 
     def start_loop(self, **kwargs):
 

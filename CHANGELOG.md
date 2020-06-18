@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [1.1.2] - 2020-06-10
+### Changed
+- RabbitMQCon.\_\_init\_\_:  In super call, changed positional arguments to keyword arguments.
+- RabbitMQCon.consume:  Added queue argument to allow a specify queue to be monitored.
+
+
 ## [1.1.1] - 2020-05-11
 ### Changed
 - Documentation updates.
