@@ -477,7 +477,7 @@ class RabbitMQCon(RabbitMQPub):
 
     """
 
-    def __init__(self, user, passwd, host="localhost", port=5672,
+    def __init__(self, user, japd, host="localhost", port=5672,
                  exchange_name="", exchange_type="direct", queue_name="",
                  routing_key="", x_durable=True, q_durable=True,
                  auto_delete=False, no_ack=False, **kwargs):
@@ -488,7 +488,7 @@ class RabbitMQCon(RabbitMQPub):
 
         Arguments:
             (input) user -> User login name.
-            (input) passwd ->  User password.
+            (input) japd ->  User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default = 5672.
             (input) exchange_name -> Name of exchange.
@@ -504,7 +504,7 @@ class RabbitMQCon(RabbitMQPub):
         """
 
         super(RabbitMQCon, self).__init__(
-            user, passwd, host, port, exchange_name=exchange_name,
+            user, japd, host, port, exchange_name=exchange_name,
             exchange_type=exchange_type, queue_name=queue_name,
             routing_key=routing_key, x_durable=x_durable, q_durable=q_durable,
             auto_delete=auto_delete, **kwargs)
