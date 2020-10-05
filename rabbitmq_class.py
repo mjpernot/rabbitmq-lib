@@ -116,7 +116,7 @@ class RabbitMQ(object):
 
     """
 
-    def __init__(self, user, passwd, host="localhost", port=5672, **kwargs):
+    def __init__(self, user, japd, host="localhost", port=5672, **kwargs):
 
         """Method:  __init__
 
@@ -124,7 +124,7 @@ class RabbitMQ(object):
 
         Arguments:
             (input) user -> User login name.
-            (input) passwd ->  User password.
+            (input) japd ->  User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default port is 5672.
 
@@ -134,7 +134,7 @@ class RabbitMQ(object):
         self.host = host
         self.port = port
         self.connection = None
-        self.creds = pika.PlainCredentials(self.name, passwd)
+        self.creds = pika.PlainCredentials(self.name, japd)
         self.params = pika.ConnectionParameters(host=self.host, port=self.port,
                                                 credentials=self.creds)
 
