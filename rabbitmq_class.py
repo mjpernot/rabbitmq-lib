@@ -211,10 +211,7 @@ class RabbitMQPub(RabbitMQ):
 
     """
 
-    def __init__(self, user, japd, host="localhost", port=5672,
-                 exchange_name="", exchange_type="direct", queue_name="",
-                 routing_key="", x_durable=True, q_durable=True,
-                 auto_delete=False, **kwargs):
+    def __init__(self, user, japd, host="localhost", port=5672, **kwargs):
 
         """Method:  __init__
 
@@ -225,13 +222,14 @@ class RabbitMQPub(RabbitMQ):
             (input) japd ->  User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default = 5672.
-            (input) exchange_name -> Name of exchange.
-            (input) exchange_type -> Types: direct, fanout, headers, and topic.
-            (input) queue_name -> Name of the queue to create.
-            (input) routing_key -> Name of queue to rout to.
-            (input) x_durable -> True|False - Exchange survives reboots.
-            (input) q_durable -> True|False - Queue survives reboots.
-            (input) auto_delete -> True|False - Auto-delete after consuming.
+            (input) kwargs:
+                exchange_name -> Name of exchange.
+                exchange_type -> Types: direct, fanout, headers, and topic.
+                queue_name -> Name of the queue to create.
+                routing_key -> Name of queue to rout to.
+                x_durable -> True|False - Exchange survives reboots.
+                q_durable -> True|False - Queue survives reboots.
+                auto_delete -> True|False - Auto-delete after consuming.
 
         """
 
@@ -240,16 +238,16 @@ class RabbitMQPub(RabbitMQ):
         self.channel = None
 
         # Queue declaration attributes
-        self.queue_name = queue_name
-        self.q_durable = q_durable
-        self.auto_delete = auto_delete
+        self.queue_name = kwargs.get("queue_name", "")
+        self.q_durable = kwargs.get("q_durable", True)
+        self.auto_delete = kwargs.get("auto_delete", False)
         self.q_passive = False
-        self.routing_key = routing_key
+        self.routing_key = kwargs.get("routing_key", "")
 
         # Exchange declaration attributes
-        self.exchange = exchange_name
-        self.exchange_type = exchange_type
-        self.x_durable = x_durable
+        self.exchange = kwargs.get("exchange_name", "")
+        self.exchange_type = kwargs.get("exchange_type", "direct")
+        self.x_durable = kwargs.get("x_durable", True)
         self.x_passive = False
 
     def open_channel(self, **kwargs):
