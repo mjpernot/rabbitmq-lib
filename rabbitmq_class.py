@@ -135,8 +135,9 @@ class RabbitMQ(object):
         self.port = port
         self.connection = None
         self.creds = pika.PlainCredentials(self.name, japd)
-        self.params = pika.ConnectionParameters(host=self.host, port=self.port,
-                                                credentials=self.creds)
+        self.params = pika.ConnectionParameters(
+            host=self.host, port=self.port, credentials=self.creds,
+            heartbeat=5)
 
     def connect(self, **kwargs):
 

@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change.
 
 ### Changed
+- RabbitMQ.\_\_init\_\_:  Added heartbeat argument to pika.ConnectionParameters call.
 - RabbitMQCon.\_\_init\_\_:  Changed positional arguments to keyword arguments.
 - RabbitMQPub.\_\_init\_\_:  Changed positional arguments to keyword arguments.
 - create_rmqcon:  Changed configuration argument.
