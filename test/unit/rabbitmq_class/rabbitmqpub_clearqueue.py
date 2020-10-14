@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_clearqueue.py
+"""Program:  rabbitmqpub_clearqueue.py
 
-    Description:  Unit test of RabbitMQPub.clear_queue in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.clear_queue in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_clearqueue.py
+        test/unit/rabbitmq_class/rabbitmqpub_clearqueue.py
 
     Arguments:
 
