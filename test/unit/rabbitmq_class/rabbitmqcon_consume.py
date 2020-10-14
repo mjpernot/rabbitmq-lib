@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQCon_consume.py
+"""Program:  rabbitmqcon_consume.py
 
-    Description:  Unit test of RabbitMQCon.consume in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqcon.consume in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQCon_consume.py
+        test/unit/rabbitmq_class/rabbitmqcon_consume.py
 
     Arguments:
 
