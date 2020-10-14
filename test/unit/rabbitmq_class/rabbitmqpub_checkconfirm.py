@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_checkconfirm.py
+"""Program:  rabbitmqpub_checkconfirm.py
 
-    Description:  Unit test of RabbitMQPub.check_confirm in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.check_confirm in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_checkconfirm.py
+        test/unit/rabbitmq_class/rabbitmqpub_checkconfirm.py
 
     Arguments:
 
