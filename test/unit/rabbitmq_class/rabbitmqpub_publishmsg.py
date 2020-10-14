@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_publishmsg.py
+"""Program:  rabbitmqpub_publishmsg.py
 
-    Description:  Unit test of RabbitMQPub.publish_msg in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.publish_msg in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_publishmsg.py
+        test/unit/rabbitmq_class/rabbitmqpub_publishmsg.py
 
     Arguments:
 
