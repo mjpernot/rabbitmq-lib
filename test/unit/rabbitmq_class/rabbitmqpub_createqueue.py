@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_createqueue.py
+"""Program:  rabbitmqpub_createqueue.py
 
-    Description:  Unit test of RabbitMQPub.create_queue in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.create_queue in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_createqueue.py
+        test/unit/rabbitmq_class/rabbitmqpub_createqueue.py
 
     Arguments:
 
