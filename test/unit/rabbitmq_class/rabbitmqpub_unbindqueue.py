@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_unbindqueue.py
+"""Program:  rabbitmqpub_unbindqueue.py
 
-    Description:  Unit test of RabbitMQPub.unbind_queue in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.unbind_queue in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_unbindqueue.py
+        test/unit/rabbitmq_class/rabbitmqpub_unbindqueue.py
 
     Arguments:
 
