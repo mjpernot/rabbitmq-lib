@@ -1,13 +1,13 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_dropconnection.py
+"""Program:  rabbitmqpub_dropconnection.py
 
-    Description:  Unit test of RabbitMQPub.drop_connection in
+    Description:  Unit test of rabbitmqpub.drop_connection in
         rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_dropconnection.py
+        test/unit/rabbitmq_class/rabbitmqpub_dropconnection.py
 
     Arguments:
 
