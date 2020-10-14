@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQ_init.py
+"""Program:  rabbitmq_init.py
 
-    Description:  Unit testing of RabbitMQ.__init__ in rabbitmq_class.py.
+    Description:  Unit testing of rabbitmq.__init__ in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQ_init.py
+        test/unit/rabbitmq_class/rabbitmq_init.py
 
     Arguments:
 
