@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_publishmsg.py
+"""Program:  rabbitmqcon_ack.py
 
-    Description:  Unit test of RabbitMQPub.publish_msg in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqcon.ack in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_publishmsg.py
+        test/unit/rabbitmq_class/rabbitmqcon_ack.py
 
     Arguments:
 
@@ -34,15 +34,15 @@ import version
 __version__ = version.__version__
 
 
-class PublishMsg(object):
+class Ack(object):
 
-    """Class:  PublishMsg
+    """Class:  Ack
 
     Description:  Class stub holder for pika class.
 
     Methods:
         __init__ -> Class initialization.
-        basic_publish -> Stub holder for basic_publish function.
+        queue_unbind -> Stub holder for queue_unbind function.
 
     """
 
@@ -56,33 +56,20 @@ class PublishMsg(object):
 
         """
 
-        self.exchange = None
-        self.routing_key = None
-        self.body = None
-        self.mandatory = None
-        self.properties = None
+        self.delivery_tag = None
 
-    def basic_publish(self, exchange, routing_key, body, mandatory,
-                      properties):
+    def basic_ack(self, delivery_tag):
 
-        """Function:  basic_publish
+        """Function:  basic_ack
 
-        Description:  Stub holder for basic_publish function.
+        Description:  Stub holder for basic_ack function.
 
         Arguments:
-            exchange -> Arg stub holder.
-            routing_key -> Arg stub holder.
-            body -> Arg stub holder.
-            mandatory -> Arg stub holder.
-            properties -> Arg stub holder.
+            delivery_tag -> Arg stub holder.
 
         """
 
-        self.exchange = exchange
-        self.routing_key = routing_key
-        self.body = body
-        self.mandatory = mandatory
-        self.properties = properties
+        self.delivery_tag = delivery_tag
 
         return True
 
@@ -95,7 +82,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_publish_msg -> Test publish_msg method.
+        test_ack -> Test ack method.
 
     """
 
@@ -120,11 +107,11 @@ class UnitTest(unittest.TestCase):
         self.body = "Message_Body"
 
     @mock.patch("rabbitmq_class.pika")
-    def test_publish_msg(self, mock_pika):
+    def test_ack(self, mock_pika):
 
-        """Function:  test_publish_msg
+        """Function:  test_ack
 
-        Description:  Test publish_msg method.
+        Description:  Test ack method.
 
         Arguments:
 
@@ -133,10 +120,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.channel = PublishMsg()
+        rmq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
+        rmq.channel = Ack()
 
-        self.assertTrue(rmq.publish_msg(self.body))
+        self.assertFalse(rmq.ack("tag"))
 
 
 if __name__ == "__main__":

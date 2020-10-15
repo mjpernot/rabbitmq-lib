@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_checkconfirm.py
+"""Program:  rabbitmqpub_createqueue.py
 
-    Description:  Unit test of RabbitMQPub.check_confirm in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.create_queue in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_checkconfirm.py
+        test/unit/rabbitmq_class/rabbitmqpub_createqueue.py
 
     Arguments:
 
@@ -34,26 +34,48 @@ import version
 __version__ = version.__version__
 
 
-class CheckConfirm(object):
+class CreateQueue(object):
 
-    """Class:  CheckConfirm
+    """Class:  CreateQueue
 
     Description:  Class stub holder for pika class.
 
     Methods:
-        confirm_delivery -> Stub holder for confirm_delivery function.
+        __init__ -> Class initialization.
+        queue_declare -> Stub holder for queue_declare function.
 
     """
 
-    def confirm_delivery(self):
+    def __init__(self):
 
-        """Function:  confirm_delivery
+        """Function:  __init__
 
-        Description:  Stub holder for confirm_delivery function.
+        Description:  Class initialization.
 
         Arguments:
 
         """
+
+        self.queue = None
+        self.durable = None
+        self.auto_delete = None
+
+    def queue_declare(self, queue, durable, auto_delete):
+
+        """Function:  queue_declare
+
+        Description:  Stub holder for queue_declare function.
+
+        Arguments:
+            queue -> Arg stub holder.
+            durable -> Arg stub holder.
+            auto_delete -> Arg stub holder.
+
+        """
+
+        self.queue = queue
+        self.durable = durable
+        self.auto_delete = auto_delete
 
         return True
 
@@ -66,7 +88,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_close_channel -> Test close_channel method.
+        test_create_queue -> Test create_queue method.
 
     """
 
@@ -90,11 +112,11 @@ class UnitTest(unittest.TestCase):
         self.auto_delete = True
 
     @mock.patch("rabbitmq_class.pika")
-    def test_close_channel(self, mock_pika):
+    def test_create_queue(self, mock_pika):
 
-        """Function:  test_close_channel
+        """Function:  test_create_queue
 
-        Description:  Test close_channel method.
+        Description:  Test create_queue method.
 
         Arguments:
 
@@ -103,9 +125,9 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.channel = CheckConfirm()
+        rmq.channel = CreateQueue()
 
-        self.assertFalse(rmq.check_confirm())
+        self.assertFalse(rmq.create_queue())
 
 
 if __name__ == "__main__":

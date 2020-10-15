@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_dropexchange.py
+"""Program:  rabbitmqpub_publishmsg.py
 
-    Description:  Unit test of RabbitMQPub.drop_exchange in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.publish_msg in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_dropexchange.py
+        test/unit/rabbitmq_class/rabbitmqpub_publishmsg.py
 
     Arguments:
 
@@ -34,15 +34,15 @@ import version
 __version__ = version.__version__
 
 
-class DropExchange(object):
+class PublishMsg(object):
 
-    """Class:  DropExchange
+    """Class:  PublishMsg
 
     Description:  Class stub holder for pika class.
 
     Methods:
         __init__ -> Class initialization.
-        queue_unbind -> Stub holder for queue_unbind function.
+        basic_publish -> Stub holder for basic_publish function.
 
     """
 
@@ -57,22 +57,32 @@ class DropExchange(object):
         """
 
         self.exchange = None
-        self.if_unused = None
+        self.routing_key = None
+        self.body = None
+        self.mandatory = None
+        self.properties = None
 
-    def exchange_delete(self, exchange, if_unused):
+    def basic_publish(self, exchange, routing_key, body, mandatory,
+                      properties):
 
-        """Function:  exchange_delete
+        """Function:  basic_publish
 
-        Description:  Stub holder for queue_unbind function.
+        Description:  Stub holder for basic_publish function.
 
         Arguments:
             exchange -> Arg stub holder.
-            if_unused -> Arg stub holder.
+            routing_key -> Arg stub holder.
+            body -> Arg stub holder.
+            mandatory -> Arg stub holder.
+            properties -> Arg stub holder.
 
         """
 
         self.exchange = exchange
-        self.if_unused = if_unused
+        self.routing_key = routing_key
+        self.body = body
+        self.mandatory = mandatory
+        self.properties = properties
 
         return True
 
@@ -85,7 +95,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_drop_exchange -> Test drop_exchange method.
+        test_publish_msg -> Test publish_msg method.
 
     """
 
@@ -110,11 +120,11 @@ class UnitTest(unittest.TestCase):
         self.body = "Message_Body"
 
     @mock.patch("rabbitmq_class.pika")
-    def test_drop_exchange(self, mock_pika):
+    def test_publish_msg(self, mock_pika):
 
-        """Function:  test_drop_exchange
+        """Function:  test_publish_msg
 
-        Description:  Test drop_exchange method.
+        Description:  Test publish_msg method.
 
         Arguments:
 
@@ -124,9 +134,9 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.channel = DropExchange()
+        rmq.channel = PublishMsg()
 
-        self.assertFalse(rmq.drop_exchange())
+        self.assertTrue(rmq.publish_msg(self.body))
 
 
 if __name__ == "__main__":

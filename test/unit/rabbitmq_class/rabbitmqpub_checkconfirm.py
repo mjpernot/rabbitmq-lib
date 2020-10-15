@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_setupexchange.py
+"""Program:  rabbitmqpub_checkconfirm.py
 
-    Description:  Unit test of RabbitMQPub.setup_exchange in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.check_confirm in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_setupexchange.py
+        test/unit/rabbitmq_class/rabbitmqpub_checkconfirm.py
 
     Arguments:
 
@@ -34,48 +34,26 @@ import version
 __version__ = version.__version__
 
 
-class SetupExchange(object):
+class CheckConfirm(object):
 
-    """Class:  SetupExchange
+    """Class:  CheckConfirm
 
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        exchange_declare -> Stub holder for exchange_declare function.
+        confirm_delivery -> Stub holder for confirm_delivery function.
 
     """
 
-    def __init__(self):
+    def confirm_delivery(self):
 
-        """Function:  __init__
+        """Function:  confirm_delivery
 
-        Description:  Stub holder for __init__ function.
+        Description:  Stub holder for confirm_delivery function.
 
         Arguments:
 
         """
-
-        self.exchange = None
-        self.exchange_type = None
-        self.durable = None
-
-    def exchange_declare(self, exchange, exchange_type, durable):
-
-        """Function:  exchange_declare
-
-        Description:  Stub holder for exchange_declare function.
-
-        Arguments:
-            exchange -> Arg stub holder.
-            exchange_type -> Arg stub holder.
-            durable -> Arg stub holder.
-
-        """
-
-        self.exchange = exchange
-        self.exchange_type = exchange_type
-        self.durable = durable
 
         return True
 
@@ -88,7 +66,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_setup_exchange -> Test setup_exchange method.
+        test_close_channel -> Test close_channel method.
 
     """
 
@@ -112,11 +90,11 @@ class UnitTest(unittest.TestCase):
         self.auto_delete = True
 
     @mock.patch("rabbitmq_class.pika")
-    def test_setup_exchange(self, mock_pika):
+    def test_close_channel(self, mock_pika):
 
-        """Function:  test_setup_exchange
+        """Function:  test_close_channel
 
-        Description:  Test setup_exchange method.
+        Description:  Test close_channel method.
 
         Arguments:
 
@@ -125,9 +103,9 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.channel = SetupExchange()
+        rmq.channel = CheckConfirm()
 
-        self.assertFalse(rmq.setup_exchange())
+        self.assertFalse(rmq.check_confirm())
 
 
 if __name__ == "__main__":

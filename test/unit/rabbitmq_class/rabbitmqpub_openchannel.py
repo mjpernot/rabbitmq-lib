@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_createqueue.py
+"""Program:  rabbitmqpub_openchannel.py
 
-    Description:  Unit test of RabbitMQPub.create_queue in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.open_channel in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_createqueue.py
+        test/unit/rabbitmq_class/rabbitmqpub_openchannel.py
 
     Arguments:
 
@@ -34,48 +34,26 @@ import version
 __version__ = version.__version__
 
 
-class CreateQueue(object):
+class OpenChannel(object):
 
-    """Class:  CreateQueue
+    """Class:  OpenChannel
 
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        queue_declare -> Stub holder for queue_declare function.
+        close -> Stub holder for channel function.
 
     """
 
-    def __init__(self):
+    def channel(self):
 
-        """Function:  __init__
+        """Function:  channel
 
-        Description:  Class initialization.
+        Description:  Stub holder for channel function.
 
         Arguments:
 
         """
-
-        self.queue = None
-        self.durable = None
-        self.auto_delete = None
-
-    def queue_declare(self, queue, durable, auto_delete):
-
-        """Function:  queue_declare
-
-        Description:  Stub holder for queue_declare function.
-
-        Arguments:
-            queue -> Arg stub holder.
-            durable -> Arg stub holder.
-            auto_delete -> Arg stub holder.
-
-        """
-
-        self.queue = queue
-        self.durable = durable
-        self.auto_delete = auto_delete
 
         return True
 
@@ -88,7 +66,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_create_queue -> Test create_queue method.
+        test_open_channel -> Test open_channel method.
 
     """
 
@@ -112,11 +90,11 @@ class UnitTest(unittest.TestCase):
         self.auto_delete = True
 
     @mock.patch("rabbitmq_class.pika")
-    def test_create_queue(self, mock_pika):
+    def test_open_channel(self, mock_pika):
 
-        """Function:  test_create_queue
+        """Function:  test_open_channel
 
-        Description:  Test create_queue method.
+        Description:  Test open_channel method.
 
         Arguments:
 
@@ -125,9 +103,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.channel = CreateQueue()
+        rmq.connection = OpenChannel()
+        rmq.open_channel()
 
-        self.assertFalse(rmq.create_queue())
+        self.assertEqual(rmq.channel, True)
 
 
 if __name__ == "__main__":

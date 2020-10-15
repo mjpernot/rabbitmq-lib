@@ -78,7 +78,7 @@ class UnitTest(unittest.TestCase):
                 """
 
                 self.user = "USERNAME"
-                self.pswd = "PSWD"
+                self.japd = "japd"
                 self.host = "HOSTNAME"
                 self.port = 1111
                 self.exchange_name = "EXCHANGE_NAME"

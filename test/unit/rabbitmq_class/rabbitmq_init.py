@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQ_close.py
+"""Program:  rabbitmq_init.py
 
-    Description:  Unit testing of RabbitMQ.close in rabbitmq_class.py.
+    Description:  Unit testing of rabbitmq.__init__ in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQ_close.py
+        test/unit/rabbitmq_class/rabbitmq_init.py
 
     Arguments:
 
@@ -34,30 +34,6 @@ import version
 __version__ = version.__version__
 
 
-class PikaClose(object):
-
-    """Class:  PikaClose
-
-    Description:  Class stub holder for pika class.
-
-    Methods:
-        close -> Stub holder for close function.
-
-    """
-
-    def close(self):
-
-        """Function:  close
-
-        Description:  Stub holder for close function.
-
-        Arguments:
-
-        """
-
-        return True
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -66,7 +42,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_close -> Test close method.
+        test_with_data -> Test other attributes with data.
+        test_default -> Test with minimum number of arguments.
 
     """
 
@@ -86,6 +63,24 @@ class UnitTest(unittest.TestCase):
         self.connection = None
 
     @mock.patch("rabbitmq_class.pika")
+    def test_with_data(self, mock_pika):
+
+        """Function:  test_with_data
+
+        Description:  Test __init__ method with all arguments.
+
+        Arguments:
+
+        """
+
+        mock_pika.PlainCredentials.return_value = "PlainCredentials"
+        mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        rmq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
+
+        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.connection),
+                         (self.name, self.host, self.port, None))
+
+    @mock.patch("rabbitmq_class.pika")
     def test_default(self, mock_pika):
 
         """Function:  test_default
@@ -99,9 +94,9 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         rmq = rabbitmq_class.RabbitMQ(self.name, "xxxxx")
-        rmq.connection = PikaClose()
 
-        self.assertFalse(rmq.close())
+        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.connection),
+                         (self.name, "localhost", 5672, None))
 
 
 if __name__ == "__main__":

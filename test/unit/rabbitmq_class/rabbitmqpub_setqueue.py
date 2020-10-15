@@ -1,13 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_dropconnection.py
+"""Program:  rabbitmqpub_setqueue.py
 
-    Description:  Unit test of RabbitMQPub.drop_connection in
-        rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.set_queue in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_dropconnection.py
+        test/unit/rabbitmq_class/rabbitmqpub_setqueue.py
 
     Arguments:
 
@@ -43,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_drop_connection -> Test drop_connection method.
+        test_setup_queue -> Test setup_queue method.
 
     """
 
@@ -66,14 +65,17 @@ class UnitTest(unittest.TestCase):
         self.routing_key = "Route_Key"
         self.auto_delete = True
 
-    @mock.patch("rabbitmq_class.RabbitMQPub.close_channel")
-    @mock.patch("rabbitmq_class.RabbitMQPub.close")
+    @mock.patch("rabbitmq_class.RabbitMQPub.check_confirm")
+    @mock.patch("rabbitmq_class.RabbitMQPub.bind_queue")
+    @mock.patch("rabbitmq_class.RabbitMQPub.create_queue")
+    @mock.patch("rabbitmq_class.RabbitMQPub.setup_exchange")
     @mock.patch("rabbitmq_class.pika")
-    def test_drop_connection(self, mock_pika, mock_close, mock_channel):
+    def test_setup_queue(self, mock_pika, mock_setup, mock_create, mock_bind,
+                         mock_check):
 
-        """Function:  test_drop_connection
+        """Function:  test_setup_queue
 
-        Description:  Test drop_connection method.
+        Description:  Test setup_queue method.
 
         Arguments:
 
@@ -81,11 +83,13 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        mock_close.return_value = True
-        mock_channel.return_value = True
+        mock_setup.return_value = True
+        mock_create.return_value = True
+        mock_bind.return_value = True
+        mock_check.return_value = True
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
 
-        self.assertFalse(rmq.drop_connection())
+        self.assertFalse(rmq.setup_queue())
 
 
 if __name__ == "__main__":

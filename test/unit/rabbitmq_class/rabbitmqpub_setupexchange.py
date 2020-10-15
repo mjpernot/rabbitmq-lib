@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_clearqueue.py
+"""Program:  rabbitmqpub_setupexchange.py
 
-    Description:  Unit test of RabbitMQPub.clear_queue in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.setup_exchange in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_clearqueue.py
+        test/unit/rabbitmq_class/rabbitmqpub_setupexchange.py
 
     Arguments:
 
@@ -34,15 +34,15 @@ import version
 __version__ = version.__version__
 
 
-class ClearQueue(object):
+class SetupExchange(object):
 
-    """Class:  ClearQueue
+    """Class:  SetupExchange
 
     Description:  Class stub holder for pika class.
 
     Methods:
         __init__ -> Class initialization.
-        queue_purge -> Stub holder for queue_purge function.
+        exchange_declare -> Stub holder for exchange_declare function.
 
     """
 
@@ -50,26 +50,32 @@ class ClearQueue(object):
 
         """Function:  __init__
 
-        Description:  Class initialization.
+        Description:  Stub holder for __init__ function.
 
         Arguments:
 
         """
 
-        self.queue = None
+        self.exchange = None
+        self.exchange_type = None
+        self.durable = None
 
-    def queue_purge(self, queue):
+    def exchange_declare(self, exchange, exchange_type, durable):
 
-        """Function:  queue_purge
+        """Function:  exchange_declare
 
-        Description:  Stub holder for queue_purge function.
+        Description:  Stub holder for exchange_declare function.
 
         Arguments:
-            queue -> Arg stub holder.
+            exchange -> Arg stub holder.
+            exchange_type -> Arg stub holder.
+            durable -> Arg stub holder.
 
         """
 
-        self.queue = queue
+        self.exchange = exchange
+        self.exchange_type = exchange_type
+        self.durable = durable
 
         return True
 
@@ -82,7 +88,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_clear_queue -> Test clear_queue method.
+        test_setup_exchange -> Test setup_exchange method.
 
     """
 
@@ -104,14 +110,13 @@ class UnitTest(unittest.TestCase):
         self.queue_name = "Queue_Name"
         self.routing_key = "Route_Key"
         self.auto_delete = True
-        self.body = "Message_Body"
 
     @mock.patch("rabbitmq_class.pika")
-    def test_clear_queue(self, mock_pika):
+    def test_setup_exchange(self, mock_pika):
 
-        """Function:  test_clear_queue
+        """Function:  test_setup_exchange
 
-        Description:  Test clear_queue method.
+        Description:  Test setup_exchange method.
 
         Arguments:
 
@@ -119,11 +124,10 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        mock_pika.BasicProperties.return_value = True
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.channel = ClearQueue()
+        rmq.channel = SetupExchange()
 
-        self.assertFalse(rmq.clear_queue())
+        self.assertFalse(rmq.setup_exchange())
 
 
 if __name__ == "__main__":

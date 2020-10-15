@@ -73,7 +73,7 @@ def create_rmqcon(cfg, q_name, r_key, **kwargs):
     """
 
     return RabbitMQCon(
-        cfg.user, cfg.pswd, cfg.host, cfg.port,
+        cfg.user, cfg.japd, cfg.host, cfg.port,
         exchange_name=cfg.exchange_name, exchange_type=cfg.exchange_type,
         queue_name=q_name, routing_key=r_key, x_durable=cfg.x_durable,
         q_durable=cfg.q_durable, auto_delete=cfg.auto_delete,
@@ -95,7 +95,7 @@ def create_rmqpub(cfg, q_name, r_key, **kwargs):
     """
 
     return RabbitMQPub(
-        cfg.user, cfg.pswd, cfg.host, cfg.port,
+        cfg.user, cfg.japd, cfg.host, cfg.port,
         exchange_name=cfg.exchange_name, exchange_type=cfg.exchange_type,
         queue_name=q_name, routing_key=r_key, x_durable=cfg.x_durable,
         q_durable=cfg.q_durable, auto_delete=cfg.auto_delete)
@@ -116,7 +116,7 @@ class RabbitMQ(object):
 
     """
 
-    def __init__(self, user, passwd, host="localhost", port=5672, **kwargs):
+    def __init__(self, user, japd, host="localhost", port=5672, **kwargs):
 
         """Method:  __init__
 
@@ -124,7 +124,7 @@ class RabbitMQ(object):
 
         Arguments:
             (input) user -> User login name.
-            (input) passwd ->  User password.
+            (input) japd ->  User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default port is 5672.
 
@@ -134,9 +134,10 @@ class RabbitMQ(object):
         self.host = host
         self.port = port
         self.connection = None
-        self.creds = pika.PlainCredentials(self.name, passwd)
-        self.params = pika.ConnectionParameters(host=self.host, port=self.port,
-                                                credentials=self.creds)
+        self.creds = pika.PlainCredentials(self.name, japd)
+        self.params = pika.ConnectionParameters(
+            host=self.host, port=self.port, credentials=self.creds,
+            heartbeat=5)
 
     def connect(self, **kwargs):
 
@@ -211,10 +212,7 @@ class RabbitMQPub(RabbitMQ):
 
     """
 
-    def __init__(self, user, passwd, host="localhost", port=5672,
-                 exchange_name="", exchange_type="direct", queue_name="",
-                 routing_key="", x_durable=True, q_durable=True,
-                 auto_delete=False, **kwargs):
+    def __init__(self, user, japd, host="localhost", port=5672, **kwargs):
 
         """Method:  __init__
 
@@ -222,34 +220,35 @@ class RabbitMQPub(RabbitMQ):
 
         Arguments:
             (input) user -> User login name.
-            (input) passwd ->  User password.
+            (input) japd ->  User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default = 5672.
-            (input) exchange_name -> Name of exchange.
-            (input) exchange_type -> Types: direct, fanout, headers, and topic.
-            (input) queue_name -> Name of the queue to create.
-            (input) routing_key -> Name of queue to rout to.
-            (input) x_durable -> True|False - Exchange survives reboots.
-            (input) q_durable -> True|False - Queue survives reboots.
-            (input) auto_delete -> True|False - Auto-delete after consuming.
+            (input) kwargs:
+                exchange_name -> Name of exchange.
+                exchange_type -> Types: direct, fanout, headers, and topic.
+                queue_name -> Name of the queue to create.
+                routing_key -> Name of queue to rout to.
+                x_durable -> True|False - Exchange survives reboots.
+                q_durable -> True|False - Queue survives reboots.
+                auto_delete -> True|False - Auto-delete after consuming.
 
         """
 
-        super(RabbitMQPub, self).__init__(user, passwd, host, port, **kwargs)
+        super(RabbitMQPub, self).__init__(user, japd, host, port, **kwargs)
 
         self.channel = None
 
         # Queue declaration attributes
-        self.queue_name = queue_name
-        self.q_durable = q_durable
-        self.auto_delete = auto_delete
+        self.queue_name = kwargs.get("queue_name", "")
+        self.q_durable = kwargs.get("q_durable", True)
+        self.auto_delete = kwargs.get("auto_delete", False)
         self.q_passive = False
-        self.routing_key = routing_key
+        self.routing_key = kwargs.get("routing_key", "")
 
         # Exchange declaration attributes
-        self.exchange = exchange_name
-        self.exchange_type = exchange_type
-        self.x_durable = x_durable
+        self.exchange = kwargs.get("exchange_name", "")
+        self.exchange_type = kwargs.get("exchange_type", "direct")
+        self.x_durable = kwargs.get("x_durable", True)
         self.x_passive = False
 
     def open_channel(self, **kwargs):
@@ -477,10 +476,7 @@ class RabbitMQCon(RabbitMQPub):
 
     """
 
-    def __init__(self, user, passwd, host="localhost", port=5672,
-                 exchange_name="", exchange_type="direct", queue_name="",
-                 routing_key="", x_durable=True, q_durable=True,
-                 auto_delete=False, no_ack=False, **kwargs):
+    def __init__(self, user, japd, host="localhost", port=5672, **kwargs):
 
         """Method:  __init__
 
@@ -488,28 +484,32 @@ class RabbitMQCon(RabbitMQPub):
 
         Arguments:
             (input) user -> User login name.
-            (input) passwd ->  User password.
+            (input) japd ->  User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default = 5672.
-            (input) exchange_name -> Name of exchange.
-            (input) exchange_type -> Exchange type: direct, fanout, headers,
-                and topic.
-            (input) queue_name -> Name of the queue to create.
-            (input) routing_key -> Name of queue to rout to.
-            (input) x_durable -> True|False - Exchange survives reboots.
-            (input) q_durable -> True|False - Queue survives reboots.
-            (input) auto_delete -> True|False - Auto-delete after consuming.
-            (input) no_ack -> True|False - Automatic acknowledgement.
+            (input) **kwargs:
+                exchange_name -> Name of exchange.
+                exchange_type -> Types: direct, fanout, headers, and topic.
+                queue_name -> Name of the queue to create.
+                routing_key -> Name of queue to rout to.
+                x_durable -> True|False - Exchange survives reboots.
+                q_durable -> True|False - Queue survives reboots.
+                auto_delete -> True|False - Auto-delete after consuming.
+                no_ack -> True|False - Automatic acknowledgement.
 
         """
 
         super(RabbitMQCon, self).__init__(
-            user, passwd, host, port, exchange_name=exchange_name,
-            exchange_type=exchange_type, queue_name=queue_name,
-            routing_key=routing_key, x_durable=x_durable, q_durable=q_durable,
-            auto_delete=auto_delete, **kwargs)
+            user, japd, host, port,
+            exchange_name=kwargs.get("exchange_name", ""),
+            exchange_type=kwargs.get("exchange_type", "direct"),
+            queue_name=kwargs.get("queue_name", ""),
+            routing_key=kwargs.get("routing_key", ""),
+            x_durable=kwargs.get("x_durable", True),
+            q_durable=kwargs.get("q_durable", True),
+            auto_delete=kwargs.get("auto_delete", False))
 
-        self.no_ack = no_ack
+        self.no_ack = kwargs.get("no_ack", False)
 
     def consume(self, func_call, **kwargs):
 
