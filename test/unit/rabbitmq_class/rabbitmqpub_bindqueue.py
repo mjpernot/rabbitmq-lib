@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_unbindqueue.py
+"""Program:  rabbitmqpub_bindqueue.py
 
-    Description:  Unit test of RabbitMQPub.unbind_queue in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.bind_queue in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_unbindqueue.py
+        test/unit/rabbitmq_class/rabbitmqpub_bindqueue.py
 
     Arguments:
 
@@ -34,15 +34,15 @@ import version
 __version__ = version.__version__
 
 
-class UnbindQueue(object):
+class BindQueue(object):
 
-    """Class:  UnbindQueue
+    """Class:  BindQueue
 
     Description:  Class stub holder for pika class.
 
     Methods:
         __init__ -> Class initialization.
-        queue_unbind -> Stub holder for queue_unbind function.
+        exchange_declare -> Stub holder for exchange_declare function.
 
     """
 
@@ -60,11 +60,11 @@ class UnbindQueue(object):
         self.exchange = None
         self.routing_key = None
 
-    def queue_unbind(self, queue, exchange, routing_key):
+    def queue_bind(self, queue, exchange, routing_key):
 
-        """Function:  queue_unbind
+        """Function:  queue_bind
 
-        Description:  Stub holder for queue_unbind function.
+        Description:  Stub holder for queue_bind function.
 
         Arguments:
             queue -> Arg stub holder.
@@ -88,7 +88,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_unbind_queue -> Test unbind_queue method.
+        test_bind_queue -> Test bind_queue method.
 
     """
 
@@ -110,14 +110,13 @@ class UnitTest(unittest.TestCase):
         self.queue_name = "Queue_Name"
         self.routing_key = "Route_Key"
         self.auto_delete = True
-        self.body = "Message_Body"
 
     @mock.patch("rabbitmq_class.pika")
-    def test_unbind_queue(self, mock_pika):
+    def test_bind_queue(self, mock_pika):
 
-        """Function:  test_unbind_queue
+        """Function:  test_bind_queue
 
-        Description:  Test unbind_queue method.
+        Description:  Test bind_queue method.
 
         Arguments:
 
@@ -125,11 +124,10 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        mock_pika.BasicProperties.return_value = True
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.channel = UnbindQueue()
+        rmq.channel = BindQueue()
 
-        self.assertFalse(rmq.unbind_queue())
+        self.assertFalse(rmq.bind_queue())
 
 
 if __name__ == "__main__":

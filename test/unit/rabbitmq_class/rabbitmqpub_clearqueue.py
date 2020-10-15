@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_closechannel.py
+"""Program:  rabbitmqpub_clearqueue.py
 
-    Description:  Unit test of RabbitMQPub.close_channel in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.clear_queue in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_closechannel.py
+        test/unit/rabbitmq_class/rabbitmqpub_clearqueue.py
 
     Arguments:
 
@@ -34,26 +34,42 @@ import version
 __version__ = version.__version__
 
 
-class CloseChannel(object):
+class ClearQueue(object):
 
-    """Class:  CloseChannel
+    """Class:  ClearQueue
 
     Description:  Class stub holder for pika class.
 
     Methods:
-        close -> Stub holder for close function.
+        __init__ -> Class initialization.
+        queue_purge -> Stub holder for queue_purge function.
 
     """
 
-    def close(self):
+    def __init__(self):
 
-        """Function:  close
+        """Function:  __init__
 
-        Description:  Stub holder for close function.
+        Description:  Class initialization.
 
         Arguments:
 
         """
+
+        self.queue = None
+
+    def queue_purge(self, queue):
+
+        """Function:  queue_purge
+
+        Description:  Stub holder for queue_purge function.
+
+        Arguments:
+            queue -> Arg stub holder.
+
+        """
+
+        self.queue = queue
 
         return True
 
@@ -66,7 +82,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_close_channel -> Test close_channel method.
+        test_clear_queue -> Test clear_queue method.
 
     """
 
@@ -88,13 +104,14 @@ class UnitTest(unittest.TestCase):
         self.queue_name = "Queue_Name"
         self.routing_key = "Route_Key"
         self.auto_delete = True
+        self.body = "Message_Body"
 
     @mock.patch("rabbitmq_class.pika")
-    def test_close_channel(self, mock_pika):
+    def test_clear_queue(self, mock_pika):
 
-        """Function:  test_close_channel
+        """Function:  test_clear_queue
 
-        Description:  Test close_channel method.
+        Description:  Test clear_queue method.
 
         Arguments:
 
@@ -102,10 +119,11 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        mock_pika.BasicProperties.return_value = True
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.channel = CloseChannel()
+        rmq.channel = ClearQueue()
 
-        self.assertFalse(rmq.close_channel())
+        self.assertFalse(rmq.clear_queue())
 
 
 if __name__ == "__main__":

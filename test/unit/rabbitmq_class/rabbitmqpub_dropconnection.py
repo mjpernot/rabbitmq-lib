@@ -1,12 +1,13 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_openchannel.py
+"""Program:  rabbitmqpub_dropconnection.py
 
-    Description:  Unit test of RabbitMQPub.open_channel in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.drop_connection in
+        rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_openchannel.py
+        test/unit/rabbitmq_class/rabbitmqpub_dropconnection.py
 
     Arguments:
 
@@ -34,30 +35,6 @@ import version
 __version__ = version.__version__
 
 
-class OpenChannel(object):
-
-    """Class:  OpenChannel
-
-    Description:  Class stub holder for pika class.
-
-    Methods:
-        close -> Stub holder for channel function.
-
-    """
-
-    def channel(self):
-
-        """Function:  channel
-
-        Description:  Stub holder for channel function.
-
-        Arguments:
-
-        """
-
-        return True
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -66,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_open_channel -> Test open_channel method.
+        test_drop_connection -> Test drop_connection method.
 
     """
 
@@ -89,12 +66,14 @@ class UnitTest(unittest.TestCase):
         self.routing_key = "Route_Key"
         self.auto_delete = True
 
+    @mock.patch("rabbitmq_class.RabbitMQPub.close_channel")
+    @mock.patch("rabbitmq_class.RabbitMQPub.close")
     @mock.patch("rabbitmq_class.pika")
-    def test_open_channel(self, mock_pika):
+    def test_drop_connection(self, mock_pika, mock_close, mock_channel):
 
-        """Function:  test_open_channel
+        """Function:  test_drop_connection
 
-        Description:  Test open_channel method.
+        Description:  Test drop_connection method.
 
         Arguments:
 
@@ -102,11 +81,11 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        mock_close.return_value = True
+        mock_channel.return_value = True
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.connection = OpenChannel()
-        rmq.open_channel()
 
-        self.assertEqual(rmq.channel, True)
+        self.assertFalse(rmq.drop_connection())
 
 
 if __name__ == "__main__":

@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQ_init.py
+"""Program:  rabbitmqcon_init.py
 
-    Description:  Unit testing of RabbitMQ.__init__ in rabbitmq_class.py.
+    Description:  Unit testing of rabbitmqcon.__init__ in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQ_init.py
+        test/unit/rabbitmq_class/rabbitmqcon_init.py
 
     Arguments:
 
@@ -61,6 +61,11 @@ class UnitTest(unittest.TestCase):
         self.host = "ServerName"
         self.port = 5555
         self.connection = None
+        self.exchange_name = "Exchange_Name"
+        self.queue_name = "Queue_Name"
+        self.routing_key = "Route_Key"
+        self.auto_delete = True
+        self.no_ack = True
 
     @mock.patch("rabbitmq_class.pika")
     def test_with_data(self, mock_pika):
@@ -75,10 +80,19 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rmq = rabbitmq_class.RabbitMQ(self.name, "xxxxx", self.host, self.port)
+        rmq = rabbitmq_class.RabbitMQCon(
+            self.name, "xxxxx", self.host, self.port,
+            exchange_name=self.exchange_name, queue_name=self.queue_name,
+            routing_key=self.routing_key, auto_delete=self.auto_delete,
+            no_ack=self.no_ack)
 
-        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.connection),
-                         (self.name, self.host, self.port, None))
+        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.exchange,
+                          rmq.exchange_type, rmq.queue_name, rmq.routing_key,
+                          rmq.x_durable, rmq.q_durable, rmq.auto_delete,
+                          rmq.no_ack),
+                         (self.name, self.host, 5555, self.exchange_name,
+                          "direct", self.queue_name, self.routing_key,
+                          True, True, self.auto_delete, self.no_ack))
 
     @mock.patch("rabbitmq_class.pika")
     def test_default(self, mock_pika):
@@ -93,10 +107,14 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        rmq = rabbitmq_class.RabbitMQ(self.name, "xxxxx")
+        rmq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
 
-        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.connection),
-                         (self.name, "localhost", 5672, None))
+        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.exchange,
+                          rmq.exchange_type, rmq.queue_name, rmq.routing_key,
+                          rmq.x_durable, rmq.q_durable, rmq.auto_delete,
+                          rmq.no_ack),
+                         (self.name, "localhost", 5672, "", "direct", "", "",
+                          True, True, False, False))
 
 
 if __name__ == "__main__":

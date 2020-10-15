@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQCon_startloop.py
+"""Program:  rabbitmqcon_startloop.py
 
-    Description:  Unit testing of RabbitMQCon.start_loop in rabbitmq_class.py.
+    Description:  Unit testing of rabbitmqcon.start_loop in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQCon_startloop.py
+        test/unit/rabbitmq_class/rabbitmqcon_startloop.py
 
     Arguments:
 

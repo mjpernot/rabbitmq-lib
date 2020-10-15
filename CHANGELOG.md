@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.0.0] - 2020-10-05
+Breaking Change.
+
+### Changed
+- RabbitMQ.\_\_init\_\_:  Added heartbeat argument to pika.ConnectionParameters call.
+- RabbitMQCon.\_\_init\_\_:  Changed positional arguments to keyword arguments.
+- RabbitMQPub.\_\_init\_\_:  Changed positional arguments to keyword arguments.
+- create_rmqcon:  Changed configuration argument.
+- create_rmqpub:  Changed configuration argument.
+
+
 ## [1.1.2] - 2020-06-10
 ### Changed
 - RabbitMQCon.\_\_init\_\_:  In super call, changed positional arguments to keyword arguments.

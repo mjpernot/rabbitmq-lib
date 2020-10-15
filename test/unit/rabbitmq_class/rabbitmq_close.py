@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQPub_setqueue.py
+"""Program:  rabbitmq_close.py
 
-    Description:  Unit test of RabbitMQPub.set_queue in rabbitmq_class.py.
+    Description:  Unit testing of rabbitmq.close in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQPub_setqueue.py
+        test/unit/rabbitmq_class/rabbitmq_close.py
 
     Arguments:
 
@@ -34,6 +34,30 @@ import version
 __version__ = version.__version__
 
 
+class PikaClose(object):
+
+    """Class:  PikaClose
+
+    Description:  Class stub holder for pika class.
+
+    Methods:
+        close -> Stub holder for close function.
+
+    """
+
+    def close(self):
+
+        """Function:  close
+
+        Description:  Stub holder for close function.
+
+        Arguments:
+
+        """
+
+        return True
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -42,7 +66,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_setup_queue -> Test setup_queue method.
+        test_close -> Test close method.
 
     """
 
@@ -60,22 +84,13 @@ class UnitTest(unittest.TestCase):
         self.host = "ServerName"
         self.port = 5555
         self.connection = None
-        self.exchange_name = "Exchange_Name"
-        self.queue_name = "Queue_Name"
-        self.routing_key = "Route_Key"
-        self.auto_delete = True
 
-    @mock.patch("rabbitmq_class.RabbitMQPub.check_confirm")
-    @mock.patch("rabbitmq_class.RabbitMQPub.bind_queue")
-    @mock.patch("rabbitmq_class.RabbitMQPub.create_queue")
-    @mock.patch("rabbitmq_class.RabbitMQPub.setup_exchange")
     @mock.patch("rabbitmq_class.pika")
-    def test_setup_queue(self, mock_pika, mock_setup, mock_create, mock_bind,
-                         mock_check):
+    def test_default(self, mock_pika):
 
-        """Function:  test_setup_queue
+        """Function:  test_default
 
-        Description:  Test setup_queue method.
+        Description:  Test __init__ method with default arguments.
 
         Arguments:
 
@@ -83,13 +98,10 @@ class UnitTest(unittest.TestCase):
 
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
-        mock_setup.return_value = True
-        mock_create.return_value = True
-        mock_bind.return_value = True
-        mock_check.return_value = True
-        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq = rabbitmq_class.RabbitMQ(self.name, "xxxxx")
+        rmq.connection = PikaClose()
 
-        self.assertFalse(rmq.setup_queue())
+        self.assertFalse(rmq.close())
 
 
 if __name__ == "__main__":

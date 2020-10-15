@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RabbitMQCon_ack.py
+"""Program:  rabbitmqpub_dropexchange.py
 
-    Description:  Unit test of RabbitMQCon.ack in rabbitmq_class.py.
+    Description:  Unit test of rabbitmqpub.drop_exchange in rabbitmq_class.py.
 
     Usage:
-        test/unit/rabbitmq_class/RabbitMQCon_ack.py
+        test/unit/rabbitmq_class/rabbitmqpub_dropexchange.py
 
     Arguments:
 
@@ -34,9 +34,9 @@ import version
 __version__ = version.__version__
 
 
-class Ack(object):
+class DropExchange(object):
 
-    """Class:  Ack
+    """Class:  DropExchange
 
     Description:  Class stub holder for pika class.
 
@@ -56,20 +56,23 @@ class Ack(object):
 
         """
 
-        self.delivery_tag = None
+        self.exchange = None
+        self.if_unused = None
 
-    def basic_ack(self, delivery_tag):
+    def exchange_delete(self, exchange, if_unused):
 
-        """Function:  basic_ack
+        """Function:  exchange_delete
 
-        Description:  Stub holder for basic_ack function.
+        Description:  Stub holder for queue_unbind function.
 
         Arguments:
-            delivery_tag -> Arg stub holder.
+            exchange -> Arg stub holder.
+            if_unused -> Arg stub holder.
 
         """
 
-        self.delivery_tag = delivery_tag
+        self.exchange = exchange
+        self.if_unused = if_unused
 
         return True
 
@@ -82,7 +85,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_ack -> Test ack method.
+        test_drop_exchange -> Test drop_exchange method.
 
     """
 
@@ -107,11 +110,11 @@ class UnitTest(unittest.TestCase):
         self.body = "Message_Body"
 
     @mock.patch("rabbitmq_class.pika")
-    def test_ack(self, mock_pika):
+    def test_drop_exchange(self, mock_pika):
 
-        """Function:  test_ack
+        """Function:  test_drop_exchange
 
-        Description:  Test ack method.
+        Description:  Test drop_exchange method.
 
         Arguments:
 
@@ -120,10 +123,10 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         mock_pika.BasicProperties.return_value = True
-        rmq = rabbitmq_class.RabbitMQCon(self.name, "xxxxx")
-        rmq.channel = Ack()
+        rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
+        rmq.channel = DropExchange()
 
-        self.assertFalse(rmq.ack("tag"))
+        self.assertFalse(rmq.drop_exchange())
 
 
 if __name__ == "__main__":
