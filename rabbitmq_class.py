@@ -24,7 +24,7 @@ import version
 __version__ = version.__version__
 
 
-def pub_2_rmq(cfg, data, **kwargs):
+def pub_2_rmq(cfg, data):
 
     """Function:  pub_2_rmq
 
@@ -58,7 +58,7 @@ def pub_2_rmq(cfg, data, **kwargs):
     return status, err_msg
 
 
-def create_rmqcon(cfg, q_name, r_key, **kwargs):
+def create_rmqcon(cfg, q_name, r_key):
 
     """Function:  create_rmqcon
 
@@ -80,7 +80,7 @@ def create_rmqcon(cfg, q_name, r_key, **kwargs):
         no_ack=cfg.no_ack)
 
 
-def create_rmqpub(cfg, q_name, r_key, **kwargs):
+def create_rmqpub(cfg, q_name, r_key):
 
     """Function:  create_rmqpub
 
@@ -139,7 +139,7 @@ class RabbitMQ(object):
             host=self.host, port=self.port, credentials=self.creds,
             heartbeat=5)
 
-    def connect(self, **kwargs):
+    def connect(self):
 
         """Method:  connect
 
@@ -168,7 +168,7 @@ class RabbitMQ(object):
 
         return connect_status, err_msg
 
-    def close(self, **kwargs):
+    def close(self):
 
         """Method:  close
 
@@ -251,7 +251,7 @@ class RabbitMQPub(RabbitMQ):
         self.x_durable = kwargs.get("x_durable", True)
         self.x_passive = False
 
-    def open_channel(self, **kwargs):
+    def open_channel(self):
 
         """Method:  open_channel
 
@@ -263,7 +263,7 @@ class RabbitMQPub(RabbitMQ):
 
         self.channel = self.connection.channel()
 
-    def close_channel(self, **kwargs):
+    def close_channel(self):
 
         """Method:  close_channel
 
@@ -275,7 +275,7 @@ class RabbitMQPub(RabbitMQ):
 
         self.channel.close()
 
-    def create_queue(self, **kwargs):
+    def create_queue(self):
 
         """Method:  setup_queue
 
@@ -289,7 +289,7 @@ class RabbitMQPub(RabbitMQ):
                                    durable=self.q_durable,
                                    auto_delete=self.auto_delete)
 
-    def setup_exchange(self, **kwargs):
+    def setup_exchange(self):
 
         """Method:  setup_exchange
 
@@ -303,7 +303,7 @@ class RabbitMQPub(RabbitMQ):
                                       exchange_type=self.exchange_type,
                                       durable=self.x_durable)
 
-    def bind_queue(self, **kwargs):
+    def bind_queue(self):
 
         """Method:  bind_queue
 
@@ -316,7 +316,7 @@ class RabbitMQPub(RabbitMQ):
         self.channel.queue_bind(queue=self.queue_name, exchange=self.exchange,
                                 routing_key=self.routing_key)
 
-    def publish_msg(self, body, mandatory=True, **kwargs):
+    def publish_msg(self, body, mandatory=True):
 
         """Method:  publish_msg
 
@@ -334,7 +334,7 @@ class RabbitMQPub(RabbitMQ):
             body=body, mandatory=mandatory,
             properties=pika.BasicProperties(delivery_mode=2))
 
-    def setup_queue(self, **kwargs):
+    def setup_queue(self):
 
         """Method:  setup_queue
 
@@ -350,7 +350,7 @@ class RabbitMQPub(RabbitMQ):
         self.bind_queue()
         self.check_confirm()
 
-    def create_connection(self, **kwargs):
+    def create_connection(self):
 
         """Method:  create_connection
 
@@ -377,7 +377,7 @@ class RabbitMQPub(RabbitMQ):
 
         return connect_status, err_msg
 
-    def drop_connection(self, **kwargs):
+    def drop_connection(self):
 
         """Method:  drop_connection
 
@@ -390,7 +390,7 @@ class RabbitMQPub(RabbitMQ):
         self.close_channel()
         self.close()
 
-    def check_confirm(self, **kwargs):
+    def check_confirm(self):
 
         """Method:  check_confirm
 
@@ -402,7 +402,7 @@ class RabbitMQPub(RabbitMQ):
 
         self.channel.confirm_delivery()
 
-    def drop_queue(self, if_unused=True, if_empty=True, **kwargs):
+    def drop_queue(self, if_unused=True, if_empty=True):
 
         """Method:  drop_queue
 
@@ -417,7 +417,7 @@ class RabbitMQPub(RabbitMQ):
         self.channel.queue_delete(queue=self.queue_name, if_unused=if_unused,
                                   if_empty=if_empty)
 
-    def clear_queue(self, **kwargs):
+    def clear_queue(self):
 
         """Method:  clear_queue
 
@@ -429,7 +429,7 @@ class RabbitMQPub(RabbitMQ):
 
         self.channel.queue_purge(queue=self.queue_name)
 
-    def unbind_queue(self, **kwargs):
+    def unbind_queue(self):
 
         """Method:  unbind_queue
 
@@ -443,7 +443,7 @@ class RabbitMQPub(RabbitMQ):
                                   exchange=self.exchange,
                                   routing_key=self.routing_key)
 
-    def drop_exchange(self, if_unused=True, **kwargs):
+    def drop_exchange(self, if_unused=True):
 
         """Method:  drop_exchange
 
@@ -530,7 +530,7 @@ class RabbitMQCon(RabbitMQPub):
 
         return self.channel.basic_consume(func_call, queue, self.no_ack)
 
-    def start_loop(self, **kwargs):
+    def start_loop(self):
 
         """Method:  start_loop
 
@@ -549,7 +549,7 @@ class RabbitMQCon(RabbitMQPub):
 
         self.close()
 
-    def ack(self, tag, **kwargs):
+    def ack(self, tag):
 
         """Method:  ack
 

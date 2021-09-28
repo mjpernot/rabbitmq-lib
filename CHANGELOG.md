@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Update to work with RabbitMQ 3.8.2
 
 ### Changed
+- Removed unneccessary \*\*kwargs from arguments lists.
 - Documentation updates.
 
 
