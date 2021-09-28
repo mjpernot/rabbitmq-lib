@@ -8,16 +8,17 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Update to work with Pika 1.2.0
 - Update to work with RabbitMQ 3.8.2
 
+### Changed
+- Documentation updates.
+
 
 ## [2.0.0] - 2020-10-05
 Breaking Change.
 
 ### Changed
 - RabbitMQ.\_\_init\_\_:  Added heartbeat argument to pika.ConnectionParameters call.
-- RabbitMQCon.\_\_init\_\_:  Changed positional arguments to keyword arguments.
-- RabbitMQPub.\_\_init\_\_:  Changed positional arguments to keyword arguments.
-- create_rmqcon:  Changed configuration argument.
-- create_rmqpub:  Changed configuration argument.
+- RabbitMQPub.\_\_init\_\_, RabbitMQCon.\_\_init\_\_:  Changed positional arguments to keyword arguments.
+- create_rmqpub, create_rmqcon:  Changed configuration argument.
 
 
 ## [1.1.2] - 2020-06-10
@@ -127,11 +128,9 @@ Breaking Change.
 ## [0.0.4] - 2017-11-07
 ### Fixed
 - RabbitMQPub.\_\_init\_\_ - Corrected misnamed argument to superclass call.
-- RabbitMQ.connect - Set the handler to the self.connection attribute.
-- RabbitMQPub.open_channel - Set the handler to the self.channel attribute.
+- RabbitMQPub.open_channel, RabbitMQ.connect - Set the handler to the self.connection attribute.
 - RabbitMQPub.close_channel - Removed returning channel to calling function.
-- RabbitMQPub.bind_queue - Corrected misnamed argument to class call.
-- RabbitMQPub.publish_msg - Corrected misnamed argument to class call.
+- RabbitMQPub.publish_msg, RabbitMQPub.bind_queue - Corrected misnamed argument to class call.
 - RabbitMQPub.create_connection - Removed setting attributes on method return.
 
 
