@@ -42,10 +42,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fail_auth -> Test with failed authenication - AuthenticationError.
-        test_fail_closed -> Test with failed connection - ConnectionClosed.
-        test_success_connect -> Test with successful connection.
+        setUp
+        test_fail_auth
+        test_fail_closed
+        test_success_connect
 
     """
 

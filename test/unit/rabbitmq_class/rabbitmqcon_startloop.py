@@ -41,8 +41,8 @@ class StartLoop2(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        start_consuming -> start_consuming method.
-        stop_consuming -> stop_consuming method.
+        start_consuming
+        stop_consuming
 
     """
 
@@ -78,7 +78,7 @@ class StartLoop(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        start_consuming -> Stub holder for start_consuming function.
+        start_consuming
 
     """
 
@@ -102,9 +102,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_raise_exception -> Test with raising exception.
-        test_success_consume -> Test with successful consuming.
+        setUp
+        test_raise_exception
+        test_success_consume
 
     """
 

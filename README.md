@@ -21,43 +21,33 @@
 
 
 # Installation:
-  There are two types of installs: pip and git.
+  * From here on out, any reference to **{Python_Project}** or **PYTHON_PROJECT** replace with the baseline path of the python program.
+  * Replace any reference to **{Other_Python_Project}** with the baseline path of another python program.
+  * There are two types of installs: pip and git.
 
 ### Pip Installation:
-  * Replace **{Other_Python_Project}** with the baseline path of another python program.
 
 ###### Create requirements file in another program's project to install rabbitmq-lib as a library module.
 
-Create requirements-rabbitmq-lib.txt file:
-```
-vim {Other_Python_Project}/requirements-rabbitmq-lib.txt
-```
+Create requirements-rabbitmq-lib.txt:
 
-Add the following lines to the requirements-rabbitmq-lib.txt file:
 ```
-git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/rabbitmq-lib.git#egg=rabbitmq-lib
+cd {Python_Project}
+cp requirements-rabbitmq-lib.txt {Other_Python_Project}/requirements-mysql-lib.txt
 ```
 
 ##### Modify the other program's README.md file to add the pip commands under the "Install supporting classes and libraries" section.
 
-Modify the README.md file:
-```
-vim {Other_Python_Project}/README.md
-```
+Modify the {Other_Python_Project}/README.md file and add the following line:
 
-Add the following lines under the "Install supporting classes and libraries" section.
 ```
-pip install -r requirements-rabbitmq-lib.txt --target rabbit_lib --trusted-host pypi.appdev.proj.coe.ic.gov
+   pip install -r requirements-rabbitmq-lib.txt --target rabbit_lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ##### Add the general Rabbitmq-lib requirements to the other program's requirements.txt file.  Remove any duplicates.
 
-Modify the requirements.txt file:
-```
-vim {Other_Python_Project}/requirements.txt
-```
+Modify the {Other_Python_Project}/requirements.txt file and add the following line:
 
-Add the following lines to the requirements.txt file:
 ```
 pika==0.11.0
 ```
@@ -65,7 +55,6 @@ pika==0.11.0
 ### Git Installation:
 
 Install general Python libraries and classes using git.
-  * Replace **{Python_Project}** with the baseline path of the python program.
 
 ```
 cd {Python_Project}
@@ -88,24 +77,7 @@ exit
 
 ### Installation:
 
-Install the project using git.
-  * Replace **{Python_Project}** with the baseline path of the python program.
-  * Replace **{Branch_Name}** with the name of the Git branch being tested.  See Git Merge Request.
-
-```
-umask 022
-cd {Python_Project}
-git clone --branch {Branch_Name} git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/rabbitmq-lib.git
-```
-
-Install/upgrade system modules.
-```
-cd rabbitmq-lib
-sudo bash
-umask 022
-pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
-exit
-```
+Install the project using the procedures in the Installation section.
 
 ### Testing:
 ```

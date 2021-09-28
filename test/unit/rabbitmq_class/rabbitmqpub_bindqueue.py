@@ -41,8 +41,8 @@ class BindQueue(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        exchange_declare -> Stub holder for exchange_declare function.
+        __init__
+        exchange_declare
 
     """
 
@@ -67,9 +67,9 @@ class BindQueue(object):
         Description:  Stub holder for queue_bind function.
 
         Arguments:
-            queue -> Arg stub holder.
-            exchange -> Arg stub holder.
-            routing_key -> Arg stub holder.
+            queue
+            exchange
+            routing_key
 
         """
 
@@ -87,8 +87,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_bind_queue -> Test bind_queue method.
+        setUp
+        test_bind_queue
 
     """
 

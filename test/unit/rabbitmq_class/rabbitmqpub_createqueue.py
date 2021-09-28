@@ -41,8 +41,8 @@ class CreateQueue(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        queue_declare -> Stub holder for queue_declare function.
+        __init__
+        queue_declare
 
     """
 
@@ -67,9 +67,9 @@ class CreateQueue(object):
         Description:  Stub holder for queue_declare function.
 
         Arguments:
-            queue -> Arg stub holder.
-            durable -> Arg stub holder.
-            auto_delete -> Arg stub holder.
+            queue
+            durable
+            auto_delete
 
         """
 
@@ -87,8 +87,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_create_queue -> Test create_queue method.
+        setUp
+        test_create_queue
 
     """
 
