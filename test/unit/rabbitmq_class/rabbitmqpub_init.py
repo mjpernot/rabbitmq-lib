@@ -41,9 +41,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_with_data -> Test other attributes with data.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_multiple_node
+        test_single_node
+        test_heartbeat_set
+        test_heartbeat_default
+        test_with_data
+        test_default
 
     """
 
@@ -65,6 +69,91 @@ class UnitTest(unittest.TestCase):
         self.queue_name = "Queue_Name"
         self.routing_key = "Route_Key"
         self.auto_delete = True
+        self.host_list = ["host1:5671", "host2:5672"]
+        self.params_list = ["ConnectionParameters", "ConnectionParameters"]
+
+    @mock.patch("rabbitmq_class.pika")
+    def test_multiple_node(self, mock_pika):
+
+        """Function:  test_multiple_node
+
+        Description:  Test with multiple node connection.
+
+        Arguments:
+
+        """
+
+        mock_pika.PlainCredentials.return_value = "PlainCredentials"
+        mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        rmq = rabbitmq_class.RabbitMQPub(
+            self.name, "xxxxx", self.host, self.port,
+            exchange_name=self.exchange_name, queue_name=self.queue_name,
+            routing_key=self.routing_key, auto_delete=self.auto_delete,
+            host_list=self.host_list)
+
+        self.assertEqual(rmq.params, self.params_list)
+
+    @mock.patch("rabbitmq_class.pika")
+    def test_single_node(self, mock_pika):
+
+        """Function:  test_single_node
+
+        Description:  Test with single node connection.
+
+        Arguments:
+
+        """
+
+        mock_pika.PlainCredentials.return_value = "PlainCredentials"
+        mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        rmq = rabbitmq_class.RabbitMQPub(
+            self.name, "xxxxx", self.host, self.port,
+            exchange_name=self.exchange_name, queue_name=self.queue_name,
+            routing_key=self.routing_key, auto_delete=self.auto_delete,
+            heartbeat=120)
+
+        self.assertEqual(rmq.params, "ConnectionParameters")
+
+    @mock.patch("rabbitmq_class.pika")
+    def test_heartbeat_set(self, mock_pika):
+
+        """Function:  test_heartbeat_set
+
+        Description:  Test with set heartbeat value.
+
+        Arguments:
+
+        """
+
+        mock_pika.PlainCredentials.return_value = "PlainCredentials"
+        mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        rmq = rabbitmq_class.RabbitMQPub(
+            self.name, "xxxxx", self.host, self.port,
+            exchange_name=self.exchange_name, queue_name=self.queue_name,
+            routing_key=self.routing_key, auto_delete=self.auto_delete,
+            heartbeat=120)
+
+        self.assertEqual(rmq.heartbeat, 120)
+
+    @mock.patch("rabbitmq_class.pika")
+    def test_heartbeat_default(self, mock_pika):
+
+        """Function:  test_heartbeat_default
+
+        Description:  Test with default heartbeat value.
+
+        Arguments:
+
+        """
+
+        mock_pika.PlainCredentials.return_value = "PlainCredentials"
+        mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
+        rmq = rabbitmq_class.RabbitMQPub(
+            self.name, "xxxxx", self.host, self.port,
+            exchange_name=self.exchange_name, queue_name=self.queue_name,
+            routing_key=self.routing_key, auto_delete=self.auto_delete)
+
+        self.assertEqual(rmq.heartbeat, 60)
 
     @mock.patch("rabbitmq_class.pika")
     def test_with_data(self, mock_pika):

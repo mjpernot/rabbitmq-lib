@@ -41,7 +41,7 @@ class OpenChannel(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        close -> Stub holder for channel function.
+        close
 
     """
 
@@ -65,8 +65,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_open_channel -> Test open_channel method.
+        setUp
+        test_open_channel
 
     """
 

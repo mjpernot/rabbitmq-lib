@@ -42,10 +42,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_failed_publish -> Test with failed publish.
-        test_failed_connection -> Test with failed connection.
-        test_publish_msg -> Test publishing message to RabbitMQ.
+        setUp
+        test_failed_publish
+        test_failed_connection
+        test_publish_msg
 
     """
 
@@ -66,10 +66,10 @@ class UnitTest(unittest.TestCase):
             Description:  Class which is a representation of a RabbitMQ class.
 
             Methods:
-                __init__ -> Initialize configuration environment.
-                drop_connection -> Stub holder for drop_connection method.
-                create_connection -> Stub holder for create_connection method.
-                publish_msg -> Stub holder for publish_msg method.
+                __init__
+                drop_connection
+                create_connection
+                publish_msg
 
             """
 
@@ -123,7 +123,7 @@ class UnitTest(unittest.TestCase):
                 Description:  Stub holder for publish_msg method.
 
                 Arguments:
-                    (input) msg -> Message body.
+                    (input) msg
 
                 """
 
@@ -138,7 +138,7 @@ class UnitTest(unittest.TestCase):
             Description:  Class which is a representation of a cfg module.
 
             Methods:
-                __init__ -> Initialize configuration environment.
+                __init__
 
             """
 

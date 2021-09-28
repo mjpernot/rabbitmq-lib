@@ -41,8 +41,8 @@ class PublishMsg(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        basic_publish -> Stub holder for basic_publish function.
+        __init__
+        basic_publish
 
     """
 
@@ -70,11 +70,11 @@ class PublishMsg(object):
         Description:  Stub holder for basic_publish function.
 
         Arguments:
-            exchange -> Arg stub holder.
-            routing_key -> Arg stub holder.
-            body -> Arg stub holder.
-            mandatory -> Arg stub holder.
-            properties -> Arg stub holder.
+            exchange
+            routing_key
+            body
+            mandatory
+            properties
 
         """
 
@@ -94,8 +94,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_publish_msg -> Test publish_msg method.
+        setUp
+        test_publish_msg
 
     """
 

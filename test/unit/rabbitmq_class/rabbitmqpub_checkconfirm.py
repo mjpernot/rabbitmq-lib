@@ -41,7 +41,7 @@ class CheckConfirm(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        confirm_delivery -> Stub holder for confirm_delivery function.
+        confirm_delivery
 
     """
 
@@ -65,8 +65,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_close_channel -> Test close_channel method.
+        setUp
+        test_close_channel
 
     """
 

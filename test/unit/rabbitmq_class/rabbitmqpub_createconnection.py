@@ -42,8 +42,8 @@ class CreateConnection(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        exchange_declare -> Stub holder for exchange_declare function.
+        __init__
+        exchange_declare
 
     """
 
@@ -67,10 +67,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_channel_is_closed -> Test with channel is closed.
-        test_channel_is_open -> Test with channel is open.
-        test_fail_connect -> Test with failure to connect.
+        setUp
+        test_channel_is_closed
+        test_channel_is_open
+        test_fail_connect
 
     """
 

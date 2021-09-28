@@ -41,7 +41,7 @@ class CloseChannel(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        close -> Stub holder for close function.
+        close
 
     """
 
@@ -65,8 +65,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_close_channel -> Test close_channel method.
+        setUp
+        test_close_channel
 
     """
 

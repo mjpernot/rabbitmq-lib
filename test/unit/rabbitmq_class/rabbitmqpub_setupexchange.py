@@ -41,8 +41,8 @@ class SetupExchange(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        exchange_declare -> Stub holder for exchange_declare function.
+        __init__
+        exchange_declare
 
     """
 
@@ -67,9 +67,9 @@ class SetupExchange(object):
         Description:  Stub holder for exchange_declare function.
 
         Arguments:
-            exchange -> Arg stub holder.
-            exchange_type -> Arg stub holder.
-            durable -> Arg stub holder.
+            exchange
+            exchange_type
+            durable
 
         """
 
@@ -87,8 +87,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_setup_exchange -> Test setup_exchange method.
+        setUp
+        test_setup_exchange
 
     """
 
