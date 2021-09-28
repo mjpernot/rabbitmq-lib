@@ -41,8 +41,8 @@ class ClearQueue(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        queue_purge -> Stub holder for queue_purge function.
+        __init__
+        queue_purge
 
     """
 
@@ -65,7 +65,7 @@ class ClearQueue(object):
         Description:  Stub holder for queue_purge function.
 
         Arguments:
-            queue -> Arg stub holder.
+            queue
 
         """
 
@@ -81,8 +81,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_clear_queue -> Test clear_queue method.
+        setUp
+        test_clear_queue
 
     """
 
