@@ -7,8 +7,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.1.0] - 2021-09-28
 - Update to work with Pika 1.2.0
 - Update to work with RabbitMQ 3.8.2
+- Handle connecting to multiple node cluster
 
 ### Changed
+- RabbitMQ.\_\_init\_\_:  Added host_list parameter to allow connection to multiple RabbitMQ nodes in a cluster.
+- RabbitMQ.\_\_init\_\_:  Added heartbeat parameter to allow setting of heartbeat in connection and changed the heartbeat default value from 5 to 60 due to change in Pika 1.2.0.
 - Removed unneccessary \*\*kwargs from arguments lists.
 - Documentation updates.
 

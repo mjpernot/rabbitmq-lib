@@ -127,6 +127,9 @@ class RabbitMQ(object):
             (input) japd ->  User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default port is 5672.
+            (input) kwargs:
+                host_list -> List of RabbitMQ nodes in a cluster.
+                heartbeat -> Time in seconds to keep connection alive.
 
         """
 
@@ -134,10 +137,24 @@ class RabbitMQ(object):
         self.host = host
         self.port = port
         self.connection = None
+        self.host_list = kwargs.get("host_list", list())
+        self.heartbeat = kwargs.get("heartbeat", 60)
         self.creds = pika.PlainCredentials(self.name, japd)
-        self.params = pika.ConnectionParameters(
-            host=self.host, port=self.port, credentials=self.creds,
-            heartbeat=5)
+
+        if self.host_list:
+            self.params = list()
+
+            for node in self.host_list:
+                node_port = node.split(":")
+                params = pika.ConnectionParameters(
+                    host=node_port[0], port=int(node_port[1]),
+                    credentials=self.creds, heartbeat=self.heartbeat)
+                self.params.append(params)
+
+        else:
+            self.params = pika.ConnectionParameters(
+                host=self.host, port=self.port, credentials=self.creds,
+                heartbeat=self.heartbeat)
 
     def connect(self):
 
