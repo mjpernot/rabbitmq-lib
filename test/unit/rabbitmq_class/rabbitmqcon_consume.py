@@ -41,8 +41,8 @@ class Consume(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        queue_unbind -> Stub holder for queue_unbind function.
+        __init__
+        queue_unbind
 
     """
 
@@ -67,9 +67,9 @@ class Consume(object):
         Description:  Stub holder for basic_consume function.
 
         Arguments:
-            func_call -> Arg stub holder.
-            queue_name -> Arg stub holder.
-            no_ack -> Arg stub holder.
+            func_call
+            queue_name
+            no_ack
 
         """
 
@@ -87,9 +87,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_queue_arg -> Test with queue argument.
-        test_consume -> Test consume method.
+        setUp
+        test_queue_arg
+        test_consume
 
     """
 
