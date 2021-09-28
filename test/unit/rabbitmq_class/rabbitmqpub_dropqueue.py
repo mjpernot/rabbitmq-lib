@@ -41,8 +41,8 @@ class DropQueue(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        basic_publish -> Stub holder for basic_publish function.
+        __init__
+        basic_publish
 
     """
 
@@ -67,9 +67,9 @@ class DropQueue(object):
         Description:  Stub holder for queue_delete function.
 
         Arguments:
-            queue -> Arg stub holder.
-            if_unused -> Arg stub holder.
-            if_empty -> Arg stub holder.
+            queue
+            if_unused
+            if_empty
 
         """
 
@@ -87,8 +87,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_drop_queue -> Test drop_queue method.
+        setUp
+        test_drop_queue
 
     """
 
