@@ -41,8 +41,8 @@ class Ack(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        queue_unbind -> Stub holder for queue_unbind function.
+        __init__
+        queue_unbind
 
     """
 
@@ -65,7 +65,7 @@ class Ack(object):
         Description:  Stub holder for basic_ack function.
 
         Arguments:
-            delivery_tag -> Arg stub holder.
+            delivery_tag
 
         """
 
@@ -81,8 +81,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_ack -> Test ack method.
+        setUp
+        test_ack
 
     """
 
