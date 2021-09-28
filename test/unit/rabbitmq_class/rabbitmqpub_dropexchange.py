@@ -41,8 +41,8 @@ class DropExchange(object):
     Description:  Class stub holder for pika class.
 
     Methods:
-        __init__ -> Class initialization.
-        queue_unbind -> Stub holder for queue_unbind function.
+        __init__
+        queue_unbind
 
     """
 
@@ -66,8 +66,8 @@ class DropExchange(object):
         Description:  Stub holder for queue_unbind function.
 
         Arguments:
-            exchange -> Arg stub holder.
-            if_unused -> Arg stub holder.
+            exchange
+            if_unused
 
         """
 
@@ -84,8 +84,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_drop_exchange -> Test drop_exchange method.
+        setUp
+        test_drop_exchange
 
     """
 
