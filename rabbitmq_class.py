@@ -248,6 +248,8 @@ class RabbitMQPub(RabbitMQ):
                 x_durable -> True|False - Exchange survives reboots.
                 q_durable -> True|False - Queue survives reboots.
                 auto_delete -> True|False - Auto-delete after consuming.
+                host_list -> List of RabbitMQ nodes in a cluster.
+                heartbeat -> Time in seconds to keep connection alive.
 
         """
 
@@ -513,6 +515,8 @@ class RabbitMQCon(RabbitMQPub):
                 q_durable -> True|False - Queue survives reboots.
                 auto_delete -> True|False - Auto-delete after consuming.
                 no_ack -> True|False - Automatic acknowledgement.
+                host_list -> List of RabbitMQ nodes in a cluster.
+                heartbeat -> Time in seconds to keep connection alive.
 
         """
 
@@ -524,7 +528,9 @@ class RabbitMQCon(RabbitMQPub):
             routing_key=kwargs.get("routing_key", ""),
             x_durable=kwargs.get("x_durable", True),
             q_durable=kwargs.get("q_durable", True),
-            auto_delete=kwargs.get("auto_delete", False))
+            auto_delete=kwargs.get("auto_delete", False),
+            heartbeat=kwargs.get("heartbeat", 60),
+            host_list=kwargs.get("host_list", list()))
 
         self.no_ack = kwargs.get("no_ack", False)
 

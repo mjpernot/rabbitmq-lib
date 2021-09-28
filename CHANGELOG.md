@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Handle connecting to multiple node cluster
 
 ### Changed
+- RabbitMQCon.\_\_init\_\_:  Passed host_list and heartbeat arguments to superclass call.
 - RabbitMQ.\_\_init\_\_:  Added host_list parameter to allow connection to multiple RabbitMQ nodes in a cluster.
 - RabbitMQ.\_\_init\_\_:  Added heartbeat parameter to allow setting of heartbeat in connection and changed the heartbeat default value from 5 to 60 due to change in Pika 1.2.0.
 - Removed unneccessary \*\*kwargs from arguments lists.
