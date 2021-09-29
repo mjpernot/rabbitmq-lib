@@ -173,12 +173,12 @@ class UnitTest(unittest.TestCase):
             exchange_name=self.exchange_name, queue_name=self.queue_name,
             routing_key=self.routing_key, auto_delete=self.auto_delete)
 
-        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.exchange,
-                          rmq.exchange_type, rmq.queue_name, rmq.routing_key,
-                          rmq.x_durable, rmq.q_durable, rmq.auto_delete),
-                         (self.name, self.host, 5555, self.exchange_name,
-                          "direct", self.queue_name, self.routing_key,
-                          True, True, self.auto_delete))
+        self.assertEqual(
+            (rmq.name, rmq.host, rmq.port, rmq.exchange, rmq.exchange_type,
+             rmq.queue_name, rmq.routing_key, rmq.x_durable, rmq.q_durable,
+             rmq.auto_delete),
+            (self.name, self.host, 5555, self.exchange_name, "direct",
+             self.queue_name, self.routing_key, True, True, self.auto_delete))
 
     @mock.patch("rabbitmq_class.pika")
     def test_default(self, mock_pika):
@@ -195,11 +195,12 @@ class UnitTest(unittest.TestCase):
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
 
-        self.assertEqual((rmq.name, rmq.host, rmq.port, rmq.exchange,
-                          rmq.exchange_type, rmq.queue_name, rmq.routing_key,
-                          rmq.x_durable, rmq.q_durable, rmq.auto_delete),
-                         (self.name, "localhost", 5672, "", "direct", "", "",
-                          True, True, False))
+        self.assertEqual(
+            (rmq.name, rmq.host, rmq.port, rmq.exchange, rmq.exchange_type,
+             rmq.queue_name, rmq.routing_key, rmq.x_durable, rmq.q_durable,
+             rmq.auto_delete),
+            (self.name, "localhost", 5672, "", "direct", "", "", True, True,
+             False))
 
 
 if __name__ == "__main__":
