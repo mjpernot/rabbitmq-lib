@@ -107,6 +107,7 @@ class RMQTest(object):
 
         return self.pub_status
 
+
 class CfgTest(object):
 
     """Class:  CfgTest
