@@ -130,7 +130,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-
         self.cfg = CfgTest()
         self.cfg2 = CfgTest2()
 
