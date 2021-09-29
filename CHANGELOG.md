@@ -7,6 +7,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.1.1] - 2021-09-29
 ### Fixed
 - RabbitMQPub.publish_msg:  Added version check, due to change in Pika's basic_publish return status.
+- create_rmqcon, create_rmqpub:  Added heartbeat and host_list to RabbitMQ instance call.
 
 
 ## [2.1.0] - 2021-09-28
