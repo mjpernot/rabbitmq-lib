@@ -325,9 +325,9 @@ class RabbitMQPub(RabbitMQ):
 
         """
 
-        self.channel.exchange_declare(exchange=self.exchange,
-                                      exchange_type=self.exchange_type,
-                                      durable=self.x_durable)
+        self.channel.exchange_declare(
+            exchange=self.exchange, exchange_type=self.exchange_type,
+            durable=self.x_durable)
 
     def bind_queue(self):
 
@@ -479,9 +479,9 @@ class RabbitMQPub(RabbitMQ):
 
         """
 
-        self.channel.queue_unbind(queue=self.queue_name,
-                                  exchange=self.exchange,
-                                  routing_key=self.routing_key)
+        self.channel.queue_unbind(
+            queue=self.queue_name, exchange=self.exchange,
+            routing_key=self.routing_key)
 
     def drop_exchange(self, if_unused=True):
 
