@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.1.2] - 2021-10-07
+
+
 ## [2.1.1] - 2021-09-29
 ### Fixed
 - RabbitMQPub.publish_msg:  Added version check, due to change in Pika's basic_publish return status.
