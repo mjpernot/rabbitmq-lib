@@ -114,6 +114,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_no_ack
+        test_no_no_ack
         test_heartbeat_host_list
         test_no_heartbeat_host_list
         test_create_instance
@@ -132,6 +134,38 @@ class UnitTest(unittest.TestCase):
 
         self.cfg = CfgTest()
         self.cfg2 = CfgTest2()
+
+    @mock.patch("rabbitmq_class.RabbitMQCon")
+    def test_no_ack(self, mock_rmq):
+
+        """Function:  test_no_ack
+
+        Description:  Test with no_ack in config set up.
+
+        Arguments:
+
+        """
+
+        mock_rmq.return_value = "RabbitMQ_Instance"
+
+        self.assertEqual(rabbitmq_class.create_rmqcon(
+            self.cfg, self.cfg.queue, self.cfg.r_key), "RabbitMQ_Instance")
+
+    @mock.patch("rabbitmq_class.RabbitMQCon")
+    def test_no_no_ack(self, mock_rmq):
+
+        """Function:  test_no_no_ack
+
+        Description:  Test with no no_ack in config set up.
+
+        Arguments:
+
+        """
+
+        mock_rmq.return_value = "RabbitMQ_Instance"
+
+        self.assertEqual(rabbitmq_class.create_rmqcon(
+            self.cfg2, self.cfg2.queue, self.cfg2.r_key), "RabbitMQ_Instance")
 
     @mock.patch("rabbitmq_class.RabbitMQCon")
     def test_heartbeat_host_list(self, mock_rmq):
