@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.1.2] - 2021-10-07
+### Changed
+- RabbitMQCon.consume:  Added version check, due to change in Pika's basic_consume parameter list.
 
 
 ## [2.1.1] - 2021-09-29
