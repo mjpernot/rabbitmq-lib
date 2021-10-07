@@ -74,13 +74,14 @@ def create_rmqcon(cfg, q_name, r_key):
 
     heartbeat = cfg.heartbeat if hasattr(cfg, "heartbeat") else 60
     host_list = cfg.host_list if hasattr(cfg, "host_list") else list()
+    no_ack = cfg.no_ack if hasattr(cfg, "no_ack") else False
 
     return RabbitMQCon(
         cfg.user, cfg.japd, cfg.host, cfg.port,
         exchange_name=cfg.exchange_name, exchange_type=cfg.exchange_type,
         queue_name=q_name, routing_key=r_key, x_durable=cfg.x_durable,
-        q_durable=cfg.q_durable, auto_delete=cfg.auto_delete,
-        no_ack=cfg.no_ack, heartbeat=heartbeat, host_list=host_list)
+        q_durable=cfg.q_durable, auto_delete=cfg.auto_delete, no_ack=no_ack,
+        heartbeat=heartbeat, host_list=host_list)
 
 
 def create_rmqpub(cfg, q_name, r_key):
@@ -572,7 +573,11 @@ class RabbitMQCon(RabbitMQPub):
 
         queue = kwargs.get("queue", self.queue_name)
 
-        return self.channel.basic_consume(func_call, queue, self.no_ack)
+        if pika.__version__ < '1.0.0':
+            return self.channel.basic_consume(func_call, queue, self.no_ack)
+
+        return self.channel.basic_consume(queue, func_call,
+                                          auto_ack=self.no_ack)
 
     def start_loop(self):
 
