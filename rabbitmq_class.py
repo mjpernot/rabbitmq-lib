@@ -576,9 +576,8 @@ class RabbitMQCon(RabbitMQPub):
         if pika.__version__ < '1.0.0':
             return self.channel.basic_consume(func_call, queue, self.no_ack)
 
-        else:
-            return self.channel.basic_consume(queue, func_call,
-                                              auto_ack=self.no_ack)
+        return self.channel.basic_consume(queue, func_call,
+                                          auto_ack=self.no_ack)
 
     def start_loop(self):
 
