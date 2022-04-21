@@ -4,6 +4,11 @@
 
     Description:  Class definitions and methods for RabbitMQ system.
 
+    Functions:
+        pub_2_rmq
+        create_rmqcon
+        create_rmqpub
+
     Classes:
         RabbitMQ
             RabbitMQPub
