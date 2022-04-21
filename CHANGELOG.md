@@ -4,15 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.2.0] - 2022-04-21
+- Added new classes: RabbitMQBase and RabbitMQApi
+
+### Changed
+- Documentation updates.
+
+
 ## [2.1.2] - 2021-10-07
 ### Changed
-- RabbitMQCon.consume:  Added version check, due to change in Pika's basic_consume parameter list.
+- RabbitMQCon.consume:  Added version check, due to change in Pika basic_consume parameter list.
 - create_rmqcon:  Set default of no_ack to False if not present in config file.
 
 
 ## [2.1.1] - 2021-09-29
 ### Fixed
-- RabbitMQPub.publish_msg:  Added version check, due to change in Pika's basic_publish return status.
+- RabbitMQPub.publish_msg:  Added version check, due to change in Pika basic_publish return status.
 - create_rmqcon, create_rmqpub:  Added heartbeat and host_list to RabbitMQ instance call.
 
 
