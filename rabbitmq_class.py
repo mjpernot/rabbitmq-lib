@@ -13,15 +13,18 @@
         RabbitMQ
             RabbitMQPub
                 RabbitMQCon
+        RabbitMQBase
 
 """
 
 # Libraries and Global Variables
 
 # Standard
+import copy
 
 # Third-party
 import pika
+import requests
 
 # Local
 import version
@@ -123,9 +126,9 @@ class RabbitMQ(object):
         connecting to and closing connection to a RabbitMQ node.
 
     Methods:
-        __init__ -> Class instance initilization.
-        connect -> Connects the instance to a RabbitMQ node.
-        close -> Close connection to the RabbitMQ node.
+        __init__
+        connect
+        close
 
     """
 
@@ -137,7 +140,7 @@ class RabbitMQ(object):
 
         Arguments:
             (input) user -> User login name.
-            (input) japd ->  User psword.
+            (input) japd -> User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default port is 5672.
             (input) kwargs:
@@ -222,23 +225,21 @@ class RabbitMQPub(RabbitMQ):
         queue.
 
     Methods:
-        __init__ -> Class instance initilization.
-        open_channel -> Open a channel to a RabbitMQ node.
-        close_channel -> Close the channel to the RabbitMQ node.
-        create_queue -> Setup a queue on a RabbitMQ node.
-        setup_exchange -> Create an exchange on a RabbitMQ node.
-        bind_queue -> Bind a queue to an exchange.
-        publish_msg -> Publish a message to a RabbitMQ queue.
-        setup_queue -> Initializes the exchange and queue and binds the queue
-            to the exchange.
-        create_connection -> Create a connection and a channel, followed by the
-            initialization of an exchange and queue.
-        drop_connection -> Drop channel and connection.
-        check_confirm -> Turn on delivery confirmation for channel.
-        drop_queue -> Drop queue from the exchange connected to.
-        clear_queue -> Remove messages from the current queue.
-        unbind_queue -> Unbind a queue from an exchange.
-        drop_exchange -> Drop an exchange from the RabbitMQ node.
+        __init__
+        open_channel
+        close_channel
+        create_queue
+        setup_exchange
+        bind_queue
+        publish_msg
+        setup_queue
+        create_connection
+        drop_connection
+        check_confirm
+        drop_queue
+        clear_queue
+        unbind_queue
+        drop_exchange
 
     """
 
@@ -250,7 +251,7 @@ class RabbitMQPub(RabbitMQ):
 
         Arguments:
             (input) user -> User login name.
-            (input) japd ->  User psword.
+            (input) japd -> User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default = 5672.
             (input) kwargs:
@@ -515,10 +516,10 @@ class RabbitMQCon(RabbitMQPub):
         queue.
 
     Methods:
-        __init__ -> Class instance initilization.
-        consume -> Call Basic Consumecallback function for requested queue.
-        start_loop -> Start loop checking for new messages in Rabbitmq queue.
-        ack -> Send an acknowledge for a specific message tag.
+        __init__
+        consume
+        start_loop
+        ack
 
     """
 
@@ -530,7 +531,7 @@ class RabbitMQCon(RabbitMQPub):
 
         Arguments:
             (input) user -> User login name.
-            (input) japd ->  User psword.
+            (input) japd -> User psword.
             (input) host -> Hostname of RabbitMQ node.
             (input) port -> RabbitMQ port.  Default = 5672.
             (input) **kwargs:
@@ -615,3 +616,97 @@ class RabbitMQCon(RabbitMQPub):
         """
 
         self.channel.basic_ack(delivery_tag=tag)
+
+class RabbitMQBase(object):
+
+    """Class:  RabbitMQBase
+
+    Description:  Class which is a representation of a RabbitMQ API connection.
+        Contains the default type of requests such as GET, PUT, POST, DELETE.
+
+    Note:
+        For the Requests authentication set up:
+            http://docs.python-requests.org/en/latest/user/authentication/
+
+    Methods:
+        __init__
+        api_get
+        get
+
+    """
+
+    def __init__(self, user, japd, host="localhost", port=15672,
+                 scheme="https"):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the RabbitMQ class.
+
+        Arguments:
+            (input) user -> User login name
+            (input) japd -> User psword
+            (input) host -> Hostname of RabbitMQ node
+            (input) port -> RabbitMQ adminstration port - default is 15672
+            (input) scheme -> Type of connection - default is https
+
+        """
+
+        self.name = user
+        self.host = host
+        self.port = port
+        self.scheme = scheme
+        self.url = self.scheme + "://" + self.host + ":" + str(self.port)
+        self.auth = (self.name, self.host)
+        self.headers = {'Content-type': 'application/json'}
+
+    def api_get(self, url_cmd, **kwargs):
+
+        """Method:  api_get
+
+        Description:  Wrapper for the get method call, also sets up headers,
+            auth and base url.
+
+        Arguments:
+            (input) url_cmd -> Get command
+            (input) kwargs:
+                headers -> Additional headers to be added to base url
+            (output) Response of the get command in dictionary format
+
+        """
+
+        kwargs['url'] = self.url + url_cmd
+        kwargs['auth'] = self.auth
+        headers = copy.deepcopy(self.headers)
+        headers.update(kwargs.get('headers', {}))
+        kwargs['headers'] = headers
+
+        return self.get(**kwargs)
+
+    def get(self, *args, **kwargs):
+
+        """Method:  get
+
+        Description:  Request Get command.
+
+        Arguments:
+            (input) kwargs:
+                url -> Base url
+                auth -> Authentication tuple
+                headers -> Header commands
+            (output) Response of the get command in dictionary format
+
+        """
+
+        response = requests.get(*args, **kwargs)
+        response.raise_for_status()
+
+        """
+        Or should it be something like this:
+        try:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as e:
+            print(e)
+        """
+
+        return response.json()
+
