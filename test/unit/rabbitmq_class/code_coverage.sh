@@ -33,6 +33,15 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqcon_ini
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqcon_consume.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqcon_ack.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqcon_startloop.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_api_delete.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_api_get.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_api_post.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_api_put.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_delete.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_get.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_init.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_post.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_put.py
 
 echo ""
 echo "Producing code coverage report"

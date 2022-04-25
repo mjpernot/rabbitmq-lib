@@ -29,4 +29,13 @@ test/unit/rabbitmq_class/rabbitmqcon_init.py
 test/unit/rabbitmq_class/rabbitmqcon_consume.py
 test/unit/rabbitmq_class/rabbitmqcon_ack.py
 test/unit/rabbitmq_class/rabbitmqcon_startloop.py
+test/unit/rabbitmq_class/rabbitmqbase_api_delete.py
+test/unit/rabbitmq_class/rabbitmqbase_api_get.py
+test/unit/rabbitmq_class/rabbitmqbase_api_post.py
+test/unit/rabbitmq_class/rabbitmqbase_api_put.py
+test/unit/rabbitmq_class/rabbitmqbase_delete.py
+test/unit/rabbitmq_class/rabbitmqbase_get.py
+test/unit/rabbitmq_class/rabbitmqbase_init.py
+test/unit/rabbitmq_class/rabbitmqbase_post.py
+test/unit/rabbitmq_class/rabbitmqbase_put.py
 
