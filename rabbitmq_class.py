@@ -21,6 +21,7 @@
 
 # Standard
 import copy
+import json
 
 # Third-party
 import pika
@@ -632,6 +633,12 @@ class RabbitMQBase(object):
         __init__
         api_get
         get
+        api_put
+        put
+        api_post
+        post
+        api_delete
+        delete
 
     """
 
@@ -656,29 +663,29 @@ class RabbitMQBase(object):
         self.port = port
         self.scheme = scheme
         self.url = self.scheme + "://" + self.host + ":" + str(self.port)
-        self.auth = (self.name, self.host)
-        self.headers = {'Content-type': 'application/json'}
+        self.auth = (self.name, japd)
+        self.headers = {"Content-type": "application/json"}
 
     def api_get(self, url_cmd, **kwargs):
 
         """Method:  api_get
 
-        Description:  Wrapper for the get method call, also sets up headers,
-            auth and base url.
+        Description:  Wrapper for the request GET method call, also sets up
+            headers, auth and base url.
 
         Arguments:
-            (input) url_cmd -> Get command
+            (input) url_cmd -> GET command
             (input) kwargs:
                 headers -> Additional headers to be added to base url
             (output) Response of the get command in dictionary format
 
         """
 
-        kwargs['url'] = self.url + url_cmd
-        kwargs['auth'] = self.auth
+        kwargs["url"] = self.url + url_cmd
+        kwargs["auth"] = self.auth
         headers = copy.deepcopy(self.headers)
-        headers.update(kwargs.get('headers', {}))
-        kwargs['headers'] = headers
+        headers.update(kwargs.get("headers", {}))
+        kwargs["headers"] = headers
 
         return self.get(**kwargs)
 
@@ -686,7 +693,7 @@ class RabbitMQBase(object):
 
         """Method:  get
 
-        Description:  Request Get command.
+        Description:  Request GET command.
 
         Arguments:
             (input) kwargs:
@@ -700,13 +707,128 @@ class RabbitMQBase(object):
         response = requests.get(*args, **kwargs)
         response.raise_for_status()
 
-        """
-        Or should it be something like this:
-        try:
-            response.raise_for_status()
-        except requests.exceptions.HTTPError as e:
-            print(e)
-        """
-
         return response.json()
 
+    def api_put(self, url_cmd, **kwargs):
+
+        """Method:  api_put
+
+        Description:  Wrapper for the request PUT method call, also sets up
+            headers, auth and base url.
+
+        Arguments:
+            (input) url_cmd -> PUT command
+            (input) kwargs:
+                headers -> Additional headers to be added to base url
+                data -> Data for the PUT command
+
+        """
+
+        kwargs["url"] = self.url + url_cmd
+        kwargs["auth"] = self.auth
+        headers = copy.deepcopy(self.headers)
+        headers.update(kwargs.get("headers", {}))
+        kwargs["headers"] = headers
+        self.put(**kwargs)
+
+    def put(self, *args, **kwargs):
+
+        """Method:  put
+
+        Description:  Request PUT command and also encode the JSON data.
+
+        Arguments:
+            (input) kwargs:
+                url -> Base url
+                auth -> Authentication tuple
+                headers -> Header commands
+                data -> Data for the PUT command
+
+        """
+
+        if "data" in kwargs:
+            kwargs["data"] = json.dumps(kwargs["data"])
+
+        response = requests.put(*args, **kwargs)
+        response.raise_for_status()
+
+    def api_post(self, url_cmd, **kwargs):
+
+        """Method:  api_post
+
+        Description:  Wrapper for the request POST method call, also sets up
+            headers, auth and base url.
+
+        Arguments:
+            (input) url_cmd -> POST command
+            (input) kwargs:
+                headers -> Additional headers to be added to base url
+                data -> Data for the PUT command
+
+        """
+
+        kwargs["url"] = self.url + url_cmd
+        kwargs["auth"] = self.auth
+        headers = copy.deepcopy(self.headers)
+        headers.update(kwargs.get("headers", {}))
+        kwargs["headers"] = headers
+        self.post(**kwargs)
+
+    def post(self, *args, **kwargs):
+
+        """Method:  post
+
+        Description:  Request POST command and also encode the JSON data.
+
+        Arguments:
+            (input) kwargs:
+                url -> Base url
+                auth -> Authentication tuple
+                headers -> Header commands
+                data -> Data for the PUT command
+
+        """
+
+        if "data" in kwargs:
+            kwargs["data"] = json.dumps(kwargs["data"])
+
+        response = requests.post(*args, **kwargs)
+        response.raise_for_status()
+
+    def api_delete(self, url_cmd, **kwargs):
+
+        """Method:  api_delete
+
+        Description:  Wrapper for the request DELETE method call, also sets up
+            headers, auth and base url.
+
+        Arguments:
+            (input) url_cmd -> DELETE command
+            (input) kwargs:
+                headers -> Additional headers to be added to base url
+
+        """
+
+        kwargs["url"] = self.url + url_cmd
+        kwargs["auth"] = self.auth
+        headers = copy.deepcopy(self.headers)
+        headers.update(kwargs.get("headers", {}))
+        kwargs["headers"] = headers
+        self.delete(**kwargs)
+
+    def delete(self, *args, **kwargs):
+
+        """Method:  delete
+
+        Description:  Request DELETE command.
+
+        Arguments:
+            (input) kwargs:
+                url -> Base url
+                auth -> Authentication tuple
+                headers -> Header commands
+
+        """
+
+        response = requests.delete(*args, **kwargs)
+        response.raise_for_status()

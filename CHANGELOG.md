@@ -7,6 +7,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.2.0] - 2022-04-21
 - Added new classes: RabbitMQBase and RabbitMQApi
 
+### Added
+- RabbitMQBase class: Representation of RabbitMQ API connection with the GET, PUT, POST, DELETE objects.
+
 ### Changed
 - Documentation updates.
 
