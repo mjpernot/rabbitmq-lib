@@ -14,6 +14,7 @@
             RabbitMQPub
                 RabbitMQCon
         RabbitMQBase
+            RabbitMQAdmin
 
 """
 
@@ -26,6 +27,7 @@ import json
 # Third-party
 import pika
 import requests
+from six.moves import urllib
 
 # Local
 import version
@@ -832,3 +834,72 @@ class RabbitMQBase(object):
 
         response = requests.delete(*args, **kwargs)
         response.raise_for_status()
+
+
+class RabbitMQAdmin(RabbitMQBase):
+
+    """Class:  RabbitMQAdmin
+
+    Description:  Class which contains a list of RabbitMQ administration
+        commands and uses the RabbitMQBase class as an entry point to
+        RabbitMQ.
+
+    Methods:
+        overview
+        get_cluster_name
+        list_nodes
+        get_node
+        list_extensions
+        get_definitions
+        post_definitions
+        list_connections
+        get_connection
+        delete_connection
+        list_connection_channels
+        list_channels
+        get_channel
+        list_consumers
+        list_consumers_for_vhost
+        list_exchanges
+        list_exchanges_for_vhost
+        get_exchange_for_vhost
+        create_exchange_for_vhost
+        delete_exchange_for_vhost
+        list_bindings
+        list_bindings_for_vhost
+        list_vhosts
+        get_vhost
+        delete_vhost
+        create_vhost
+        list_users
+        get_user
+        delete_user
+        create_user
+        list_user_permissions
+        whoami
+        list_permissions
+        get_user_permission
+        delete_user_permission
+        create_user_permission
+        list_policies
+        list_policies_for_vhost
+        get_policy_for_vhost
+        create_policy_for_vhost
+        delete_policy_for_vhost
+        is_vhost_alive
+
+    """
+
+    def overview(self):
+
+        """Method:  overview
+
+        Description:  Information that describes the whole RabbitMQ server.
+
+        Arguments:
+            (output) Response of the command in dictionary format
+
+        """
+
+        return self.api_get("/api/overview")
+
