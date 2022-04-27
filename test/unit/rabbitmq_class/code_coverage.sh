@@ -42,6 +42,8 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_ge
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_init.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_post.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_put.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_get_cluster_name.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_overview.py
 
 echo ""
 echo "Producing code coverage report"
