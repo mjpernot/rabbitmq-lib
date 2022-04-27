@@ -894,7 +894,8 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """Method:  overview
 
-        Description:  Information that describes the whole RabbitMQ server.
+        Description:  Returns information that describes the whole RabbitMQ
+            server.
 
         Arguments:
             (output) Response of the command in dictionary format
@@ -903,3 +904,17 @@ class RabbitMQAdmin(RabbitMQBase):
 
         return self.api_get("/api/overview")
 
+    def get_cluster_name(self):
+
+        """Method:  get_cluster_name
+
+        Description:  Returns the name identifying the RabbitMQ cluster.
+
+        Arguments:
+            (output) RabbitMQ cluster name
+
+        """
+
+        return self.get(
+            url=self.url + '/api/cluster-name', headers=self.headers,
+            auth=self.auth)
