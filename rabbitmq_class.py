@@ -916,5 +916,99 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.get(
-            url=self.url + '/api/cluster-name', headers=self.headers,
+            url=self.url + "/api/cluster-name", headers=self.headers,
             auth=self.auth)
+
+    def list_nodes(self):
+
+        """Method:  list_nodes
+
+        Description:  Returns a list of nodes in the RabbitMQ cluster.  Set
+        "memory=true" to get memory statistics, and "binary=true" to get a
+        breakdown of binary memory use (may be expensive if there are many small
+        binaries in the system).
+
+        Arguments:
+            (output) List of nodes in dictionary format
+
+        """
+
+        return self.api_get("/api/nodes")
+
+    def get_node(self, name, memory=False, binary=False):
+
+        """Method:  get_node
+
+        Description:  Returns information on a specify node.
+
+        Arguments:
+            (input) name -> Name of node
+            (input) memory -> True|False - Return memory statistics
+            (input) binary -> True|False - Return binary memory use
+            (output) Returns information on node in dictionary format
+
+        """
+
+        return self.api_get(
+            url="/api/nodes/{0}".format(name),
+            params=dict(binary=binary, memory=memory))
+
+    def list_extensions(self):
+
+        """Method:  list_extensions
+
+        Description:  Returns a list of extensions for the management plugin.
+
+        Arguments:
+            (output) List of extensions in dictionary format
+
+        """
+
+        return self.api_get("/api/extensions")
+
+    def get_definitions(self):
+
+        """Method:  get_definitions
+
+        Description:  Returns the server definitions that will include:
+            exchanges, queues, bindings, users, virtual hosts, permissions
+            and parameters.
+
+        Note:  This method can be used for backing up the configuration of a
+            server or cluster.
+
+        Arguments:
+            (output) Server definitions in dictionary format
+
+        """
+
+        return self.api_get("/api/definitions")
+
+    def post_definitions(self, data):
+
+        """Method:  post_definitions
+
+        Description:  Post server definitions that will include: exchanges,
+            queues, bindings, users, virtual hosts, permissions and parameters.
+            POST to upload an existing set of definitions.
+
+        Notes:
+            1. This method can be used for restoring the configuration of a
+                server or cluster.
+            2. The definitions are merged. Anything already existing on the
+                server but not in the uploaded definitions is untouched.
+            3. Conflicting definitions on immutable objects (exchanges, queues
+                and bindings) will cause an error.
+            4. Conflicting definitions on mutable objects will cause the object
+                in the server to be overwritten with the object from the
+                definitions.
+            5. In the event of an error you will be left with a part-applied
+                set of definitions.
+            6. No post to messages is done.
+
+        Arguments:
+            (input) data -> Definitions
+
+        """
+
+        self.api_post("/api/definitions", data=data)
