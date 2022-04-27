@@ -39,5 +39,10 @@ test/unit/rabbitmq_class/rabbitmqbase_init.py
 test/unit/rabbitmq_class/rabbitmqbase_post.py
 test/unit/rabbitmq_class/rabbitmqbase_put.py
 test/unit/rabbitmq_class/rabbitmqadmin_get_cluster_name.py
+test/unit/rabbitmq_class/rabbitmqadmin_get_definitions.py
+test/unit/rabbitmq_class/rabbitmqadmin_get_node.py
+test/unit/rabbitmq_class/rabbitmqadmin_list_extensions.py
+test/unit/rabbitmq_class/rabbitmqadmin_list_nodes.py
 test/unit/rabbitmq_class/rabbitmqadmin_overview.py
+test/unit/rabbitmq_class/rabbitmqadmin_post_definitions.py
 
