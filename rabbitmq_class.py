@@ -1207,5 +1207,73 @@ class RabbitMQAdmin(RabbitMQBase):
                 urllib.parse.quote_plus(vhost),
                 urllib.parse.quote_plus(exchange)), data=body)
 
+    def list_bindings(self):
 
+        """Method:  list_bindings
+
+        Description:  Returns a list of all bindings.
+
+        Arguments:
+            (output) List of bindings in dictionary format
+
+        """
+
+        return self.api_get("/api/bindings")
+
+    def list_bindings_for_vhost(self, vhost):
+
+        """Method:  list_bindings_for_vhost
+
+        Description:  Lists all bindings for a specific virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (output) List of bindings in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/bindings/{}".format(urllib.parse.quote_plus(vhost)))
+
+    def list_vhosts(self):
+
+        """Method:  list_vhosts
+
+        Description:  Returns a list of all virtual hosts.
+
+        Arguments:
+            (output) List of virtual hosts in dictionary format
+
+        """
+
+        return self.api_get("/api/vhosts")
+
+    def get_vhost(self, vhost):
+
+        """Method:  get_vhost
+
+        Description:  Return information for a specific virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (output) Information on virtual host in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/vhosts/{0}".format(urllib.parse.quote_plus(vhost)))
+
+    def delete_vhost(self, vhost):
+
+        """Method:  delete_vhost
+
+        Description:  Delete a virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+
+        """
+
+        self.api_delete(
+            "/api/vhosts/{0}".format(urllib.parse.quote_plus(vhost)))
 
