@@ -59,11 +59,10 @@ class UnitTest(unittest.TestCase):
         self.name = "UserName"
         self.japd = "japd"
         self.rmq = rabbitmq_class.RabbitMQAdmin(self.name, self.japd)
-        self.data = {"key": "value"}
         self.definitions = {"key": "value"}
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_post")
-    def test_basic(self, mock_get):
+    def test_basic(self, mock_post):
 
         """Function:  test_basic
 
@@ -73,7 +72,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = self.data
+        mock_post.return_value = True
 
         self.assertFalse(self.rmq.post_definitions(self.definitions))
 
