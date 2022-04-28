@@ -1012,3 +1012,200 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         self.api_post("/api/definitions", data=data)
+
+    def list_connections(self):
+
+        """Method:  list_connections
+
+        Description:  Returns a list of all open connections.
+
+        Arguments:
+            (output) List of connections in dictionary format
+
+        """
+
+        return self.api_get("/api/connections")
+
+    def get_connection(self, name):
+
+        """Method:  get_connection
+
+        Description:  Returns information on a single connection.
+
+        Arguments:
+            (input) name -> Name of connection
+            (output) Information on connection in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/connections/{0}".format(urllib.parse.quote_plus(name)))
+
+
+    def delete_connection(self, name, reason=None):
+
+        """Method:  delete_connection
+
+        Description:  Delete named connection, with optional reason.
+
+        Arguments:
+            (input) name -> Name of connection
+            (input) reason -> Reason for delete
+
+        """
+
+        headers = {'X-Reason': reason} if reason else {}
+
+        self.api_delete(
+            "/api/connections/{0}".format(
+                urllib.parse.quote_plus(name)), headers=headers)
+
+    def list_connection_channels(self, name):
+
+        """Method:  list_connection_channels
+
+        Description:  Lists all channels for a specific connection.
+
+        Arguments:
+            (input) name -> Name of connection
+            (output) List of channels for connection in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/connections/{0}/channels".format(
+                urllib.parse.quote_plus(name)))
+
+    def list_channels(self):
+
+        """Method:  list_channels
+
+        Description:  Returns a list of all open channels.
+
+        Arguments:
+            (output) List of channels in dictionary format
+
+        """
+
+        return self.api_get("/api/channels")
+
+
+    def get_channel(self, name):
+
+        """Method:  get_channel
+
+        Description:  Lists information for a specific channel.
+
+        Arguments:
+            (input) name -> Name of channel
+            (output) Information on a channel in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/channels/{0}".format(urllib.parse.quote_plus(name)))
+
+    def list_consumers(self):
+
+        """Method:  list_consumers
+
+        Description:  Returns a list of all consumers.
+
+        Arguments:
+            (output) List of consumers in dictionary format
+
+        """
+
+        return self.api_get("/api/consumers")
+
+    def list_consumers_for_vhost(self, vhost):
+
+        """Method:  list_consumers_for_vhost
+
+        Description:  Lists all customers for a specific virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (output) List of consumers in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/consumers/{0}".format(urllib.parse.quote_plus(vhost)))
+
+    def list_exchanges(self):
+
+        """Method:  list_exchanges
+
+        Description:  Returns a list of all exchanges.
+
+        Arguments:
+            (output) List of exchanges in dictionary format
+
+        """
+
+        return self.api_get("/api/exchanges")
+
+    def list_exchanges_for_vhost(self, vhost):
+
+        """Method:  list_exchanges_for_vhost
+
+        Description:  Lists all exchanges for a specific virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (output) List of exchanges in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/exchanges/{0}".format(urllib.parse.quote_plus(vhost)))
+
+    def get_exchange_for_vhost(self, exchange, vhost):
+
+        """Method:  get_exchange_for_vhost
+
+        Description:  Return information on an individual exchange in a
+            specific virtual host.
+
+        Arguments:
+            (input) exchange -> Name of exchange
+            (input) vhost -> Name of virtual host
+            (output) Information on exchange in vhost in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/exchanges/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost),
+                urllib.parse.quote_plus(exchange)))
+
+    def create_exchange_for_vhost(self, exchange, vhost, body):
+
+        """Method:  create_exchange_for_vhost
+
+        Description:  Creates an exchange on a virtual host.
+
+        Notes:
+            1. Body will have the following format:
+                {"type": "direct",
+                 "auto_delete": false,
+                 "durable": true,
+                 "internal": false,
+                 "arguments": {}}
+            2. The type key is mandatory; other keys are optional.
+
+        Arguments:
+            (input) exchange -> Name of exchange
+            (input) vhost -> Name of virtual host
+            (input) body -> Dictionary of attributes for exchange creation
+
+        """
+
+        self.api_put(
+            "/api/exchanges/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost),
+                urllib.parse.quote_plus(exchange)), data=body)
+
+
+
