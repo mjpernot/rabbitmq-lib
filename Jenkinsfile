@@ -47,9 +47,21 @@ pipeline {
                 ./test/unit/rabbitmq_class/rabbitmqbase_init.py
                 ./test/unit/rabbitmq_class/rabbitmqbase_post.py
                 ./test/unit/rabbitmq_class/rabbitmqbase_put.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_create_exchange_for_vhost.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_delete_connection.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_get_channel.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_get_cluster_name.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_get_connection.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_get_definitions.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_get_exchange_for_vhost.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_get_node.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_channels.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_connections.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_connection_channels.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_consumers.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_consumers_for_vhost.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_exchanges.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_exchanges_for_vhost.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_extensions.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_nodes.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_overview.py
