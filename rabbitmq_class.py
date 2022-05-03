@@ -1348,7 +1348,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Create an individual user.
 
         Arguments:
-            (input) vhost -> Name of user
+            (input) name -> Name of user
             (input) japd -> User pswd, set to "" if no pswd is required
                 The japd argument takes precedence if japd_hash is also set
             (input) japd_hash -> An optional pswd hash for the user
@@ -1449,4 +1449,30 @@ class RabbitMQAdmin(RabbitMQBase):
         self.api_delete(
             "/api/permissions/{0}/{1}".format(
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+
+    def create_user_permission(
+        self, name, vhost, configure=None, write=None, read=None):
+
+        """Method:  create_user
+
+        Description:  Create an individual user.
+
+        Arguments:
+            (input) name -> Name of user
+            (input) vhost -> Name of virtual host
+            (input) configure -> Regex for the user permission, default is `.*`
+            (input) write -> Regex for the user permission, default is `.*`
+            (input) read -> Regex for the user permission, default is `.*`
+
+        """
+
+        data = {
+            "configure": configure or '.*',
+            "write": write or '.*',
+            "read": read or '.*'}
+
+        self.api_put(
+            "/api/permissions/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
+            data=data)
 
