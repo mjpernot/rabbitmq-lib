@@ -45,6 +45,7 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_pu
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_create_exchange_for_vhost.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_create_vhost.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_connection.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_user.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_vhost.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_get_channel.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_get_cluster_name.py
