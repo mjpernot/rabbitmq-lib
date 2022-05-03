@@ -43,6 +43,7 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_in
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_post.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqbase_put.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_create_exchange_for_vhost.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_create_vhost.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_connection.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_vhost.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_get_channel.py
