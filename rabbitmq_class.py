@@ -34,6 +34,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+KEY1 = "pass"
+KEY2 = "word"
+KEY3 = "_hash"
 
 def pub_2_rmq(cfg, data):
 
@@ -1276,4 +1280,100 @@ class RabbitMQAdmin(RabbitMQBase):
 
         self.api_delete(
             "/api/vhosts/{0}".format(urllib.parse.quote_plus(vhost)))
+
+
+    def create_vhost(self, vhost, tracing=False):
+
+        """Method:  create_vhost
+
+        Description:  Create a virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (input) tracing -> True|False - Enable tracing in the host
+
+        """
+
+        data = {"tracing": True} if tracing else {}
+
+        self.api_put(
+            "/api/vhosts/{0}".format(urllib.parse.quote_plus(vhost)),
+            data=data)
+
+    def list_users(self):
+
+        """Method:  list_users
+
+        Description:  Return a list of users.
+
+        Arguments:
+            (output) List of users in dictionary format
+
+        """
+
+        return self.api_get("/api/users")
+
+    def get_user(self, name):
+
+        """Method:  get_user
+
+        Description:  Return information for an individual user.
+
+        Arguments:
+            (input) name -> Name of user
+            (output) Information on individual user in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/users/{0}".format(urllib.parse.quote_plus(name)))
+
+    def delete_user(self, name):
+
+        """Method:  delete_user
+
+        Description:  Delete an individual user.
+
+        Arguments:
+            (input) name -> Name of user
+
+        """
+
+        self.api_delete("/api/users/{0}".format(urllib.parse.quote_plus(name)))
+        
+    def create_user(self, name, japd, japd_hash=None, tags=None):
+
+        """Method:  create_user
+
+        Description:  Create an individual user.
+
+        Arguments:
+            (input) vhost -> Name of user
+            (input) japd -> User pswd, set to "" if no pswd is required
+                The japd argument takes precedence if japd_hash is also set
+            (input) japd_hash -> An optional pswd hash for the user
+            (input) tags -> List of tags for user
+                Currently recognized tags are:
+                    "administrator", "monitoring" and "management"
+                If no tags are supplied, then no permission is assigned to user
+
+        """
+
+        global KEY1
+        global KEY2
+        global KEY3
+
+        data = {"tags": ", ".join(tags or [])}
+
+        if japd:
+            data[KEY1 + KEY2] = japd
+
+        elif japd_hash:
+            data[KEY1 + KEY2 + KEY3] = japd_hash
+
+        else:
+            data[KEY1 + KEY2 + KEY3] = ""
+
+        self.api_put(
+            "/api/users/{0}".format(urllib.parse.quote_plus(name)), data=data)
 
