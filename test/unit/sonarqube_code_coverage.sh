@@ -68,6 +68,7 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_l
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_list_extensions.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_list_nodes.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_list_users.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_list_user_permissions.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_list_vhosts.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_overview.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_post_definitions.py
