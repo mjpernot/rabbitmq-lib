@@ -71,6 +71,7 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_l
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_list_vhosts.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_overview.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_post_definitions.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_whoami.py
 
 echo ""
 echo "Producing code coverage report"

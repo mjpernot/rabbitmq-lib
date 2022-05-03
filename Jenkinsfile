@@ -76,6 +76,7 @@ pipeline {
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_vhosts.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_overview.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_post_definitions.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_whoami.py
                 deactivate
                 rm -rf test_env
                 """
