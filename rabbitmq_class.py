@@ -882,7 +882,7 @@ class RabbitMQAdmin(RabbitMQBase):
         list_user_permissions
         whoami
         list_permissions
-        get_user_permission
+        get_vhost_user_perms
         delete_user_permission
         create_user_permission
         list_policies
@@ -1376,4 +1376,77 @@ class RabbitMQAdmin(RabbitMQBase):
 
         self.api_put(
             "/api/users/{0}".format(urllib.parse.quote_plus(name)), data=data)
+
+    def list_user_permissions(self, name):
+
+        """Method:  list_user_permissions
+
+        Description:  List of permissions for a specific user.
+
+        Arguments:
+            (input) name -> Name of user
+            (output) List of permissions for user in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/users/{0}/permissions".format(urllib.parse.quote_plus(name)))
+
+    def whoami(self):
+
+        """Method:  whoami
+
+        Description:  Information on the current user.
+
+        Arguments:
+            (output) Return information on current user in dictionary format
+
+        """
+
+        return self.api_get("/api/whoami")
+
+    def list_permissions(self):
+
+        """Method:  list_permissions
+
+        Description:  Lists all permissions for all users.
+
+        Arguments:
+            (output) Return permissions on all users in dictionary format
+
+        """
+
+        return self.api_get("/api/permissions")
+
+    def get_vhost_user_perms(self, vhost, name):
+
+        """Method:  get_vhost_user_perms
+
+        Description:  Get user permissions on a specific virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (input) name -> Name of user
+
+        """
+
+        return self.api_get(
+            "/api/permissions/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+
+    def delete_user_permission(self, name, vhost):
+
+        """Method:  delete_user_permission
+
+        Description:  Delete an user's permissions on a specific virtual host.
+
+        Arguments:
+            (input) name -> User name
+            (input) vhost -> Name of virtual host
+
+        """
+
+        self.api_delete(
+            "/api/permissions/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
 
