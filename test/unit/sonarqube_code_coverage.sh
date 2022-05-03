@@ -52,6 +52,7 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_g
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_get_definitions.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_get_exchange_for_vhost.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_get_node.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_get_user.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_list_bindings.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_list_bindings_for_vhost.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_list_channels.py

@@ -48,6 +48,7 @@ test/unit/rabbitmq_class/rabbitmqadmin_get_connection.py
 test/unit/rabbitmq_class/rabbitmqadmin_get_definitions.py
 test/unit/rabbitmq_class/rabbitmqadmin_get_exchange_for_vhost.py
 test/unit/rabbitmq_class/rabbitmqadmin_get_node.py
+test/unit/rabbitmq_class/rabbitmqadmin_get_user.py
 test/unit/rabbitmq_class/rabbitmqadmin_list_bindings.py
 test/unit/rabbitmq_class/rabbitmqadmin_list_bindings_for_vhost.py
 test/unit/rabbitmq_class/rabbitmqadmin_list_channels.py
