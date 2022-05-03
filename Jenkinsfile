@@ -68,6 +68,7 @@ pipeline {
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_exchanges_for_vhost.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_extensions.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_nodes.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_users.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_vhosts.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_overview.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_post_definitions.py
