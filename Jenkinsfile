@@ -49,11 +49,13 @@ pipeline {
                 ./test/unit/rabbitmq_class/rabbitmqbase_put.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_create_exchange_for_vhost.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_create_policy_for_vhost.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_create_topic_permission.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_create_user.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_create_user_permission.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_create_vhost.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_delete_connection.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_delete_policy_for_vhost.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_delete_topic_permission.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_delete_user.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_delete_user_permission.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_delete_vhost.py
@@ -81,9 +83,13 @@ pipeline {
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_permissions.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_policies.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_policies_for_vhost.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_topic_permissions.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_users.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_user_permissions.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_user_topic_permissions.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_vhosts.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_vhost_topic_permissions.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_vhost_user_topic_perms.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_overview.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_post_definitions.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_whoami.py
