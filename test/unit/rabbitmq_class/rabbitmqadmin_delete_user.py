@@ -60,7 +60,7 @@ class UnitTest(unittest.TestCase):
         self.name = "UserName"
         self.japd = "japd"
         self.rmq = rabbitmq_class.RabbitMQAdmin(self.name, self.japd)
-        self.name = "UserName"
+        self.uname = "UserName"
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_delete")
     def test_basic(self, mock_delete):
@@ -75,7 +75,7 @@ class UnitTest(unittest.TestCase):
 
         mock_delete.return_value = True
 
-        self.assertFalse(self.rmq.delete_user(self.name))
+        self.assertFalse(self.rmq.delete_user(self.uname))
 
 
 if __name__ == "__main__":

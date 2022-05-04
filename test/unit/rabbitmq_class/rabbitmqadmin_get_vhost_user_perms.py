@@ -62,7 +62,7 @@ class UnitTest(unittest.TestCase):
         self.rmq = rabbitmq_class.RabbitMQAdmin(self.name, self.japd)
         self.data = {"key": "value"}
         self.vhost = "VirtualHost"
-        self.name = "UserName"
+        self.uname = "UserName"
         self.results = {"key": "value"}
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_get")
@@ -79,7 +79,7 @@ class UnitTest(unittest.TestCase):
         mock_get.return_value = self.data
 
         self.assertEqual(
-            self.rmq.get_vhost_user_perms(self.vhost, self.name), self.results)
+            self.rmq.get_vhost_user_perms(self.vhost, self.uname), self.results)
 
 
 if __name__ == "__main__":

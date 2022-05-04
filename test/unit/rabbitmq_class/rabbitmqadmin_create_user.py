@@ -64,7 +64,7 @@ class UnitTest(unittest.TestCase):
         self.name = "UserName"
         self.japd = "japd"
         self.rmq = rabbitmq_class.RabbitMQAdmin(self.name, self.japd)
-        self.name = "UserName"
+        self.uname = "UserName"
         self.ujapd = "UserJapd"
         self.japd_hash = "UserHash"
         self.tags = ["administrator"]
@@ -83,7 +83,7 @@ class UnitTest(unittest.TestCase):
         mock_put.return_value = True
 
         self.assertFalse(
-            self.rmq.create_user(self.name, self.ujapd, tags=self.tags))
+            self.rmq.create_user(self.uname, self.ujapd, tags=self.tags))
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_put")
     def test_no_tags(self, mock_put):
@@ -98,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
         mock_put.return_value = True
 
-        self.assertFalse(self.rmq.create_user(self.name, self.ujapd, tags=[]))
+        self.assertFalse(self.rmq.create_user(self.uname, self.ujapd, tags=[]))
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_put")
     def test_japd_and_hash(self, mock_put):
@@ -115,7 +115,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertFalse(
             self.rmq.create_user(
-                self.name, self.ujapd, japd_hash=self.japd_hash))
+                self.uname, self.ujapd, japd_hash=self.japd_hash))
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_put")
     def test_japd_hash_only(self, mock_put):
@@ -131,7 +131,7 @@ class UnitTest(unittest.TestCase):
         mock_put.return_value = True
 
         self.assertFalse(
-            self.rmq.create_user(self.name, "", japd_hash=self.japd_hash))
+            self.rmq.create_user(self.uname, "", japd_hash=self.japd_hash))
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_put")
     def test_no_japd(self, mock_put):
@@ -146,7 +146,7 @@ class UnitTest(unittest.TestCase):
 
         mock_put.return_value = True
 
-        self.assertFalse(self.rmq.create_user(self.name, ""))
+        self.assertFalse(self.rmq.create_user(self.uname, ""))
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_put")
     def test_basic(self, mock_put):
@@ -161,7 +161,7 @@ class UnitTest(unittest.TestCase):
 
         mock_put.return_value = True
 
-        self.assertFalse(self.rmq.create_user(self.name, self.ujapd))
+        self.assertFalse(self.rmq.create_user(self.uname, self.ujapd))
 
 
 if __name__ == "__main__":

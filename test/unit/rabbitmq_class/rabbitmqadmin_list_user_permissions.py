@@ -61,7 +61,7 @@ class UnitTest(unittest.TestCase):
         self.japd = "japd"
         self.rmq = rabbitmq_class.RabbitMQAdmin(self.name, self.japd)
         self.data = {"key": "value"}
-        self.name = "UserName"
+        self.uname = "UserName"
         self.results = {"key": "value"}
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_get")
@@ -78,7 +78,7 @@ class UnitTest(unittest.TestCase):
         mock_get.return_value = self.data
 
         self.assertEqual(
-            self.rmq.list_user_permissions(self.name), self.results)
+            self.rmq.list_user_permissions(self.uname), self.results)
 
 
 if __name__ == "__main__":
