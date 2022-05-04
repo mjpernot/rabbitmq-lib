@@ -61,6 +61,7 @@ pipeline {
                 ./test/unit/rabbitmq_class/rabbitmqadmin_get_definitions.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_get_exchange_for_vhost.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_get_node.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_get_policy_for_vhost.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_get_user.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_get_vhost_user_perms.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_bindings.py
