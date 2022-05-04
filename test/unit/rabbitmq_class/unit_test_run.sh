@@ -44,6 +44,7 @@ test/unit/rabbitmq_class/rabbitmqadmin_create_user.py
 test/unit/rabbitmq_class/rabbitmqadmin_create_user_permission.py
 test/unit/rabbitmq_class/rabbitmqadmin_create_vhost.py
 test/unit/rabbitmq_class/rabbitmqadmin_delete_connection.py
+test/unit/rabbitmq_class/rabbitmqadmin_delete_policy_for_vhost.py
 test/unit/rabbitmq_class/rabbitmqadmin_delete_user.py
 test/unit/rabbitmq_class/rabbitmqadmin_delete_user_permission.py
 test/unit/rabbitmq_class/rabbitmqadmin_delete_vhost.py
