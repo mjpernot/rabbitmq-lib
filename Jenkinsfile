@@ -76,6 +76,7 @@ pipeline {
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_nodes.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_permissions.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_policies.py
+                ./test/unit/rabbitmq_class/rabbitmqadmin_list_policies_for_vhost.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_users.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_user_permissions.py
                 ./test/unit/rabbitmq_class/rabbitmqadmin_list_vhosts.py
