@@ -1427,6 +1427,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Arguments:
             (input) vhost -> Name of virtual host
             (input) name -> Name of user
+            (output) Returns user permissions on a vhost in dictionary format
 
         """
 
@@ -1476,3 +1477,116 @@ class RabbitMQAdmin(RabbitMQBase):
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
             data=data)
 
+    def list_policies(self):
+
+        """Method:  list_policies
+
+        Description:  List of all the policies.
+
+        Arguments:
+            (output) List of policies in dictionary format
+
+        """
+
+        return self.api_get("/api/policies")
+
+    def list_policies_for_vhost(self, name):
+
+        """Method:  list_policies_for_vhost
+
+        Description:  List of all the policies for a specific virtual host.
+
+        Arguments:
+            (input) name -> Name of virtual host
+            (output) List of policies for a vhost in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/policies/{0}".format(urllib.parse.quote_plus(name)))
+
+    def get_policy_for_vhost(self, vhost, name):
+
+        """Method:  get_policy_for_vhost
+
+        Description:  Details for a policy for a specific virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (input) name -> Name of policy
+            (output) Details on a policy for a vhost in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/policies/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+
+    def create_policy_for_vhost(self, vhost, name, definition, pattern=None,
+                                priority=0, apply_to='all'):
+
+        """Method:  create_policy_for_vhost
+
+        Description:  Create a policy on a specific virtual host.
+
+        Example:
+            # Makes all queues and exchanges on vhost "/" highly available
+            api.create_policy_for_vhost(
+                vhost="/",
+                name="ha-all",
+                definition={"ha-mode": "all"},
+                pattern="",
+                apply_to="all")
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (input) name -> Name of policy
+            (input) definition -> Definition of the policy in dictionary format
+            (input) pattern -> Pattern of resource names to apply the policy to
+            (input) priority -> Priority of policy, default is 0
+            (input) apply_to -> What resource type to apply the policy to
+                Typical values: exchanges, queues, all
+
+        """
+
+        data = {"pattern": pattern, "definition": definition,
+                "priority": priority, "apply-to": apply_to}
+
+        self.api_put(
+            "/api/policies/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
+            data=data)
+
+    def delete_policy_for_vhost(self, vhost, name):
+
+        """Method:  delete_policy_for_vhost
+
+        Description:  Delete a specific policy on a virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (input) name -> Policy name
+
+        """
+
+        self.api_delete(
+            "/api/policies/{0}/{1}/".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+
+    def is_vhost_alive(self, vhost):
+
+        """Method:  is_vhost_alive
+
+        Description:  Declares a test queue, then publishes and consumes a
+            message.
+
+        Notes:  This is intended for use by monitoring tools.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (output) Returns status of vhost in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/aliveness-test/{0}".format(urllib.parse.quote_plus(vhost)))

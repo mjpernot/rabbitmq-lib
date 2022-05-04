@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ### Added
 - RabbitMQBase class: Representation of RabbitMQ API connection with the GET, PUT, POST, DELETE objects.
+- RabbitMQAdmin class:  Class which contains a list of RabbitMQ administration commands.
 
 ### Changed
 - Documentation updates.
