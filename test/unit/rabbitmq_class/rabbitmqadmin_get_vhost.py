@@ -3,8 +3,7 @@
 
 """Program:  rabbitmqadmin_get_vhost.py
 
-    Description:  Unit testing of RabbitMQAdmin.get_vhost in
-        rabbitmq_class.py.
+    Description:  Unit testing of RabbitMQAdmin.get_vhost in rabbitmq_class.py.
 
     Usage:
         test/unit/rabbitmq_class/rabbitmqadmin_get_vhost.py
@@ -77,8 +76,7 @@ class UnitTest(unittest.TestCase):
 
         mock_get.return_value = self.data
 
-        self.assertEqual(
-            self.rmq.get_vhost(self.vhost), self.results)
+        self.assertEqual(self.rmq.get_vhost(self.vhost), self.results)
 
 
 if __name__ == "__main__":
