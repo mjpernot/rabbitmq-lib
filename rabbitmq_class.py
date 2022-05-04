@@ -39,6 +39,7 @@ KEY1 = "pass"
 KEY2 = "word"
 KEY3 = "_hash"
 
+
 def pub_2_rmq(cfg, data):
 
     """Function:  pub_2_rmq
@@ -624,6 +625,7 @@ class RabbitMQCon(RabbitMQPub):
 
         self.channel.basic_ack(delivery_tag=tag)
 
+
 class RabbitMQBase(object):
 
     """Class:  RabbitMQBase
@@ -935,8 +937,8 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Description:  Returns a list of nodes in the RabbitMQ cluster.  Set
         "memory=true" to get memory statistics, and "binary=true" to get a
-        breakdown of binary memory use (may be expensive if there are many small
-        binaries in the system).
+        breakdown of binary memory use (may be expensive if there are many
+        small binaries in the system).
 
         Arguments:
             (output) List of nodes in dictionary format
@@ -1051,7 +1053,6 @@ class RabbitMQAdmin(RabbitMQBase):
         return self.api_get(
             "/api/connections/{0}".format(urllib.parse.quote_plus(name)))
 
-
     def delete_connection(self, name, reason=None):
 
         """Method:  delete_connection
@@ -1098,7 +1099,6 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get("/api/channels")
-
 
     def get_channel(self, name):
 
@@ -1287,7 +1287,6 @@ class RabbitMQAdmin(RabbitMQBase):
         self.api_delete(
             "/api/vhosts/{0}".format(urllib.parse.quote_plus(vhost)))
 
-
     def create_vhost(self, vhost, tracing=False):
 
         """Method:  create_vhost
@@ -1346,7 +1345,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         self.api_delete("/api/users/{0}".format(urllib.parse.quote_plus(name)))
-        
+
     def create_user(self, name, japd, japd_hash=None, tags=None):
 
         """Method:  create_user
@@ -1457,8 +1456,8 @@ class RabbitMQAdmin(RabbitMQBase):
             "/api/permissions/{0}/{1}".format(
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
 
-    def create_user_permission(
-        self, name, vhost, configure=None, write=None, read=None):
+    def create_user_permission(self, name, vhost, configure=None, write=None,
+                               read=None):
 
         """Method:  create_user
 
