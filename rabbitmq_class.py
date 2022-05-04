@@ -891,6 +891,12 @@ class RabbitMQAdmin(RabbitMQBase):
         create_policy_for_vhost
         delete_policy_for_vhost
         is_vhost_alive
+        list_topic_permissions
+        list_vhost_topic_permissions
+        list_user_topic_permissions
+        list_vhost_user_topic_perms
+        create_topic_permission
+        delete_topic_permission
 
     """
 
@@ -1590,3 +1596,110 @@ class RabbitMQAdmin(RabbitMQBase):
 
         return self.api_get(
             "/api/aliveness-test/{0}".format(urllib.parse.quote_plus(vhost)))
+
+    def list_topic_permissions(self):
+
+        """Method:  list_topic_permissions
+
+        Description:  List of all topic permissions for all users.
+
+        Arguments:
+            (output) List of topic permissions in dictionary format
+
+        """
+
+        return self.api_get("/api/topic-permissions")
+
+    def list_vhost_topic_permissions(self, name):
+
+        """Method:  list_vhost_topic_permissions
+
+        Description:  List all topic permissions for a specific virtual host.
+
+        Arguments:
+            (input) name -> Name of virtual host
+            (output) List of topic permissions for a vhost in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/vhosts/{0}/topic-permissions".format(
+                urllib.parse.quote_plus(name)))
+
+    def list_user_topic_permissions(self, name):
+
+        """Method:  list_user_topic_permissions
+
+        Description:  List of topic permissions for a specific user.
+
+        Arguments:
+            (input) name -> Name of user
+            (output) List of topic permissions for user in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/users/{0}/topic-permissions".format(
+                urllib.parse.quote_plus(name)))
+
+    def list_vhost_user_topic_perms(self, vhost, name):
+
+        """Method:  list_vhost_user_topic_perms
+
+        Description:  Get user topic permissions on a specific virtual host.
+
+        Arguments:
+            (input) vhost -> Name of virtual host
+            (input) name -> Name of user
+            (output) Returns user topic perms on a vhost in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/topic-permissions/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+
+    def create_topic_permission(self, name, vhost, exchange, write="",
+                                read=""):
+
+        """Method:  create_topic_permission
+
+        Description:  Create a topic permission.
+
+        Notes:  For the read and write topic permissions, '' is a synonym for
+            '^$' and restricts permissions in the exact same way.
+
+        Arguments:
+            (input) name -> Name of user
+            (input) vhost -> Name of virtual host
+            (input) exchange -> Exchange name
+            (input) write -> Regex for the user permission, default is ""
+            (input) read -> Regex for the user permission, default is ""
+
+        """
+
+        data = {"exchange": exchange, "read": read, "write": write}
+
+        self.api_put(
+            "/api/topic-permissions/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
+            data=data)
+
+    def delete_topic_permission(self, name, vhost, exchange):
+
+        """Method:  delete_topic_permission
+
+        Description:  Delete a individual topic permission for a user on a
+            virtual host on a named exchange.
+
+        Arguments:
+            (input) name -> User name
+            (input) vhost -> Name of virtual host
+            (input) exchange - Exchange name
+
+        """
+
+        self.api_delete(
+            "/api/topic-permissions/{0}/{1}/{2}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name),
+                urllib.parse.quote_plus(exchange)))
