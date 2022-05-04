@@ -962,7 +962,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            url="/api/nodes/{0}".format(name),
+            url_cmd="/api/nodes/{0}".format(name),
             params=dict(binary=binary, memory=memory))
 
     def list_extensions(self):
