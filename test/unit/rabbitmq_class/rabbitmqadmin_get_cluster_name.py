@@ -3,7 +3,8 @@
 
 """Program:  rabbitmqadmin_get_cluster_name.py
 
-    Description:  Unit testing of RabbitMQAdmin.get_cluster_name in rabbitmq_class.py.
+    Description:  Unit testing of RabbitMQAdmin.get_cluster_name in
+        rabbitmq_class.py.
 
     Usage:
         test/unit/rabbitmq_class/rabbitmqadmin_get_cluster_name.py

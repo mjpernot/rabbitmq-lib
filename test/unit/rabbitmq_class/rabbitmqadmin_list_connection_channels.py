@@ -3,7 +3,8 @@
 
 """Program:  rabbitmqadmin_list_connection_channels.py
 
-    Description:  Unit testing of RabbitMQAdmin.list_connection_channels in rabbitmq_class.py.
+    Description:  Unit testing of RabbitMQAdmin.list_connection_channels in
+        rabbitmq_class.py.
 
     Usage:
         test/unit/rabbitmq_class/rabbitmqadmin_list_connection_channels.py

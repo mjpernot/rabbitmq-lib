@@ -79,7 +79,8 @@ class UnitTest(unittest.TestCase):
         mock_get.return_value = self.data
 
         self.assertEqual(
-            self.rmq.get_vhost_user_perms(self.vhost, self.uname), self.results)
+            self.rmq.get_vhost_user_perms(
+                self.vhost, self.uname), self.results)
 
 
 if __name__ == "__main__":

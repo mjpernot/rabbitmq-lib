@@ -3,7 +3,8 @@
 
 """Program:  rabbitmqadmin_post_definitions.py
 
-    Description:  Unit testing of RabbitMQAdmin.post_definitions in rabbitmq_class.py.
+    Description:  Unit testing of RabbitMQAdmin.post_definitions in
+        rabbitmq_class.py.
 
     Usage:
         test/unit/rabbitmq_class/rabbitmqadmin_post_definitions.py

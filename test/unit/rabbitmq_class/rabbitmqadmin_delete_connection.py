@@ -3,7 +3,8 @@
 
 """Program:  rabbitmqadmin_delete_connection.py
 
-    Description:  Unit testing of RabbitMQAdmin.delete_connection in rabbitmq_class.py.
+    Description:  Unit testing of RabbitMQAdmin.delete_connection in
+        rabbitmq_class.py.
 
     Usage:
         test/unit/rabbitmq_class/rabbitmqadmin_delete_connection.py

@@ -3,7 +3,8 @@
 
 """Program:  rabbitmqadmin_get_connection.py
 
-    Description:  Unit testing of RabbitMQAdmin.get_connection in rabbitmq_class.py.
+    Description:  Unit testing of RabbitMQAdmin.get_connection in
+        rabbitmq_class.py.
 
     Usage:
         test/unit/rabbitmq_class/rabbitmqadmin_get_connection.py

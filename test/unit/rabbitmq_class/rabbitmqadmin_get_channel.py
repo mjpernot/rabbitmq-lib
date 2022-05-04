@@ -3,7 +3,8 @@
 
 """Program:  rabbitmqadmin_get_channel.py
 
-    Description:  Unit testing of RabbitMQAdmin.get_channel in rabbitmq_class.py.
+    Description:  Unit testing of RabbitMQAdmin.get_channel in
+        rabbitmq_class.py.
 
     Usage:
         test/unit/rabbitmq_class/rabbitmqadmin_get_channel.py

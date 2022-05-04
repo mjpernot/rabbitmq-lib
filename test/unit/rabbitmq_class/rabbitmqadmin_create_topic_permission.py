@@ -3,7 +3,8 @@
 
 """Program:  rabbitmqadmin_create_topic_permission.py
 
-    Description:  Unit testing of RabbitMQAdmin.create_topic_permission in rabbitmq_class.py.
+    Description:  Unit testing of RabbitMQAdmin.create_topic_permission in
+        rabbitmq_class.py.
 
     Usage:
         test/unit/rabbitmq_class/rabbitmqadmin_create_topic_permission.py
