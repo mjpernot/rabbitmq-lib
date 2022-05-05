@@ -63,8 +63,8 @@ class UnitTest(unittest.TestCase):
         self.rmq = rabbitmq_class.RabbitMQAdmin(self.name, self.japd)
         self.qname = "QueueName"
         self.vhost = "VhostName"
-        self.body = {"auto_delete":false, "durable":true, "arguments":{},
-                     "node":"rabbit@rabbit1"}
+        self.body = {"auto_delete": False, "durable": True, "arguments": {},
+                     "node": "rabbit@rabbit1"}
         self.body2 = {}
 
     @mock.patch("rabbitmq_class.RabbitMQBase.api_put")
