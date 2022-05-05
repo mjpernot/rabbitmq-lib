@@ -899,6 +899,11 @@ class RabbitMQAdmin(RabbitMQBase):
         list_vhost_user_topic_perms
         create_topic_permission
         delete_topic_permission
+        create_queue_for_vhost
+        get_queue_for_vhost
+        list_queues
+        list_queues_for_vhost
+        delete_queue_for_vhost
 
     """
 
@@ -1702,3 +1707,98 @@ class RabbitMQAdmin(RabbitMQBase):
             "/api/topic-permissions/{0}/{1}/{2}".format(
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name),
                 urllib.parse.quote_plus(exchange)))
+
+    def create_queue_for_vhost(self, name, vhost, body):
+
+        """Method:  create_queue_for_vhost
+
+        Description:  Create an individual queue in a virtual host.
+
+        Notes:  The body should look like this.  All keys are optional.
+            {"auto_delete":false,
+             "durable":true,
+             "arguments":{},
+             "node":"rabbit@rabbit1"}
+
+        Arguments:
+            (input) name -> Name of queue
+            (input) vhost -> Name of virtual host
+            (input) body -> The body for the queue in dictionary format
+
+        """
+
+        self.api_put(
+            "/api/queues/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost),
+                urllib.parse.quote_plus(name)), data=body)
+
+    def get_queue_for_vhost(self, name, vhost):
+
+        """Method:  get_queue_for_vhost
+
+        Description:  Get information on individual queue in a virtual host.
+
+        Arguments:
+            (input) name -> Name of queue
+            (input) vhost -> Name of virtual host
+            (output) Returns queue information on a vhost in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/queues/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+
+    def list_queues(self):
+
+        """Method:  list_queues
+
+        Description:  Returns a list of all queues.
+
+        Arguments:
+            (output) Returns list of queues in dictionary format
+
+        """
+
+        return self.api_get("/api/queues")
+
+    def list_queues_for_vhost(self, name):
+
+        """Method:  get_queue_for_vhost
+
+        Description:  Get information on individual queue in a virtual host.
+
+        Arguments:
+            (input) name -> Name of virtual host
+            (output) Returns list of queues on a vhost in dictionary format
+
+        """
+
+        return self.api_get(
+            "/api/queues/{0}".format(urllib.parse.quote_plus(name)))
+
+    def delete_queue_for_vhost(self, name, vhost, if_unused=True,
+                               if_empty=True):
+
+        """Method:  delete_queue_for_vhost
+
+        Description:  Delete and individual queue on a virtual host.
+
+        Notes:
+            1. if_unused=True: This prevents the delete from succeeding if the
+                queue has consumers.  False will override this option.
+            2. if_empty=True: This prevents the delete from succeeding if the
+                queue contains messages.  False will override this option.
+
+        Arguments:
+            (input) name -> Name of queue
+            (input) vhost -> Name of virtual host
+            (input) if_unused -> True|False - Delete if queue is unused
+            (input) if_empty -> True|False - Delete if queue is empty
+
+        """
+
+        self.api_delete(
+            "/api/queues/{0}/{1}".format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
+            params={"if-unused": if_unused, "if-empty": if_empty})
