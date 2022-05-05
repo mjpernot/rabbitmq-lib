@@ -78,6 +78,7 @@ test/unit/rabbitmq_class/rabbitmqadmin_list_permissions.py
 test/unit/rabbitmq_class/rabbitmqadmin_list_policies.py
 test/unit/rabbitmq_class/rabbitmqadmin_list_policies_for_vhost.py
 test/unit/rabbitmq_class/rabbitmqadmin_list_queues.py
+test/unit/rabbitmq_class/rabbitmqadmin_list_queues_for_vhost.py
 test/unit/rabbitmq_class/rabbitmqadmin_list_topic_permissions.py
 test/unit/rabbitmq_class/rabbitmqadmin_list_users.py
 test/unit/rabbitmq_class/rabbitmqadmin_list_user_permissions.py
