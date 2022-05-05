@@ -51,6 +51,7 @@ coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_c
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_create_vhost.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_connection.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_policy_for_vhost.py
+coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_queue_for_vhost.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_topic_permission.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_user.py
 coverage run -a --source=rabbitmq_class test/unit/rabbitmq_class/rabbitmqadmin_delete_user_permission.py
