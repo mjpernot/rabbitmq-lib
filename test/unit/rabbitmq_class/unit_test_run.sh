@@ -40,6 +40,7 @@ test/unit/rabbitmq_class/rabbitmqbase_post.py
 test/unit/rabbitmq_class/rabbitmqbase_put.py
 test/unit/rabbitmq_class/rabbitmqadmin_create_exchange_for_vhost.py
 test/unit/rabbitmq_class/rabbitmqadmin_create_policy_for_vhost.py
+test/unit/rabbitmq_class/rabbitmqadmin_create_queue_for_vhost.py
 test/unit/rabbitmq_class/rabbitmqadmin_create_topic_permission.py
 test/unit/rabbitmq_class/rabbitmqadmin_create_user.py
 test/unit/rabbitmq_class/rabbitmqadmin_create_user_permission.py
