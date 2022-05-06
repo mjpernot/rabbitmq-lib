@@ -49,7 +49,7 @@ Modify the {Other_Python_Project}/README.md file and add the following line:
 Modify the {Other_Python_Project}/requirements.txt file and add the following line:
 
 ```
-pika==0.11.0
+pika==1.2.0
 ```
 
 ### Git Installation:
