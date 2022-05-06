@@ -1409,10 +1409,8 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        global API_USER
-
         return self.api_get(
-            API_USER + "/permissions".format(urllib.parse.quote_plus(name)))
+            "/api/users/{0}/permissions".format(urllib.parse.quote_plus(name)))
 
     def whoami(self):
 
@@ -1644,10 +1642,8 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        global API_VHOST
-
         return self.api_get(
-            API_VHOST + "/topic-permissions".format(
+            "/api/vhosts/{0}/topic-permissions".format(
                 urllib.parse.quote_plus(name)))
 
     def list_user_topic_permissions(self, name):
@@ -1662,10 +1658,8 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        global API_USER
-
         return self.api_get(
-            API_USER + "/topic-permissions".format(
+            "/api/users/{0}/topic-permissions".format(
                 urllib.parse.quote_plus(name)))
 
     def list_vhost_user_topic_perms(self, vhost, name):
