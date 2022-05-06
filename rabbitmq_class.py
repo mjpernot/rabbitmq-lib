@@ -38,6 +38,10 @@ __version__ = version.__version__
 KEY1 = "pass"
 KEY2 = "word"
 KEY3 = "_hash"
+API_VHOST = "/api/vhosts/{0}"
+API_USER = "/api/users/{0}"
+API_PERM = "/api/permissions/{0}/{1}"
+API_QUEUE = "/api/queues/{0}/{1}"
 
 
 def pub_2_rmq(cfg, data):
@@ -1275,8 +1279,9 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        return self.api_get(
-            "/api/vhosts/{0}".format(urllib.parse.quote_plus(vhost)))
+        global API_VHOST
+
+        return self.api_get(API_VHOST.format(urllib.parse.quote_plus(vhost)))
 
     def delete_vhost(self, vhost):
 
@@ -1289,8 +1294,9 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        self.api_delete(
-            "/api/vhosts/{0}".format(urllib.parse.quote_plus(vhost)))
+        global API_VHOST
+
+        self.api_delete(API_VHOST.format(urllib.parse.quote_plus(vhost)))
 
     def create_vhost(self, vhost, tracing=False):
 
@@ -1304,11 +1310,12 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_VHOST
+
         data = {"tracing": True} if tracing else {}
 
         self.api_put(
-            "/api/vhosts/{0}".format(urllib.parse.quote_plus(vhost)),
-            data=data)
+            API_VHOST.format(urllib.parse.quote_plus(vhost)), data=data)
 
     def list_users(self):
 
@@ -1335,8 +1342,9 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        return self.api_get(
-            "/api/users/{0}".format(urllib.parse.quote_plus(name)))
+        global API_USER
+
+        return self.api_get(API_USER.format(urllib.parse.quote_plus(name)))
 
     def delete_user(self, name):
 
@@ -1349,7 +1357,9 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        self.api_delete("/api/users/{0}".format(urllib.parse.quote_plus(name)))
+        global API_USER
+
+        self.api_delete(API_USER.format(urllib.parse.quote_plus(name)))
 
     def create_user(self, name, japd, japd_hash=None, tags=None):
 
@@ -1372,6 +1382,7 @@ class RabbitMQAdmin(RabbitMQBase):
         global KEY1
         global KEY2
         global KEY3
+        global API_USER
 
         data = {"tags": ", ".join(tags or [])}
 
@@ -1384,8 +1395,7 @@ class RabbitMQAdmin(RabbitMQBase):
         else:
             data[KEY1 + KEY2 + KEY3] = ""
 
-        self.api_put(
-            "/api/users/{0}".format(urllib.parse.quote_plus(name)), data=data)
+        self.api_put(API_USER.format(urllib.parse.quote_plus(name)), data=data)
 
     def list_user_permissions(self, name):
 
@@ -1399,8 +1409,10 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_USER
+
         return self.api_get(
-            "/api/users/{0}/permissions".format(urllib.parse.quote_plus(name)))
+            API_USER + "/permissions".format(urllib.parse.quote_plus(name)))
 
     def whoami(self):
 
@@ -1441,8 +1453,10 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_PERM
+
         return self.api_get(
-            "/api/permissions/{0}/{1}".format(
+            API_PERM.format(
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
 
     def delete_user_permission(self, name, vhost):
@@ -1457,8 +1471,10 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_PERM
+
         self.api_delete(
-            "/api/permissions/{0}/{1}".format(
+            API_PERM.format(
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
 
     def create_user_permission(self, name, vhost, configure=None, write=None,
@@ -1477,13 +1493,15 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_PERM
+
         data = {
             "configure": configure or '.*',
             "write": write or '.*',
             "read": read or '.*'}
 
         self.api_put(
-            "/api/permissions/{0}/{1}".format(
+            API_PERM.format(
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
             data=data)
 
@@ -1626,8 +1644,10 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_VHOST
+
         return self.api_get(
-            "/api/vhosts/{0}/topic-permissions".format(
+            API_VHOST + "/topic-permissions".format(
                 urllib.parse.quote_plus(name)))
 
     def list_user_topic_permissions(self, name):
@@ -1642,8 +1662,10 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_USER
+
         return self.api_get(
-            "/api/users/{0}/topic-permissions".format(
+            API_USER + "/topic-permissions".format(
                 urllib.parse.quote_plus(name)))
 
     def list_vhost_user_topic_perms(self, vhost, name):
@@ -1727,10 +1749,12 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_QUEUE
+
         self.api_put(
-            "/api/queues/{0}/{1}".format(
-                urllib.parse.quote_plus(vhost),
-                urllib.parse.quote_plus(name)), data=body)
+            API_QUEUE.format(
+                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
+            data=body)
 
     def get_queue_for_vhost(self, name, vhost):
 
@@ -1745,8 +1769,10 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_QUEUE
+
         return self.api_get(
-            "/api/queues/{0}/{1}".format(
+            API_QUEUE.format(
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
 
     def list_queues(self):
@@ -1798,7 +1824,9 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
+        global API_QUEUE
+
         self.api_delete(
-            "/api/queues/{0}/{1}".format(
+            API_QUEUE.format(
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
             params={"if-unused": if_unused, "if-empty": if_empty})
