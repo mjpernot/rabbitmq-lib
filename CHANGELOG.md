@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ### Changed
 - RabbitMQ.connect: Set exception handler return status to local variable.
+- Documentation updates.
 
 
 ## [2.2.0] - 2022-04-21
