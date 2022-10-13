@@ -19,6 +19,7 @@
 """
 
 # Libraries and Global Variables
+from __future__ import absolute_import
 
 # Standard
 import copy
@@ -30,7 +31,11 @@ import requests
 from six.moves import urllib
 
 # Local
-import version
+try:
+    from . import version
+
+ except (ValueError, ImportError) as err:
+    import version
 
 __version__ = version.__version__
 
