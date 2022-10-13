@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  rabbitmqadmin_delete_policy_for_vhost.py

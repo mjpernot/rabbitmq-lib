@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  rabbitmqadmin_list_user_permissions.py

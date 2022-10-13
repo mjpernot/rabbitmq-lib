@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  rabbitmqadmin_create_queue_for_vhost.py

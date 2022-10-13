@@ -19,6 +19,7 @@
 """
 
 # Libraries and Global Variables
+from __future__ import absolute_import
 
 # Standard
 import copy
@@ -30,7 +31,11 @@ import requests
 from six.moves import urllib
 
 # Local
-import version
+try:
+    from . import version
+
+except (ValueError, ImportError) as err:
+    import version
 
 __version__ = version.__version__
 
@@ -202,13 +207,16 @@ class RabbitMQ(object):
         try:
             self.connection = pika.BlockingConnection(self.params)
 
-        except pika.exceptions.ConnectionClosed as err_msg:
+        except pika.exceptions.ConnectionClosed as msg:
+            err_msg = msg
             connect_status = False
 
-        except pika.exceptions.ProbableAuthenticationError as err_msg:
+        except pika.exceptions.ProbableAuthenticationError as msg:
+            err_msg = msg
             connect_status = False
 
-        except Exception as err_msg:
+        except Exception as msg:
+            err_msg = msg
             connect_status = False
 
         return connect_status, err_msg
@@ -950,7 +958,7 @@ class RabbitMQAdmin(RabbitMQBase):
         small binaries in the system).
 
         Arguments:
-            (output) List of nodes in dictionary format
+            (output) List of nodes in list format
 
         """
 
@@ -981,7 +989,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Returns a list of extensions for the management plugin.
 
         Arguments:
-            (output) List of extensions in dictionary format
+            (output) List of extensions in list format
 
         """
 
@@ -1041,7 +1049,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Returns a list of all open connections.
 
         Arguments:
-            (output) List of connections in dictionary format
+            (output) List of connections in list format
 
         """
 
@@ -1088,7 +1096,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Arguments:
             (input) name -> Name of connection
-            (output) List of channels for connection in dictionary format
+            (output) List of channels for connection
 
         """
 
@@ -1103,7 +1111,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Returns a list of all open channels.
 
         Arguments:
-            (output) List of channels in dictionary format
+            (output) List of channels in list format
 
         """
 
@@ -1131,7 +1139,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Returns a list of all consumers.
 
         Arguments:
-            (output) List of consumers in dictionary format
+            (output) List of consumers in list format
 
         """
 
@@ -1145,7 +1153,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Arguments:
             (input) vhost -> Name of virtual host
-            (output) List of consumers in dictionary format
+            (output) List of consumers in list format
 
         """
 
@@ -1159,7 +1167,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Returns a list of all exchanges.
 
         Arguments:
-            (output) List of exchanges in dictionary format
+            (output) List of exchanges in list format
 
         """
 
@@ -1173,7 +1181,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Arguments:
             (input) vhost -> Name of virtual host
-            (output) List of exchanges in dictionary format
+            (output) List of exchanges in list format
 
         """
 
@@ -1233,7 +1241,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Returns a list of all bindings.
 
         Arguments:
-            (output) List of bindings in dictionary format
+            (output) List of bindings in list format
 
         """
 
@@ -1247,7 +1255,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Arguments:
             (input) vhost -> Name of virtual host
-            (output) List of bindings in dictionary format
+            (output) List of bindings in list format
 
         """
 
@@ -1261,7 +1269,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Returns a list of all virtual hosts.
 
         Arguments:
-            (output) List of virtual hosts in dictionary format
+            (output) List of virtual hosts in list format
 
         """
 
@@ -1324,7 +1332,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Return a list of users.
 
         Arguments:
-            (output) List of users in dictionary format
+            (output) List of users in list format
 
         """
 
@@ -1405,7 +1413,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Arguments:
             (input) name -> Name of user
-            (output) List of permissions for user in dictionary format
+            (output) List of permissions for user in list format
 
         """
 
@@ -1432,7 +1440,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Lists all permissions for all users.
 
         Arguments:
-            (output) Return permissions on all users in dictionary format
+            (output) Return permissions on all users in list format
 
         """
 
@@ -1510,7 +1518,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  List of all the policies.
 
         Arguments:
-            (output) List of policies in dictionary format
+            (output) List of policies in list format
 
         """
 
@@ -1524,7 +1532,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Arguments:
             (input) name -> Name of virtual host
-            (output) List of policies for a vhost in dictionary format
+            (output) List of policies for a vhost in list format
 
         """
 
@@ -1624,7 +1632,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  List of all topic permissions for all users.
 
         Arguments:
-            (output) List of topic permissions in dictionary format
+            (output) List of topic permissions in list format
 
         """
 
@@ -1638,7 +1646,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Arguments:
             (input) name -> Name of virtual host
-            (output) List of topic permissions for a vhost in dictionary format
+            (output) List of topic permissions for a vhost in list format
 
         """
 
@@ -1654,7 +1662,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Arguments:
             (input) name -> Name of user
-            (output) List of topic permissions for user in dictionary format
+            (output) List of topic permissions for user in list format
 
         """
 
@@ -1671,7 +1679,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Arguments:
             (input) vhost -> Name of virtual host
             (input) name -> Name of user
-            (output) Returns user topic perms on a vhost in dictionary format
+            (output) Returns user topic perms on a vhost in list format
 
         """
 
@@ -1776,7 +1784,7 @@ class RabbitMQAdmin(RabbitMQBase):
         Description:  Returns a list of all queues.
 
         Arguments:
-            (output) Returns list of queues in dictionary format
+            (output) Returns list of queues in list format
 
         """
 
@@ -1790,7 +1798,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         Arguments:
             (input) name -> Name of virtual host
-            (output) Returns list of queues on a vhost in dictionary format
+            (output) Returns list of queues on a vhost in list format
 
         """
 
