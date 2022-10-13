@@ -7,6 +7,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.2.1] - 2022-10-13
 - Updated to work in Python 3 too
 
+### Changed
+- RabbitMQ.connect: Set exception handler return status to local variable.
+
 
 ## [2.2.0] - 2022-04-21
 - Added new classes: RabbitMQBase and RabbitMQApi
