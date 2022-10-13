@@ -34,7 +34,7 @@ from six.moves import urllib
 try:
     from . import version
 
- except (ValueError, ImportError) as err:
+except (ValueError, ImportError) as err:
     import version
 
 __version__ = version.__version__
@@ -207,13 +207,16 @@ class RabbitMQ(object):
         try:
             self.connection = pika.BlockingConnection(self.params)
 
-        except pika.exceptions.ConnectionClosed as err_msg:
+        except pika.exceptions.ConnectionClosed as msg:
+            err_msg = msg
             connect_status = False
 
-        except pika.exceptions.ProbableAuthenticationError as err_msg:
+        except pika.exceptions.ProbableAuthenticationError as msg:
+            err_msg = msg
             connect_status = False
 
-        except Exception as err_msg:
+        except Exception as msg:
+            err_msg = msg
             connect_status = False
 
         return connect_status, err_msg
