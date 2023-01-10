@@ -18,7 +18,7 @@
 import sys
 import os
 import unittest
-mport mock
+import mock
 
 # Local
 sys.path.append(os.getcwd())
