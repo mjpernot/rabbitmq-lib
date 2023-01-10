@@ -24,8 +24,6 @@ from __future__ import absolute_import
 # Standard
 import copy
 import json
-
-# Third-party
 import pika
 import requests
 from six.moves import urllib
