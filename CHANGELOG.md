@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.2.2] - 2022-01-23
+- Updated to work in RedHat 8 environment.
+
+### Changed
+- Documentation updates.
+
+
 ## [2.2.1] - 2022-10-13
 - Updated to work in Python 3 too
 
