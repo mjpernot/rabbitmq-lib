@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.2.2] - 2022-01-23
+## [2.2.3] - 2024-02-21
+
+
+## [2.2.2] - 2024-01-23
 - Updated to work in RedHat 8 environment.
 
 ### Changed
