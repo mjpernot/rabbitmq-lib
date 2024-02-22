@@ -7,17 +7,9 @@
 
 
 ###  This README file is broken down into the following sections:
- * Prerequisites
  * Installation
  * Testing
    - Unit
-
-
-# Prerequisites:
-
-  * List of Linux packages that need to be installed on the server.
-    - git
-    - python-pip
 
 
 # Installation:
@@ -67,7 +59,7 @@ Redhat 8 (Running Python 3.6):
 enum34==1.1.10
 pika==1.2.0
 requests==2.22.0
-simplejson==2.0.9
+simplejson==3.12.0
 six==1.16.0
 ```
 
@@ -101,7 +93,7 @@ python -m pip install --user -r requirements3.txt --upgrade --trusted-host pypi.
 
 ### Installation:
 
-Install the project using the procedures in the Installation section.
+Install the project using the procedures in the GIT Installation section.
 
 ### Testing:
 ```

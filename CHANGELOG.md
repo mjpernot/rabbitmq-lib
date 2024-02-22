@@ -5,6 +5,12 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.2.3] - 2024-02-21
+- Updated module requirements for Python.
+
+### Changed
+- Set chardet to 3.0.4 for Python 2 and Python 3.
+- Set simplejson to 3.12.0 for Python 3.
+- Documentation changes.
 
 
 ## [2.2.2] - 2024-01-23
