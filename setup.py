@@ -57,5 +57,5 @@ setuptools.setup(
         "Programming Language :: Python :: 3.6",        
         "Topic :: Message",
         "Topic :: Message :: RabbitMQ",
-        "Topic :: Database :: RabbitMQ :: 3.6.6",
-        "Topic :: Database :: RabbitMQ :: 3.8.2"])
+        "Topic :: Database :: RabbitMQ :: 3.6",
+        "Topic :: Database :: RabbitMQ :: 3.8"])
