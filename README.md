@@ -47,20 +47,24 @@ Modify the {Other_Python_Project}/requirements.txt file and add the following li
 
 Centos 7 (Running Python 2.7):
 ```
+chardet==3.0.4
 enum34==1.1.10
 pika==1.2.0
 requests==2.22.0
 simplejson==2.0.9
 six==1.12.0
+urllib3==1.24.2
 ```
 
 Redhat 8 (Running Python 3.6):
 ```
+chardet==3.0.4
 enum34==1.1.10
 pika==1.2.0
 requests==2.22.0
 simplejson==3.12.0
 six==1.16.0
+urllib3==1.24.2
 ```
 
 ### Git Installation:
