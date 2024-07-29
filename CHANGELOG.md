@@ -5,6 +5,10 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.2.4] - 2024-07-29
+- Set urllib3 to 1.26.19 for Python 2 for security reasons.
+
+### Added
+- rabbitmq.py - Templace RabbitMQ configuration file.
 
 
 ## [2.2.3] - 2024-02-21

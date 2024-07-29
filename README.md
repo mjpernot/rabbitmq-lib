@@ -7,9 +7,16 @@
 
 
 ###  This README file is broken down into the following sections:
+ * Configuration
  * Installation
+   - Pip Installation
  * Testing
    - Unit
+
+
+# Configuration
+# Configuration
+Any program that wants to use this module to connect to mongo, recommend using the rabbitmq-lib.py file as a baseline configuration file for the rabbitmq connection configuration.
 
 
 # Installation:
