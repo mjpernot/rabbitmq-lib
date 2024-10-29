@@ -15,7 +15,6 @@
 
 
 # Configuration
-# Configuration
 Any program that wants to use this module to connect to mongo, recommend using the rabbitmq-lib.py file as a baseline configuration file for the rabbitmq connection configuration.
 
 
@@ -92,7 +91,7 @@ Install the project using the procedures in the GIT Installation section.
 ### Testing:
 ```
 cd {Python_Project}/rabbitmq-lib
-test/unit/rabbitmq_class/unit_test_run.sh
+test/unit/rabbitmq_class/unit_test_run3.sh
 ```
 
 ### Code Coverage:

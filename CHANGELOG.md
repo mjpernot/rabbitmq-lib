@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.2.7] - 2024-10-25
+- Updated chardet==4.0.0 for Python 3.
+- Updated pika==1.3.1 for Python 3.
+- Updated urllib3==1.26.19 for Python 3.
+- Updated requests==2.25.0 for Python 3.
+- Added idna==2.10 for Python 3.
+
+### Changed
+- Updates to requirements3.txt.
+- Documentation updates.
+
+
 ## [2.2.6] - 2024-09-27
 - Updated simplejson=3.13.2 for Python 3
 
