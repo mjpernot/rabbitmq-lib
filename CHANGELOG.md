@@ -11,6 +11,10 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Updated requests==2.25.0 for Python 3.
 - Added idna==2.10 for Python 3.
 
+### Changed
+- Updates to requirements3.txt.
+- Documentation updates.
+
 
 ## [2.2.6] - 2024-09-27
 - Updated simplejson=3.13.2 for Python 3
