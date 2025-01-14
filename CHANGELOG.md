@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.3.0] - 2025-01-14
+- Removed support for Python 2.7.
+
+### Changed
+- Replaced list() with [].
+- get_node: Replaced dict() with {}.
+- Converted strings to f-strings.
+- Documentation changes.
+
+
 ## [2.2.8] - 2024-11-14
 
 ### Fixed

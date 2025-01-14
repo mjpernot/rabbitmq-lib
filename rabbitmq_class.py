@@ -19,14 +19,17 @@
 """
 
 # Libraries and Global Variables
-from __future__ import absolute_import
 
 # Standard
 import copy
-import json
 import pika
 import requests
 from six.moves import urllib
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 # Local
 try:
@@ -38,9 +41,6 @@ except (ValueError, ImportError) as err:
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
-KEY3 = "_hash"
 API_VHOST = "/api/vhosts/{0}"
 API_USER = "/api/users/{0}"
 API_PERM = "/api/permissions/{0}/{1}"
@@ -96,7 +96,7 @@ def create_rmqcon(cfg, q_name, r_key):
     """
 
     heartbeat = cfg.heartbeat if hasattr(cfg, "heartbeat") else 60
-    host_list = cfg.host_list if hasattr(cfg, "host_list") else list()
+    host_list = cfg.host_list if hasattr(cfg, "host_list") else []
     no_ack = cfg.no_ack if hasattr(cfg, "no_ack") else False
 
     return RabbitMQCon(
@@ -122,7 +122,7 @@ def create_rmqpub(cfg, q_name, r_key):
     """
 
     heartbeat = cfg.heartbeat if hasattr(cfg, "heartbeat") else 60
-    host_list = cfg.host_list if hasattr(cfg, "host_list") else list()
+    host_list = cfg.host_list if hasattr(cfg, "host_list") else []
 
     return RabbitMQPub(
         cfg.user, cfg.japd, cfg.host, cfg.port,
@@ -132,7 +132,7 @@ def create_rmqpub(cfg, q_name, r_key):
         heartbeat=heartbeat, host_list=host_list)
 
 
-class RabbitMQ(object):
+class RabbitMQ():                                       # pylint:disable=R0902
 
     """Class:  RabbitMQ
 
@@ -168,12 +168,12 @@ class RabbitMQ(object):
         self.host = host
         self.port = port
         self.connection = None
-        self.host_list = kwargs.get("host_list", list())
+        self.host_list = kwargs.get("host_list", [])
         self.heartbeat = kwargs.get("heartbeat", 60)
         self.creds = pika.PlainCredentials(self.name, japd)
 
         if self.host_list:
-            self.params = list()
+            self.params = []
 
             for node in self.host_list:
                 node_port = node.split(":")
@@ -232,7 +232,7 @@ class RabbitMQ(object):
         self.connection.close()
 
 
-class RabbitMQPub(RabbitMQ):
+class RabbitMQPub(RabbitMQ):                            # pylint:disable=R0902
 
     """Class:  RabbitMQPub
 
@@ -285,7 +285,8 @@ class RabbitMQPub(RabbitMQ):
 
         """
 
-        super(RabbitMQPub, self).__init__(user, japd, host, port, **kwargs)
+        super(                                          # pylint:disable=R1725
+            RabbitMQPub, self).__init__(user, japd, host, port, **kwargs)
 
         self.channel = None
 
@@ -336,9 +337,9 @@ class RabbitMQPub(RabbitMQ):
 
         """
 
-        self.channel.queue_declare(queue=self.queue_name,
-                                   durable=self.q_durable,
-                                   auto_delete=self.auto_delete)
+        self.channel.queue_declare(
+            queue=self.queue_name, durable=self.q_durable,
+            auto_delete=self.auto_delete)
 
     def setup_exchange(self):
 
@@ -364,8 +365,9 @@ class RabbitMQPub(RabbitMQ):
 
         """
 
-        self.channel.queue_bind(queue=self.queue_name, exchange=self.exchange,
-                                routing_key=self.routing_key)
+        self.channel.queue_bind(
+            queue=self.queue_name, exchange=self.exchange,
+            routing_key=self.routing_key)
 
     def publish_msg(self, body, mandatory=True):
 
@@ -479,8 +481,8 @@ class RabbitMQPub(RabbitMQ):
 
         """
 
-        self.channel.queue_delete(queue=self.queue_name, if_unused=if_unused,
-                                  if_empty=if_empty)
+        self.channel.queue_delete(
+            queue=self.queue_name, if_unused=if_unused, if_empty=if_empty)
 
     def clear_queue(self):
 
@@ -519,8 +521,8 @@ class RabbitMQPub(RabbitMQ):
 
         """
 
-        self.channel.exchange_delete(exchange=self.exchange,
-                                     if_unused=if_unused)
+        self.channel.exchange_delete(
+            exchange=self.exchange, if_unused=if_unused)
 
 
 class RabbitMQCon(RabbitMQPub):
@@ -566,7 +568,8 @@ class RabbitMQCon(RabbitMQPub):
 
         """
 
-        super(RabbitMQCon, self).__init__(
+        super(                                          # pylint:disable=R1725
+            RabbitMQCon, self).__init__(
             user, japd, host, port,
             exchange_name=kwargs.get("exchange_name", ""),
             exchange_type=kwargs.get("exchange_type", "direct"),
@@ -576,7 +579,7 @@ class RabbitMQCon(RabbitMQPub):
             q_durable=kwargs.get("q_durable", True),
             auto_delete=kwargs.get("auto_delete", False),
             heartbeat=kwargs.get("heartbeat", 60),
-            host_list=kwargs.get("host_list", list()))
+            host_list=kwargs.get("host_list", []))
 
         self.no_ack = kwargs.get("no_ack", False)
 
@@ -636,7 +639,7 @@ class RabbitMQCon(RabbitMQPub):
         self.channel.basic_ack(delivery_tag=tag)
 
 
-class RabbitMQBase(object):
+class RabbitMQBase():
 
     """Class:  RabbitMQBase
 
@@ -660,8 +663,8 @@ class RabbitMQBase(object):
 
     """
 
-    def __init__(self, user, japd, host="localhost", port=15672,
-                 scheme="https"):
+    def __init__(                                       # pylint:disable=R0913
+            self, user, japd, host="localhost", port=15672, scheme="https"):
 
         """Method:  __init__
 
@@ -852,7 +855,7 @@ class RabbitMQBase(object):
         response.raise_for_status()
 
 
-class RabbitMQAdmin(RabbitMQBase):
+class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
     """Class:  RabbitMQAdmin
 
@@ -977,8 +980,8 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            url_cmd="/api/nodes/{0}".format(name),
-            params=dict(binary=binary, memory=memory))
+            url_cmd=f"/api/nodes/{name}",
+            params={binary: binary, memory: memory})
 
     def list_extensions(self):
 
@@ -1066,7 +1069,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/connections/{0}".format(urllib.parse.quote_plus(name)))
+            f"/api/connections/{urllib.parse.quote_plus(name)}")
 
     def delete_connection(self, name, reason=None):
 
@@ -1083,8 +1086,8 @@ class RabbitMQAdmin(RabbitMQBase):
         headers = {'X-Reason': reason} if reason else {}
 
         self.api_delete(
-            "/api/connections/{0}".format(
-                urllib.parse.quote_plus(name)), headers=headers)
+            f"/api/connections/{urllib.parse.quote_plus(name)}",
+            headers=headers)
 
     def list_connection_channels(self, name):
 
@@ -1099,8 +1102,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/connections/{0}/channels".format(
-                urllib.parse.quote_plus(name)))
+            f"/api/connections/{urllib.parse.quote_plus(name)}/channels")
 
     def list_channels(self):
 
@@ -1128,7 +1130,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/channels/{0}".format(urllib.parse.quote_plus(name)))
+            f"/api/channels/{urllib.parse.quote_plus(name)}")
 
     def list_consumers(self):
 
@@ -1156,7 +1158,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/consumers/{0}".format(urllib.parse.quote_plus(vhost)))
+            f"/api/consumers/{urllib.parse.quote_plus(vhost)}")
 
     def list_exchanges(self):
 
@@ -1184,7 +1186,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/exchanges/{0}".format(urllib.parse.quote_plus(vhost)))
+            f"/api/exchanges/{urllib.parse.quote_plus(vhost)}")
 
     def get_exchange_for_vhost(self, exchange, vhost):
 
@@ -1201,9 +1203,8 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/exchanges/{0}/{1}".format(
-                urllib.parse.quote_plus(vhost),
-                urllib.parse.quote_plus(exchange)))
+            f"/api/exchanges/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(exchange)}")
 
     def create_exchange_for_vhost(self, exchange, vhost, body):
 
@@ -1228,9 +1229,8 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         self.api_put(
-            "/api/exchanges/{0}/{1}".format(
-                urllib.parse.quote_plus(vhost),
-                urllib.parse.quote_plus(exchange)), data=body)
+            f"/api/exchanges/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(exchange)}", data=body)
 
     def list_bindings(self):
 
@@ -1258,7 +1258,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/bindings/{}".format(urllib.parse.quote_plus(vhost)))
+            f"/api/bindings/{urllib.parse.quote_plus(vhost)}")
 
     def list_vhosts(self):
 
@@ -1385,21 +1385,18 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        global KEY1
-        global KEY2
-        global KEY3
         global API_USER
 
         data = {"tags": ", ".join(tags or [])}
 
         if japd:
-            data[KEY1 + KEY2] = japd
+            data["password"] = japd
 
         elif japd_hash:
-            data[KEY1 + KEY2 + KEY3] = japd_hash
+            data["password_hash"] = japd_hash
 
         else:
-            data[KEY1 + KEY2 + KEY3] = ""
+            data["password_hash"] = ""
 
         self.api_put(API_USER.format(urllib.parse.quote_plus(name)), data=data)
 
@@ -1416,7 +1413,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/users/{0}/permissions".format(urllib.parse.quote_plus(name)))
+            f"/api/users/{urllib.parse.quote_plus(name)}/permissions")
 
     def whoami(self):
 
@@ -1481,8 +1478,8 @@ class RabbitMQAdmin(RabbitMQBase):
             API_PERM.format(
                 urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
 
-    def create_user_permission(self, name, vhost, configure=None, write=None,
-                               read=None):
+    def create_user_permission(                         # pylint:disable=R0913
+            self, name, vhost, configure=None, write=None, read=None):
 
         """Method:  create_user
 
@@ -1535,7 +1532,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/policies/{0}".format(urllib.parse.quote_plus(name)))
+            f"/api/policies/{urllib.parse.quote_plus(name)}")
 
     def get_policy_for_vhost(self, vhost, name):
 
@@ -1551,11 +1548,12 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/policies/{0}/{1}".format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+            f"/api/policies/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}")
 
-    def create_policy_for_vhost(self, vhost, name, definition, pattern=None,
-                                priority=0, apply_to='all'):
+    def create_policy_for_vhost(                        # pylint:disable=R0913
+            self, vhost, name, definition, pattern=None, priority=0,
+            apply_to='all'):
 
         """Method:  create_policy_for_vhost
 
@@ -1585,9 +1583,8 @@ class RabbitMQAdmin(RabbitMQBase):
                 "priority": priority, "apply-to": apply_to}
 
         self.api_put(
-            "/api/policies/{0}/{1}".format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
-            data=data)
+            f"/api/policies/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}", data=data)
 
     def delete_policy_for_vhost(self, vhost, name):
 
@@ -1602,8 +1599,8 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         self.api_delete(
-            "/api/policies/{0}/{1}/".format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+            f"/api/policies/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}/")
 
     def is_vhost_alive(self, vhost):
 
@@ -1621,7 +1618,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/aliveness-test/{0}".format(urllib.parse.quote_plus(vhost)))
+            f"/api/aliveness-test/{urllib.parse.quote_plus(vhost)}")
 
     def list_topic_permissions(self):
 
@@ -1649,8 +1646,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/vhosts/{0}/topic-permissions".format(
-                urllib.parse.quote_plus(name)))
+            f"/api/vhosts/{urllib.parse.quote_plus(name)}/topic-permissions")
 
     def list_user_topic_permissions(self, name):
 
@@ -1665,8 +1661,7 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/users/{0}/topic-permissions".format(
-                urllib.parse.quote_plus(name)))
+            f"/api/users/{urllib.parse.quote_plus(name)}/topic-permissions")
 
     def list_vhost_user_topic_perms(self, vhost, name):
 
@@ -1682,11 +1677,11 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         return self.api_get(
-            "/api/topic-permissions/{0}/{1}".format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+            f"/api/topic-permissions/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}")
 
-    def create_topic_permission(self, name, vhost, exchange, write="",
-                                read=""):
+    def create_topic_permission(                        # pylint:disable=R0913
+            self, name, vhost, exchange, write="", read=""):
 
         """Method:  create_topic_permission
 
@@ -1707,9 +1702,8 @@ class RabbitMQAdmin(RabbitMQBase):
         data = {"exchange": exchange, "read": read, "write": write}
 
         self.api_put(
-            "/api/topic-permissions/{0}/{1}".format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
-            data=data)
+            f"/api/topic-permissions/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}", data=data)
 
     def delete_topic_permission(self, name, vhost, exchange):
 
@@ -1726,9 +1720,9 @@ class RabbitMQAdmin(RabbitMQBase):
         """
 
         self.api_delete(
-            "/api/topic-permissions/{0}/{1}/{2}".format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name),
-                urllib.parse.quote_plus(exchange)))
+            f"/api/topic-permissions/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}"
+            f"/{urllib.parse.quote_plus(exchange)}")
 
     def create_queue_for_vhost(self, name, vhost, body):
 
@@ -1749,12 +1743,9 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        global API_QUEUE
-
         self.api_put(
-            API_QUEUE.format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
-            data=body)
+            f"/api/queues/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}", data=body)
 
     def get_queue_for_vhost(self, name, vhost):
 
@@ -1769,11 +1760,9 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        global API_QUEUE
-
         return self.api_get(
-            API_QUEUE.format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+            f"/api/queues/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}")
 
     def list_queues(self):
 
@@ -1800,8 +1789,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        return self.api_get(
-            "/api/queues/{0}".format(urllib.parse.quote_plus(name)))
+        return self.api_get(f"/api/queues/{urllib.parse.quote_plus(name)}")
 
     def delete_queue_for_vhost(self, name, vhost, if_unused=True,
                                if_empty=True):
@@ -1824,9 +1812,7 @@ class RabbitMQAdmin(RabbitMQBase):
 
         """
 
-        global API_QUEUE
-
         self.api_delete(
-            API_QUEUE.format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
+            f"/api/queues/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}",
             params={"if-unused": if_unused, "if-empty": if_empty})
