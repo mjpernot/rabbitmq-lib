@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Removed support for Python 2.7.
 
 ### Changed
+- RabbitMQBase: put, post, delete, get: Set timeout to 30 seconds for request call.
 - Replaced list() with [].
 - get_node: Replaced dict() with {}.
 - Converted strings to f-strings.

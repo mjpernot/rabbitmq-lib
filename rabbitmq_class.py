@@ -41,10 +41,6 @@ except (ValueError, ImportError) as err:
 __version__ = version.__version__
 
 # Global
-API_VHOST = "/api/vhosts/{0}"
-API_USER = "/api/users/{0}"
-API_PERM = "/api/permissions/{0}/{1}"
-API_QUEUE = "/api/queues/{0}/{1}"
 
 
 def pub_2_rmq(cfg, data):
@@ -213,7 +209,7 @@ class RabbitMQ():                                       # pylint:disable=R0902
             err_msg = msg
             connect_status = False
 
-        except Exception as msg:
+        except Exception as msg:                        # pylint:disable=W0718
             err_msg = msg
             connect_status = False
 
@@ -383,21 +379,20 @@ class RabbitMQPub(RabbitMQ):                            # pylint:disable=R0902
         """
 
         if pika.__version__ < '1.0.0':
-            status = self.channel.basic_publish(
+            return self.channel.basic_publish(
                 exchange=self.exchange, routing_key=self.routing_key,
                 body=body, mandatory=mandatory,
                 properties=pika.BasicProperties(delivery_mode=2))
 
-        else:
-            try:
-                self.channel.basic_publish(
-                    exchange=self.exchange, routing_key=self.routing_key,
-                    body=body, mandatory=mandatory,
-                    properties=pika.BasicProperties(delivery_mode=2))
-                status = True
+        try:
+            self.channel.basic_publish(
+                exchange=self.exchange, routing_key=self.routing_key,
+                body=body, mandatory=mandatory,
+                properties=pika.BasicProperties(delivery_mode=2))
+            status = True
 
-            except pika.exceptions.UnroutableError:
-                status = False
+        except pika.exceptions.UnroutableError:
+            status = False
 
         return status
 
@@ -603,8 +598,8 @@ class RabbitMQCon(RabbitMQPub):
         if pika.__version__ < '1.0.0':
             return self.channel.basic_consume(func_call, queue, self.no_ack)
 
-        return self.channel.basic_consume(queue, func_call,
-                                          auto_ack=self.no_ack)
+        return self.channel.basic_consume(
+            queue, func_call, auto_ack=self.no_ack)
 
     def start_loop(self):
 
@@ -725,7 +720,7 @@ class RabbitMQBase():
 
         """
 
-        response = requests.get(*args, **kwargs)
+        response = requests.get(*args, timeout=30, **kwargs)
         response.raise_for_status()
 
         return response.json()
@@ -770,7 +765,7 @@ class RabbitMQBase():
         if "data" in kwargs:
             kwargs["data"] = json.dumps(kwargs["data"])
 
-        response = requests.put(*args, **kwargs)
+        response = requests.put(*args, timeout=30, **kwargs)
         response.raise_for_status()
 
     def api_post(self, url_cmd, **kwargs):
@@ -813,7 +808,7 @@ class RabbitMQBase():
         if "data" in kwargs:
             kwargs["data"] = json.dumps(kwargs["data"])
 
-        response = requests.post(*args, **kwargs)
+        response = requests.post(*args, timeout=30, **kwargs)
         response.raise_for_status()
 
     def api_delete(self, url_cmd, **kwargs):
@@ -851,7 +846,7 @@ class RabbitMQBase():
 
         """
 
-        response = requests.delete(*args, **kwargs)
+        response = requests.delete(*args, timeout=30, **kwargs)
         response.raise_for_status()
 
 
@@ -1285,9 +1280,7 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
         """
 
-        global API_VHOST
-
-        return self.api_get(API_VHOST.format(urllib.parse.quote_plus(vhost)))
+        return self.api_get(f"/api/vhosts/{urllib.parse.quote_plus(vhost)}")
 
     def delete_vhost(self, vhost):
 
@@ -1300,9 +1293,7 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
         """
 
-        global API_VHOST
-
-        self.api_delete(API_VHOST.format(urllib.parse.quote_plus(vhost)))
+        self.api_delete(f"/api/vhosts/{urllib.parse.quote_plus(vhost)}")
 
     def create_vhost(self, vhost, tracing=False):
 
@@ -1316,12 +1307,10 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
         """
 
-        global API_VHOST
-
         data = {"tracing": True} if tracing else {}
 
         self.api_put(
-            API_VHOST.format(urllib.parse.quote_plus(vhost)), data=data)
+            f"/api/vhosts/{urllib.parse.quote_plus(vhost)}", data=data)
 
     def list_users(self):
 
@@ -1348,9 +1337,7 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
         """
 
-        global API_USER
-
-        return self.api_get(API_USER.format(urllib.parse.quote_plus(name)))
+        return self.api_get(f"/api/users/{urllib.parse.quote_plus(name)}")
 
     def delete_user(self, name):
 
@@ -1363,9 +1350,7 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
         """
 
-        global API_USER
-
-        self.api_delete(API_USER.format(urllib.parse.quote_plus(name)))
+        self.api_delete(f"/api/users/{urllib.parse.quote_plus(name)}")
 
     def create_user(self, name, japd, japd_hash=None, tags=None):
 
@@ -1385,8 +1370,6 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
         """
 
-        global API_USER
-
         data = {"tags": ", ".join(tags or [])}
 
         if japd:
@@ -1398,7 +1381,7 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
         else:
             data["password_hash"] = ""
 
-        self.api_put(API_USER.format(urllib.parse.quote_plus(name)), data=data)
+        self.api_put(f"/api/users/{urllib.parse.quote_plus(name)}", data=data)
 
     def list_user_permissions(self, name):
 
@@ -1454,11 +1437,9 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
         """
 
-        global API_PERM
-
         return self.api_get(
-            API_PERM.format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+            f"/api/permissions/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}")
 
     def delete_user_permission(self, name, vhost):
 
@@ -1472,11 +1453,9 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
         """
 
-        global API_PERM
-
         self.api_delete(
-            API_PERM.format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)))
+            f"/api/permissions/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}")
 
     def create_user_permission(                         # pylint:disable=R0913
             self, name, vhost, configure=None, write=None, read=None):
@@ -1494,17 +1473,14 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
 
         """
 
-        global API_PERM
-
         data = {
             "configure": configure or '.*',
             "write": write or '.*',
             "read": read or '.*'}
 
         self.api_put(
-            API_PERM.format(
-                urllib.parse.quote_plus(vhost), urllib.parse.quote_plus(name)),
-            data=data)
+            f"/api/permissions/{urllib.parse.quote_plus(vhost)}"
+            f"/{urllib.parse.quote_plus(name)}", data=data)
 
     def list_policies(self):
 
