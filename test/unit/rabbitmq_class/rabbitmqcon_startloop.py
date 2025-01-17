@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import rabbitmq_class
-import version
+import rabbitmq_class                           # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class StartLoop2(object):
+class StartLoop2():                                     # pylint:disable=R0903
 
     """Class:  StartLoop2
 
@@ -64,7 +64,7 @@ class StartLoop2(object):
         return True
 
 
-class StartLoop(object):
+class StartLoop():                                      # pylint:disable=R0903
 
     """Class:  StartLoop
 

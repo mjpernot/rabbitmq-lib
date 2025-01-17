@@ -1,1 +1,0 @@
-git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/rabbitmq-lib.git@2.2.6#egg=rabbitmq-lib

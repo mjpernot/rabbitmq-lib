@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import rabbitmq_class
-import version
+import rabbitmq_class                           # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class PublishMsg(object):
+class PublishMsg():                                     # pylint:disable=R0903
 
     """Class:  PublishMsg
 
@@ -55,8 +55,8 @@ class PublishMsg(object):
         self.mandatory = None
         self.properties = None
 
-    def basic_publish(self, exchange, routing_key, body, mandatory,
-                      properties):
+    def basic_publish(                                  # pylint:disable=R0913
+            self, exchange, routing_key, body, mandatory, properties):
 
         """Function:  basic_publish
 
