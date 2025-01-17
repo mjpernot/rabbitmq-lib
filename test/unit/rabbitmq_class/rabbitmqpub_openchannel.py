@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import rabbitmq_class
-import version
+import rabbitmq_class                           # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class OpenChannel(object):
+class OpenChannel():                                    # pylint:disable=R0903
 
     """Class:  OpenChannel
 
@@ -99,7 +99,7 @@ class UnitTest(unittest.TestCase):
         rmq.connection = OpenChannel()
         rmq.open_channel()
 
-        self.assertEqual(rmq.channel, True)
+        self.assertTrue(rmq.channel)
 
 
 if __name__ == "__main__":

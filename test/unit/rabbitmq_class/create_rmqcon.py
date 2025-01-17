@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import rabbitmq_class
-import version
+import rabbitmq_class                           # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class CfgTest2(object):
+class CfgTest2():                                       # pylint:disable=R0903
 
     """Class:  CfgTest2
 
@@ -64,7 +64,7 @@ class CfgTest2(object):
         self.heartbeat = 120
 
 
-class CfgTest(object):
+class CfgTest():                                        # pylint:disable=R0903
 
     """Class:  CfgTest
 

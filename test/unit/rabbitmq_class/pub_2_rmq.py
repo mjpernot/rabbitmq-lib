@@ -22,13 +22,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import rabbitmq_class
-import version
+import rabbitmq_class                           # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class RMQTest(object):
+class RMQTest():
 
     """Class:  RMQTest
 
@@ -83,8 +83,6 @@ class RMQTest(object):
 
         """
 
-        pass
-
     def publish_msg(self, msg):
 
         """Method:  publish_msg
@@ -101,7 +99,7 @@ class RMQTest(object):
         return self.pub_status
 
 
-class CfgTest(object):
+class CfgTest():                                        # pylint:disable=R0903
 
     """Class:  CfgTest
 
