@@ -6,6 +6,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.3.0] - 2025-01-14
 - Removed support for Python 2.7.
+- Update urllib3==1.26.20
+- Added certifi==2024.12.14
 
 ### Changed
 - RabbitMQBase: put, post, delete, get: Set timeout to 30 seconds for request call.
