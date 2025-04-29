@@ -67,7 +67,9 @@ def pub_2_rmq(cfg, data):
 
         else:
             status = False
-            err_msg = "Failure in publishing to RabbitMQ"
+            err_msg = "Failed to publish:  UnroutableError"
+
+        rmq.drop_connection()
 
     else:
         status = False
@@ -240,6 +242,8 @@ class RabbitMQPub(RabbitMQ):                            # pylint:disable=R0902
 
     Methods:
         __init__
+        connect_queue
+        queue_count
         open_channel
         close_channel
         create_queue
@@ -298,6 +302,32 @@ class RabbitMQPub(RabbitMQ):                            # pylint:disable=R0902
         self.exchange_type = kwargs.get("exchange_type", "direct")
         self.x_durable = kwargs.get("x_durable", True)
         self.x_passive = False
+
+    def connect_queue(self):
+
+        """Method:  connect_queue
+
+        Description:  Open a channel to a queue.
+
+        Arguments:
+
+        """
+
+        self.queue = self.channel.queue_declare(
+            queue=self.queue_name, durable=self.q_durable,
+            auto_delete=self.auto_delete)
+
+    def queue_count(self):
+
+        """Method:  queue_count
+
+        Description:  Return the message count in the queue.
+
+        Arguments:
+
+        """
+
+        return self.queue.method.message_count
 
     def open_channel(self):
 
