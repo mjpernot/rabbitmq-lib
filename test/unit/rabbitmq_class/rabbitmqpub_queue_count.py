@@ -51,9 +51,9 @@ class MessageCount():                                   # pylint:disable=R0903
         self.message_count = 2
 
 
-class Method():                                         # pylint:disable=R0903
+class Method2():                                        # pylint:disable=R0903
 
-    """Class:  Method
+    """Class:  Method2
 
     Description:  Class stub holder for pika class.
 
@@ -120,7 +120,7 @@ class UnitTest(unittest.TestCase):
         mock_pika.PlainCredentials.return_value = "PlainCredentials"
         mock_pika.ConnectionParameters.return_value = "ConnectionParameters"
         rmq = rabbitmq_class.RabbitMQPub(self.name, "xxxxx")
-        rmq.queue = Method()
+        rmq.queue = Method2()
 
         self.assertEqual(rmq.queue_count(), 2)
 
