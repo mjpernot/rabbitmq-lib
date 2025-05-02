@@ -59,4 +59,5 @@ setuptools.setup(
         "Topic :: Message",
         "Topic :: Message :: RabbitMQ",
         "Topic :: Database :: RabbitMQ :: 3.6",
-        "Topic :: Database :: RabbitMQ :: 3.8"])
+        "Topic :: Database :: RabbitMQ :: 3.8",
+        "Topic :: Database :: RabbitMQ :: 4.0"])
