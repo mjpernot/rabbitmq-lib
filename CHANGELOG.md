@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.4.0] - 2025-04-29
+
+### Fixed
+- rabbitmq_class.pub_2_rmq: Close the connection only if it was opened up.
+
+### Added
+- rabbitmq_class.RabbitMQPub.open_channel: Open a channel to a RabbitMQ node.
+- rabbitmq_class.RabbitMQPub.close_channel: Close the channel to the RabbitMQ node.
+
+### Changed
+- rabbitmq_class.pub_2_rmq: Changed err_msg for failed publishing to UnroutableError.
+
+### Deprecated
+- Support for RabbitMQ v3.6 and v3.8.
+
+
 ## [2.3.0] - 2025-01-14
 - Removed support for Python 2.7.
 - Update urllib3==1.26.20

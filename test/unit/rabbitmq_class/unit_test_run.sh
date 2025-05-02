@@ -15,12 +15,14 @@
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_checkconfirm.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_clearqueue.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_closechannel.py
+/usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_connect_queue.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_createconnection.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_createqueue.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_dropconnection.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_dropexchange.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_dropqueue.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_openchannel.py
+/usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_queue_count.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_publishmsg.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_setqueue.py
 /usr/bin/python ./test/unit/rabbitmq_class/rabbitmqpub_setupexchange.py

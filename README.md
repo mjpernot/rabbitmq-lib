@@ -67,7 +67,7 @@ Install the project using the procedures in the GIT Installation section.
 
 ### Testing:
 ```
-test/unit/rabbitmq_class/unit_test_run3.sh
+test/unit/rabbitmq_class/unit_test_run.sh
 test/unit/rabbitmq_class/code_coverage.sh
 ```
 
