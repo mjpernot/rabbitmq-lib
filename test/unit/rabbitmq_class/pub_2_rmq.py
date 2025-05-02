@@ -175,8 +175,10 @@ class UnitTest(unittest.TestCase):
         self.rmq.pub_status = False
         mock_rmq.return_value = self.rmq
 
-        self.assertEqual(rabbitmq_class.pub_2_rmq(
-            self.cfg, self.data), (False, "Failed to publish:  UnroutableError"))
+        self.assertEqual(
+            rabbitmq_class.pub_2_rmq(
+                self.cfg, self.data),
+            (False, "Failed to publish:  UnroutableError"))
 
     @mock.patch("rabbitmq_class.create_rmqpub")
     def test_failed_connection(self, mock_rmq):

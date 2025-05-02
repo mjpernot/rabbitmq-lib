@@ -302,6 +302,7 @@ class RabbitMQPub(RabbitMQ):                            # pylint:disable=R0902
         self.exchange_type = kwargs.get("exchange_type", "direct")
         self.x_durable = kwargs.get("x_durable", True)
         self.x_passive = False
+        self.queue = None
 
     def connect_queue(self):
 

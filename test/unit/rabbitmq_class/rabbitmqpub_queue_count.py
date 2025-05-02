@@ -27,9 +27,9 @@ import version                                  # pylint:disable=E0401,C0413
 __version__ = version.__version__
 
 
-class Message_Count():                                  # pylint:disable=R0903
+class MessageCount():                                   # pylint:disable=R0903
 
-    """Class:  Message_Count
+    """Class:  MessageCount
 
     Description:  Class stub holder for pika class.
 
@@ -72,7 +72,7 @@ class Method():                                         # pylint:disable=R0903
 
         """
 
-        self.method = Message_Count()
+        self.method = MessageCount()
 
 
 class UnitTest(unittest.TestCase):
