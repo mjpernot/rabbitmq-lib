@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.4.1] - 2025-07-11
+
+### Fixed
+- rabbitmq_class.pub_2_rmq: Removed the drop_connection call at the end of the function to prevent trying to close a non-open connection.
+
+
 ## [2.4.0] - 2025-04-29
 
 ### Fixed
