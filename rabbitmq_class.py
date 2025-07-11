@@ -74,8 +74,6 @@ def pub_2_rmq(cfg, data):
     else:
         status = False
 
-    rmq.drop_connection()
-
     return status, err_msg
 
 
