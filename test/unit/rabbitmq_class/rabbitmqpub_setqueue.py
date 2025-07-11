@@ -63,7 +63,7 @@ class UnitTest(unittest.TestCase):
     @mock.patch("rabbitmq_class.RabbitMQPub.create_queue")
     @mock.patch("rabbitmq_class.RabbitMQPub.setup_exchange")
     @mock.patch("rabbitmq_class.pika")
-    def test_setup_queue(                               # pylint:disable=R0913
+    def test_setup_queue(                       # pylint:disable=R0913,R0917
             self, mock_pika, mock_setup, mock_create, mock_bind, mock_check):
 
         """Function:  test_setup_queue

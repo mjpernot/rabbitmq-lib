@@ -55,7 +55,7 @@ class PublishMsg():                                     # pylint:disable=R0903
         self.mandatory = None
         self.properties = None
 
-    def basic_publish(                                  # pylint:disable=R0913
+    def basic_publish(                          # pylint:disable=R0913,R0917
             self, exchange, routing_key, body, mandatory, properties):
 
         """Function:  basic_publish
