@@ -687,7 +687,7 @@ class RabbitMQBase():
 
     """
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913,R0917
             self, user, japd, host="localhost", port=15672, scheme="https"):
 
         """Method:  __init__
@@ -1486,7 +1486,7 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
             f"/api/permissions/{urllib.parse.quote_plus(vhost)}"
             f"/{urllib.parse.quote_plus(name)}")
 
-    def create_user_permission(                         # pylint:disable=R0913
+    def create_user_permission(                 # pylint:disable=R0913,R0917
             self, name, vhost, configure=None, write=None, read=None):
 
         """Method:  create_user
@@ -1556,7 +1556,7 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
             f"/api/policies/{urllib.parse.quote_plus(vhost)}"
             f"/{urllib.parse.quote_plus(name)}")
 
-    def create_policy_for_vhost(                        # pylint:disable=R0913
+    def create_policy_for_vhost(                # pylint:disable=R0913,R0917
             self, vhost, name, definition, pattern=None, priority=0,
             apply_to='all'):
 
@@ -1685,7 +1685,7 @@ class RabbitMQAdmin(RabbitMQBase):                      # pylint:disable=R0904
             f"/api/topic-permissions/{urllib.parse.quote_plus(vhost)}"
             f"/{urllib.parse.quote_plus(name)}")
 
-    def create_topic_permission(                        # pylint:disable=R0913
+    def create_topic_permission(                # pylint:disable=R0913,R0917
             self, name, vhost, exchange, write="", read=""):
 
         """Method:  create_topic_permission
